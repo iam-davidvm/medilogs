@@ -1,0 +1,23 @@
+{
+  "name": "medipas",
+  "version": "1.0.0",
+  "description": "Web service to keep track of medical data",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/iam-davidvm/medipas.git"
+  },
+  "author": "David Van Melkebeke",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/iam-davidvm/medipas/issues"
+  },
+  "homepage": "https://github.com/iam-davidvm/medipas#readme",
+  "dependencies": {
+    "express": "^4.18.2",
+    "mongoose": "^6.8.2"
+  }
+}
