@@ -1,3 +1,13 @@
+:root {
+  --fnt-nun-san: 'Nunito Sans', sans-serif;
+  --clr-pri-red: hsl(1, 100%, 71%);
+  --clr-pri-pur: hsl(263, 57%, 9%); /* was hsl(262, 49%, 14%); */
+  --clr-hue-red: hsla(1, 100%, 71%, 0.25);
+  --clr-hue-pur: hsla(263, 57%, 9%, 0.7); /* was hsl(262, 49%, 14%); */
+  --clr-off-whi: hsl(0, 40%, 96%);
+  --clr-pur-whi: hsl(45, 29%, 97%);
+}
+
 *,
 *::before,
 *::after {
@@ -6,6 +16,138 @@
   box-sizing: border-box;
 }
 
-body {
+html {
   font-size: 62.5%;
+  font-family: var(--fnt-nun-san);
 }
+
+/* GENERAL */
+body {
+  height: 100vh;
+  background-color: var(--clr-off-whi);
+}
+
+.container {
+  max-width: 1200px;
+  width: 75%;
+  margin: 0 auto;
+  /* border: 1px solid red; */
+}
+
+.btn {
+  display: inline-block;
+  font-size: 1.6rem;
+  text-decoration: none;
+  padding: 1.4rem 3.6rem;
+  border-radius: 100px;
+  cursor: pointer;
+  transition: background-color 230ms, border 230ms, color 230ms;
+}
+
+.btn:focus {
+  outline-offset: 0.5rem;
+  outline: var(--clr-pri-red) solid 3px;
+}
+
+@supports selector(:focus-visible) {
+  .btn:focus {
+    outline-offset: 0rem;
+    outline: transparent none 0px;
+  }
+
+  .btn:focus-visible {
+    outline-offset: 0.5rem;
+    outline: var(--clr-pri-red) solid 3px;
+  }
+}
+
+.btn-pri {
+  border: 1px solid var(--clr-pri-red);
+  background-color: var(--clr-pri-red);
+  color: hsl(0, 0%, 100%);
+}
+
+.btn-pri:hover {
+  background-color: var(--clr-hue-red);
+  color: var(--clr-pri-red);
+}
+
+.btn-sec {
+  border: 1px solid var(--clr-pri-pur);
+  background-color: transparent;
+  color: var(--clr-pri-pur);
+}
+
+.btn-sec:hover {
+  background-color: var(--clr-hue-pur);
+  color: white;
+}
+
+.btn-tile {
+  border: 1px solid var(--clr-hue-pur);
+  background-color: transparent;
+  color: var(--clr-pri-pur);
+  font-weight: 700;
+  padding-top: 4rem;
+  padding-bottom: 4rem;
+  border-radius: 3rem;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  align-items: center;
+  justify-content: space-between;
+  /* box-shadow: rgba(0, 0, 0, 0.1) 0px 20px 25px -5px,
+    rgba(0, 0, 0, 0.04) 0px 10px 10px -5px; */
+  transition: transform 230ms;
+}
+
+.btn-tile:hover {
+  transform: scale(1.1);
+}
+
+h1 {
+  font-size: 2.8rem;
+  margin: 1.4em 0 1.4em 0.5em;
+}
+
+h2 {
+  font-size: 2.4rem;
+  margin: 1.2em 0;
+}
+
+/* END OF GENERAL */
+
+/* BOILERPLATE */
+header nav {
+  display: flex;
+  justify-content: space-between;
+  margin: 20px 0;
+}
+
+header nav a + a {
+  margin-left: 10px;
+}
+
+.tiles-section {
+  padding: 5rem 2.5rem;
+  margin-bottom: 2.5rem;
+  background-color: var(--clr-pur-whi);
+  border-radius: 3rem;
+}
+
+.tiles-section:first-of-type {
+  padding-top: 2.5rem;
+}
+
+.tiles-section h2 {
+  margin: 0 0 1.2em;
+  padding-left: 0.3em;
+}
+
+.tiles {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
+
+/* END OF BOILERPLATE */

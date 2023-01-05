@@ -26,7 +26,7 @@ mongoose
 mongoose.set('strictQuery', false);
 
 app.get('/', (req, res) => {
-  res.render('index', { title: 'hello' });
+  res.render('index', { title: 'Dashboard' });
 });
 
 app.listen(3000, () => {
