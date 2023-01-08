@@ -61,13 +61,15 @@ body {
   }
 }
 
-.btn-pri {
+.btn-pri,
+.btn-form {
   border: 1px solid var(--clr-pri-red);
   background-color: var(--clr-pri-red);
   color: hsl(0, 0%, 100%);
 }
 
-.btn-pri:hover {
+.btn-pri:hover,
+.btn-form:hover {
   background-color: var(--clr-hue-red);
   color: var(--clr-pri-red);
 }
@@ -151,3 +153,90 @@ header nav a + a {
 }
 
 /* END OF BOILERPLATE */
+
+/* USER-FORMS */
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.user-form {
+  max-width: 650px;
+  margin: 7rem auto 0;
+  background-color: var(--clr-pur-whi);
+  padding: 5rem 2.5rem;
+  border-radius: 1rem;
+}
+
+.user-form h1 {
+  margin: 1rem 0;
+  margin-top: 1rem;
+}
+
+.form-element label,
+.form-element input {
+  display: block;
+  width: 100%;
+  font-size: 1.6rem;
+}
+
+.form-element label {
+  padding: 0 0.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.form-element input,
+.form .btn-form {
+  height: 6rem;
+}
+
+.form-element input {
+  padding: 0 0.7rem;
+  font-family: var(--fnt-nun-san);
+  border-radius: 0.6rem;
+  border: 1px solid var(--clr-pri-pur);
+}
+
+.form-element input:focus {
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 20px 25px -5px,
+    rgba(0, 0, 0, 0.04) 0px 10px 10px -5px;
+}
+
+.form-element input:valid {
+  background: url('../assets/check.png');
+  background-repeat: no-repeat;
+  background-position: 98% 50%;
+}
+
+.form-element .form-alert {
+  display: none;
+}
+
+.form-element input:invalid:focus:not(:placeholder-shown) ~ .form-alert {
+  color: red;
+  font-size: 1.2rem;
+  display: block;
+  margin-top: 0.5rem;
+}
+
+.form .btn-form {
+  margin-top: 4rem;
+  border-radius: 0.6rem;
+}
+
+.form .already-user {
+  margin: 2rem 0 0;
+  font-size: 1.6rem;
+}
+
+.form .already-user a {
+  text-decoration: none;
+  color: var(--clr-pri-red);
+}
+
+.form .already-user a:hover {
+  text-decoration: underline;
+}
+
+/* END OF USER-FORMS */

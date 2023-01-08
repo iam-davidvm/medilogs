@@ -1,0 +1,33 @@
+<% layout('layouts/boilerplate.ejs') %>
+
+
+<form class="form user-form" action="/registreren" class="form" method="POST">
+    <h1><%= title %></h1>
+    <div class="form-element">
+        <label for="email">E-mailadres *</label>
+        <input type="text" id="email" pattern="[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?" required>
+    </div>
+    <div class="form-element">
+        <label for="voornaam">Voornaam *</label>
+        <input type="text" id="voornaam" pattern=".*\S.*" required>
+        <!-- <span class="form-alert" role="alert">This field is required</span> -->
+
+    </div>
+    <div class="form-element">
+        <label for="familienaam">Familienaam *</label>
+        <input type="text" id="familienaam" pattern=".*\S.*" required>
+        <!-- <span class="form-alert" role="alert">This field is required</span> -->
+
+    </div>
+    <div class="form-element">
+        <label for="wachtwoord">Kies een wachtwoord *</label>
+        <input pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,}" type="password" id="wachtwoord" required placeholder=" ">
+        <span class="form-alert" role="alert">Het wachtwoord moet minstens 6 karakters bevatten, waarvan 1 hoofdletter, 1 kleine letter en minstens 1 getal.</span>
+
+    </div>
+
+    <button class="btn btn-form">Registreren</button>
+
+    <p class="already-user">Heeft u al een account? <a href="aanmelden">Aanmelden</a></p>
+
+</form>
