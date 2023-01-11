@@ -28,7 +28,23 @@ const userSchema = new Schema({
   },
 });
 
-userSchema.plugin(passportLocalMongoose);
+// https://stackoverflow.com/a/45602063
+const options = {
+  errorMessages: {
+    MissingPasswordError: 'Er was geen wachtwoord ingevuld.',
+    AttemptTooSoonError:
+      'Account is momenteel geblokkeerd. Probeer later opnieuw.',
+    TooManyAttemptsError:
+      'Account is geblokkeerd omwille van te veel mislukte pogingen.',
+    NoSaltValueStoredError: 'Authenticatie niet mogelijk.',
+    IncorrectPasswordError: 'Het e-mailadres of wachtwoord zijn niet correct.',
+    IncorrectUsernameError: 'Het e-mailadres of wachtwoord zijn niet correct.',
+    MissingUsernameError: 'Er was geen e-mailadres ingevuld',
+    UserExistsError: 'Er bestaat al een gebruiker met dit e-mailadres.',
+  },
+};
+
+userSchema.plugin(passportLocalMongoose, options);
 
 // check if email exists
 userSchema.post('save', function (err, doc, next) {

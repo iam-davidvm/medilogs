@@ -6,25 +6,30 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@400;700;800&display=swap" rel="stylesheet" crossorigin> 
     <link rel="stylesheet" href="/css/style.css">
-    <!--  <%- // include('../partials/title') %> -->
-    <title>medipas</title>
+    <%- include('../partials/title') %>
 </head>
 <body>
     <header>
         <div class="container">
             <nav>
                 <div class="navbar-brand">
-                    <p>medilog</p>
+                    <p><a href="/">medilog</a></p>
                 </div>
                 <div class="navbar-user">
-                    <a href="/registreren" class="btn btn-sec">Registreren</a>
-                    <a href="#" class="btn btn-pri">Aanmelden</a>
+                    <% if(!currentUser) { %>
+                        <a href="/registreren" class="btn btn-sec">Registreren</a>
+                        <a href="/aanmelden" class="btn btn-pri">Aanmelden</a>
+                    <% } else { %>
+                        <% console.log(currentUser) %>
+                        <a href="/afmelden" class="btn btn-sec">Afmelden</a>
+                    <% } %>
                 </div>
             </nav>
         </div>
     </header>
     <main>
         <div class="container">
+            <%- include('../partials/flash') %>
             <%- body %>
         </div>
     </main>

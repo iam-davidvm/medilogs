@@ -12,7 +12,7 @@ router
   .route('/registreren')
   .get(userController.renderRegister)
   .post(catchAsync(userController.register));
-/*
+
 router
   .route('/aanmelden')
   .get(userController.renderLogin)
@@ -27,5 +27,5 @@ router
   );
 
 router.get('/afmelden', userController.logout);
-*/
+
 module.exports = router;

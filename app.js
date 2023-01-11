@@ -9,6 +9,9 @@ const mongoose = require('mongoose');
 const path = require('path');
 const engine = require('ejs-mate');
 
+// handling form information
+app.use(express.urlencoded({ extended: true }));
+
 // default Error handling
 const ExpressError = require('./utils/ExpressError');
 
@@ -24,7 +27,6 @@ const LocalStrategy = require('passport-local');
 
 // ROUTES
 const userRoutes = require('./routes/user');
-const { use } = require('passport');
 
 app.engine('ejs', engine);
 app.set('view engine', 'ejs');
@@ -67,6 +69,7 @@ const sessionConfig = {
 };
 
 app.use(session(sessionConfig));
+app.use(flash());
 
 // user authentication
 app.use(passport.initialize());
@@ -78,6 +81,8 @@ passport.deserializeUser(User.deserializeUser());
 // local variables
 app.use((req, res, next) => {
   res.locals.currentUser = req.user;
+  res.locals.success = req.flash('success');
+  res.locals.error = req.flash('error');
   next();
 });
 

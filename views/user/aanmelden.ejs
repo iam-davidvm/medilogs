@@ -1,0 +1,19 @@
+<% layout('layouts/boilerplate') %>
+
+<form action="/aanmelden" class="form user-form subtle-shadow" method="POST">
+    <h1><%= title %></h1>
+    <div class="form-element">
+        <label for="username">E-mailadres *</label>
+        <input type="email" name="username" id="username" pattern="[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?" required>
+    </div>
+
+    <div class="form-element">
+        <label for="password">wachtwoord</label>
+        <input type="password" name="password" id="password" required>
+    </div>
+
+    <button class="btn btn-form">Aanmelden</button>
+
+</form>
+
+<script src="/js/userform.js"></script>
