@@ -1,0 +1,11 @@
+<% layout('layouts/boilerplate') %>
+
+<form action="bloeddruk/<%= id %>" class="form subtle-shadow" method="POST">
+    <h1><%= title %></h1>
+    <div class="form-element">
+        <label for="onderdruk">Onderdruk *</label>
+        <input type="number" name="onderdruk" id="onderdruk" min="30" max="250" required>
+    </div>
+
+    <button class="btn btn-form">Bewaren</button>
+</form>

@@ -25,8 +25,12 @@ const User = require('./models/user');
 const passport = require('passport');
 const LocalStrategy = require('passport-local');
 
+// security
+const mongoSanitize = require('express-mongo-sanitize');
+
 // ROUTES
 const userRoutes = require('./routes/user');
+const bloodpressureRoutes = require('./routes/bloodpressure');
 
 app.engine('ejs', engine);
 app.set('view engine', 'ejs');
@@ -78,6 +82,9 @@ passport.use(new LocalStrategy(User.authenticate()));
 passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
 
+// security
+app.use(mongoSanitize());
+
 // local variables
 app.use((req, res, next) => {
   res.locals.currentUser = req.user;
@@ -87,6 +94,7 @@ app.use((req, res, next) => {
 });
 
 app.use('/', userRoutes);
+app.use('/bloeddruk/:persoonId', bloodpressureRoutes);
 
 app.get('/', (req, res) => {
   res.render('index', { title: 'Dashboard' });
