@@ -117,6 +117,10 @@ h2 {
   margin: 1.2em 0;
 }
 
+.highlight {
+  color: var(--clr-pri-red);
+}
+
 .subtle-shadow {
   box-shadow: rgba(0, 0, 0, 0.05) 0px 0px 0px 1px;
 }
@@ -159,11 +163,13 @@ header nav a + a {
 
 /* FLASH MESSAGES */
 .alert {
-  font-size: 1.4rem;
+  font-size: 1.6rem;
+  height: 5.4rem;
   padding: 1.5rem 1rem;
   border-radius: 0.75rem;
   margin: 7rem 0;
   color: var(--clr-off-whi);
+  position: relative;
 }
 
 .is-success {
@@ -172,6 +178,35 @@ header nav a + a {
 
 .is-error {
   background-color: #c62828;
+}
+
+.alert-close {
+  background-color: transparent;
+  border: none;
+  color: white;
+  position: absolute;
+  top: 0.5rem;
+  right: 0.5rem;
+  width: 4.4rem;
+  height: 4.4rem;
+  cursor: pointer;
+  transition: opacity 230ms ease-in-out;
+}
+
+.alert-close:hover {
+  opacity: 0.7;
+}
+
+@supports selector(:focus-visible) {
+  .alert-close:focus {
+    outline-offset: 0rem;
+    outline: transparent none 0px;
+  }
+
+  .alert-close:focus-visible {
+    outline-offset: 0.5rem;
+    outline: var(--clr-pri-red) solid 3px;
+  }
 }
 
 .fade-out {
@@ -194,14 +229,14 @@ header nav a + a {
 
 /* END OF FLASH MESSAGES */
 
-/* USER-FORMS */
+/* FORMS */
 .form {
   display: flex;
   flex-direction: column;
   gap: 2rem;
 }
 
-.user-form {
+.input-form {
   max-width: 650px;
   margin: 7rem auto 0;
   background-color: var(--clr-pur-whi);
@@ -209,7 +244,7 @@ header nav a + a {
   border-radius: 1rem;
 }
 
-.user-form h1 {
+.input-form h1 {
   margin: 1rem 0;
   margin-top: 1rem;
 }
@@ -227,18 +262,24 @@ header nav a + a {
 }
 
 .form-element input,
-.form .btn-form {
+.form .btn-form,
+.form-date-element input,
+.form-date-element select {
   height: 6rem;
 }
 
-.form-element input {
+.form-element input,
+.form-date-element input,
+.form-date-element select {
   padding: 0 0.7rem;
   font-family: var(--fnt-nun-san);
   border-radius: 0.6rem;
   border: 1px solid var(--clr-pri-pur);
 }
 
-.form-element input:focus {
+.form-element input:focus,
+.form-date-element input:focus,
+.form-date-element select:focus {
   box-shadow: rgba(0, 0, 0, 0.1) 0px 20px 25px -5px,
     rgba(0, 0, 0, 0.04) 0px 10px 10px -5px;
 }
@@ -247,6 +288,10 @@ header nav a + a {
   background: url('../assets/check.png');
   background-repeat: no-repeat;
   background-position: 98% 50%;
+}
+
+.form-element input[type='number']:valid {
+  background-position: 94% 50%;
 }
 
 .form-element .form-alert {
@@ -265,6 +310,10 @@ header nav a + a {
   border-radius: 0.6rem;
 }
 
+/* END OF FORMS */
+
+/* USER FORMS */
+
 .form .already-user {
   margin: 2rem 0 0;
   font-size: 1.6rem;
@@ -280,3 +329,50 @@ header nav a + a {
 }
 
 /* END OF USER-FORMS */
+
+/* DATE FORM ELEMENTS  */
+
+.form-date-element label,
+.form-date-element input,
+.form-date-element select {
+  display: inline-block;
+  font-size: 1.6rem;
+  /* border: 1px solid red; */
+  padding: 0 0.5rem;
+}
+
+.form-date-element select {
+  background-color: white;
+}
+
+.form-date-element label,
+.form-date-element input,
+.form-date-element select {
+  margin-right: 1.3rem;
+}
+
+.date-labels {
+  margin-bottom: 0.5rem;
+}
+
+.date-labels,
+.date-input {
+  display: grid;
+  grid-template-columns: 9rem 18rem 9rem;
+}
+
+.date-input {
+  margin-bottom: 2rem;
+}
+
+.form-date-element .date-time input {
+  width: 7rem;
+  margin-right: 0;
+}
+
+.form-date-element .date-time label {
+  margin-left: 0;
+  margin-right: 0;
+}
+
+/* END OF DATE FORM ELEMENTS  */

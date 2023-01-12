@@ -26,12 +26,18 @@ const extension = (joi) => ({
 
 const Joi = BaseJoi.extend(extension);
 
+// NA TE LEZEN: https://softchris.github.io/pages/joi.html#introducing-joi
 module.exports.bloodpressureSchema = Joi.object({
   bloodpressure: Joi.object({
-    bovendruk: Joi.number().min(30).max(250).required(),
     onderdruk: Joi.number().min(30).max(250).required(),
+    bovendruk: Joi.number().min(30).max(250).required(),
     hartslag: Joi.number().min(30).max(250).required(),
-    tijdstip: Joi.date().required(),
-    persoon: Joi.string().required(),
+    dag: Joi.string(),
+    maand: Joi.string(),
+    jaar: Joi.string(),
+    uur: Joi.string(),
+    min: Joi.string(),
+    //tijdstip: Joi.date().required(),
+    //persoon: Joi.string().required(),
   }).required(),
 });
