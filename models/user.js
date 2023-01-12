@@ -42,6 +42,7 @@ const options = {
     MissingUsernameError: 'Er was geen e-mailadres ingevuld',
     UserExistsError: 'Er bestaat al een gebruiker met dit e-mailadres.',
   },
+  populateFields: 'personen',
 };
 
 userSchema.plugin(passportLocalMongoose, options);

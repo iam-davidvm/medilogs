@@ -28,6 +28,8 @@ const LocalStrategy = require('passport-local');
 // security
 const mongoSanitize = require('express-mongo-sanitize');
 
+// models
+
 // ROUTES
 const userRoutes = require('./routes/user');
 const bloodpressureRoutes = require('./routes/bloodpressure');
