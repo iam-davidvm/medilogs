@@ -6,19 +6,19 @@ const bloodpressureSchema = new Schema({
   onderdruk: {
     type: Number,
     min: 30,
-    max: 250,
+    max: 299,
     required: true,
   },
   bovendruk: {
     type: Number,
     min: 30,
-    max: 250,
+    max: 299,
     required: true,
   },
   hartslag: {
     type: Number,
     min: 30,
-    max: 250,
+    max: 299,
   },
   tijdstip: {
     type: Date,

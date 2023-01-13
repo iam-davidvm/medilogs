@@ -11,18 +11,13 @@ module.exports.isLoggedIn = (req, res, next) => {
   next();
 };
 
-// NA TE LEZEN: https://softchris.github.io/pages/joi.html#introducing-joi
-// werken met bloodpressure[]?
 module.exports.validateBloodpressure = (req, res, next) => {
-  // ZOU DE ISSUE TE MAKEN KUNNEN HEBBEN MET HET FEIT DAT IK MIN EN MAX HEB, MAAR DAT HET GEEN NUMMER IS
-  const error = bloodpressureSchema.validate(req.body);
+  const { error } = bloodpressureSchema.validate(req.body);
+  console.log(req.body);
   console.log('error: ', error);
-  console.log('error.details: ', error.details);
-  if (error.details) {
-    // IN VB IS HET HIER GEWOON ERROR
+  if (error) {
     const msg = error.details.map((el) => el.message).join(',');
-    console.log(msg);
-    throw new ExpressError(msg, 400);
+
     req.flash('error', msg);
     res.redirect('/'); // moet nog naar error page gaan
   } else {
