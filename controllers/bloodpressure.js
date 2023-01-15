@@ -35,3 +35,16 @@ module.exports.renderConsultation = (req, res) => {
     persoonId,
   });
 };
+
+module.exports.showResults = async (req, res) => {
+  let amount = 30;
+  const { persoonId } = req.params;
+  const results = await Bloodpressure.find({ persoon: persoonId })
+    .sort({ tijdstip: 'desc' })
+    .limit(amount);
+  // console.log(results);
+  res.render('bloodpressure/results', {
+    title: `Overzicht laatste ${amount} metingen`,
+    results,
+  });
+};

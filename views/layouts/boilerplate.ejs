@@ -16,7 +16,6 @@
                     <% if(!currentUser) { %>
                         <p><a href="/">medilog</a></p>
                     <% } else { %>
-                        <% console.log(currentUser) %>
                         <p><a href="/<%= currentUser.personen[0]._id %>/dashboard/">medilog</a></p>
                     <% } %>
                 </div>

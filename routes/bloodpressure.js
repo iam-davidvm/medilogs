@@ -20,4 +20,8 @@ router
   .route('/raadplegen')
   .get(isLoggedIn, bloodpressureController.renderConsultation);
 
+router
+  .route('/overzicht')
+  .get(isLoggedIn, catchAsync(bloodpressureController.showResults));
+
 module.exports = router;

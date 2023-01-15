@@ -144,7 +144,7 @@ header nav a + a {
   border-radius: 3rem;
 }
 
-.tiles-section:first-of-type {
+.tiles-bloodpressure:first-of-type {
   padding-top: 2.5rem;
 }
 
@@ -287,7 +287,7 @@ header nav a + a {
   box-shadow: rgba(0, 0, 0, 0.1) 0px 20px 25px -5px,
     rgba(0, 0, 0, 0.04) 0px 10px 10px -5px;
   outline-offset: 0rem;
-  outline: var(--clr-pri-red) solid 3px;
+  outline: hsla(360, 0%, 0%, 0.5) solid 3px;
 }
 
 .form-element input:valid {

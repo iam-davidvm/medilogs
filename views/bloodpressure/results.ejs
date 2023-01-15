@@ -1,0 +1,34 @@
+<% layout('layouts/boilerplate') %>
+    
+
+    <h1><%= title %></h1>
+
+    <section class="table table-results">
+        <% if(results && results.length > 0) { %>
+
+            <table>
+                <thead>
+                    <tr>
+                        <th>Bovendruk</th>
+                        <th>Onderdruk</th>
+                        <th>Hartslag</th>
+                        <th>Tijdstip</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    <% for (let result of results) { %>
+                        <tr>
+                            <td><%= result.bovendruk %></td>
+                            <td><%= result.onderdruk %></td>
+                            <td><%= result.hartslag %></td>
+                            <td>
+                                <% const date = new Date(result.tijdstip) %>
+                                <%= `${date.getDate()}/${date.getMonth()}/${date.getFullYear()}` %> <!-- BETER VOORAF DEFINIEREN, ZODAT DIT HIER PROPER STAAT -->
+                            </td>
+                        </tr>
+                    <% } %>
+                </tbody>
+            </table>
+        <% } %>
+    </section>
