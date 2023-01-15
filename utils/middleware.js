@@ -13,8 +13,7 @@ module.exports.isLoggedIn = (req, res, next) => {
 
 module.exports.validateBloodpressure = (req, res, next) => {
   const { error } = bloodpressureSchema.validate(req.body);
-  console.log(req.body);
-  console.log('error: ', error);
+
   if (error) {
     const msg = error.details.map((el) => el.message).join(',');
 

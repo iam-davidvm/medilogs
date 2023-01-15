@@ -13,7 +13,12 @@
         <div class="container">
             <nav>
                 <div class="navbar-brand">
-                    <p><a href="/">medilog</a></p>
+                    <% if(!currentUser) { %>
+                        <p><a href="/">medilog</a></p>
+                    <% } else { %>
+                        <% console.log(currentUser) %>
+                        <p><a href="/<%= currentUser.personen[0]._id %>/dashboard/">medilog</a></p>
+                    <% } %>
                 </div>
                 <div class="navbar-user">
                     <% if(!currentUser) { %>

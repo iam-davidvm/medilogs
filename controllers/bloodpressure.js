@@ -11,7 +11,7 @@ module.exports.renderNewBloodpressure = (req, res) => {
 
 module.exports.addPressure = async (req, res) => {
   const { persoonId } = req.params;
-  const { onderdruk, bovendruk, hartslag, dag, maand, jaar, uur, min } =
+  const { bovendruk, onderdruk, hartslag, dag, maand, jaar, uur, min } =
     req.body.bloodpressure;
   const registeredTime = new Date(Date.UTC(jaar, maand, dag, uur, min));
   const bloodpressure = await new Bloodpressure({
@@ -26,4 +26,12 @@ module.exports.addPressure = async (req, res) => {
   await bloodpressure.save();
   req.flash('success', 'De meting werd succesvol bewaard.');
   res.redirect('/');
+};
+
+module.exports.renderConsultation = (req, res) => {
+  const { persoonId } = req.params;
+  res.render('bloodpressure/index', {
+    title: 'Metingen raadplegen',
+    persoonId,
+  });
 };

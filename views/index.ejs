@@ -1,14 +1,4 @@
 <% layout('layouts/boilerplate') %>
     
-<h1><%= title %></h1>
 
-<% if(currentUser) { %>
-<section class="tiles-section" aria-label="Bloeddruk">
-    <h2>Bloeddruk</h2>
-    <div class="tiles">
-        <a href="bloeddruk/<%= currentUser.personen[0]._id %>/nieuw" class="btn btn-tile"><img src="/assets/tile-icons/bloeddruk-meting.png" alt=""><span>Meting invoeren</span></a>
-        <a href="#" class="btn btn-tile"><img src="/assets/tile-icons/metingen-raadplegen.png" alt=""><span>Metingen raadplegen</span></a>
-        <a href="#" class="btn btn-tile">test</a>
-    </div>
-</section>
-<% } %>
+<h1><%= title %></h1>

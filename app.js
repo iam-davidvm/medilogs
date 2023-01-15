@@ -96,10 +96,15 @@ app.use((req, res, next) => {
 });
 
 app.use('/', userRoutes);
-app.use('/bloeddruk/:persoonId', bloodpressureRoutes);
+app.use('/:persoonId/bloeddruk', bloodpressureRoutes);
 
 app.get('/', (req, res) => {
-  res.render('index', { title: 'Dashboard' });
+  res.render('index', { title: 'Welkom' });
+});
+
+app.get('/:persoonId/dashboard', (req, res) => {
+  const { persoonId } = req.params;
+  res.render('dashboard/index', { title: 'Dashboard', persoonId });
 });
 
 app.all('*', (req, res, next) => {
@@ -109,7 +114,7 @@ app.all('*', (req, res, next) => {
 app.use((err, req, res, next) => {
   const { statusCode = 500 } = err;
   if (!err.message) err.message = 'Er is iets fout gegaan';
-  res.status(statusCode).send(err);
+  res.status(statusCode).render('error', { err });
 });
 
 app.listen(3000, () => {

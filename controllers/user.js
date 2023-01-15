@@ -20,9 +20,7 @@ module.exports.register = async (req, res, next) => {
 
     req.login(registeredUser, (err) => {
       if (err) return next();
-      // res.send('Succesvol aangemeld');
-      // req.flash('success', 'Jouw account werd aangemaakt');
-      res.redirect('/');
+      res.redirect(`/${registeredUser.personen[0]._id}/dashboard/`);
     });
   } catch (e) {
     // res.send(`Niet aangemeld, dit is mijn error ${e.message}`);
@@ -36,7 +34,8 @@ module.exports.renderLogin = (req, res) => {
 };
 
 module.exports.login = (req, res) => {
-  const redirectURL = req.session.returnTo || '/';
+  const redirectURL =
+    req.session.returnTo || `/${req.user.personen[0]._id}/dashboard/`;
   delete req.session.returnTo;
   res.redirect(redirectURL);
 };

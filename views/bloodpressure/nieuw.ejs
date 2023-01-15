@@ -1,14 +1,16 @@
 <% layout('layouts/boilerplate') %>
 
-<form action="/bloeddruk/<%= id %>/nieuw" class="form input-form subtle-shadow" method="POST">
+<form action="/<%= id %>/bloeddruk/nieuw" class="form input-form subtle-shadow" method="POST">
     <h1><%= title %></h1>
     <div class="form-element">
-        <label for="onderdruk">Onderdruk <span class="highlight">*</span></label>
-        <input type="number" name="bloodpressure[onderdruk]" id="onderdruk" min="30" max="299" required>
+        <label for="bovendruk">Bovendruk <span class="highlight">*</span></label>
+        <input type="number" name="bloodpressure[bovendruk]" id="bovendruk" min="30" max="299" aria-describedby="bovendruk-hint" required>
+        <p id="bovendruk-hint" class="form-hint">Dit is in principe de hoogste waarde.</p>
     </div>
     <div class="form-element">
-        <label for="bovendruk">Bovendruk <span class="highlight">*</span></label>
-        <input type="number" name="bloodpressure[bovendruk]" id="bovendruk" min="30" max="299" required>
+        <label for="onderdruk">Onderdruk <span class="highlight">*</span></label>
+        <input type="number" name="bloodpressure[onderdruk]" id="onderdruk" min="30" max="299" aria-describedby="onderdruk-hint" required>
+        <p id="onderdruk-hint" class="form-hint">Dit is in principe de laagste waarde.</p>
     </div>
     <div class="form-element">
         <label for="hartslag">Hartslag <span class="highlight">*</span></label>

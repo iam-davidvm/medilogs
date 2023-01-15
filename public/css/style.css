@@ -164,12 +164,16 @@ header nav a + a {
 /* FLASH MESSAGES */
 .alert {
   font-size: 1.6rem;
-  height: 5.4rem;
-  padding: 1.5rem 1rem;
+  min-height: 5.4rem;
+  padding: 2rem 1.5rem;
   border-radius: 0.75rem;
   margin: 7rem 0;
   color: var(--clr-off-whi);
   position: relative;
+}
+
+.alert h1 {
+  margin: 0.5rem 0 1.5rem;
 }
 
 .is-success {
@@ -282,6 +286,8 @@ header nav a + a {
 .form-date-element select:focus {
   box-shadow: rgba(0, 0, 0, 0.1) 0px 20px 25px -5px,
     rgba(0, 0, 0, 0.04) 0px 10px 10px -5px;
+  outline-offset: 0rem;
+  outline: var(--clr-pri-red) solid 3px;
 }
 
 .form-element input:valid {
@@ -305,6 +311,12 @@ header nav a + a {
   margin-top: 0.5rem;
 }
 
+.form-element .form-hint {
+  margin: 0.5rem;
+  font-size: 1.1rem;
+  color: hsla(360, 0%, 0%, 0.65);
+}
+
 .form .btn-form {
   margin-top: 4rem;
   border-radius: 0.6rem;
@@ -319,12 +331,20 @@ header nav a + a {
   font-size: 1.6rem;
 }
 
-.form .already-user a {
+.alert + .cta {
+  font-size: 1.6rem;
+  margin-left: 1.5rem;
+  text-decoration: none;
+}
+
+.form .already-user a,
+.cta {
   text-decoration: none;
   color: var(--clr-pri-red);
 }
 
-.form .already-user a:hover {
+.form .already-user a:hover,
+.cta:hover {
   text-decoration: underline;
 }
 

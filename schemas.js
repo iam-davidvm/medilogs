@@ -28,9 +28,9 @@ const Joi = BaseJoi.extend(extension);
 
 module.exports.bloodpressureSchema = Joi.object({
   bloodpressure: Joi.object({
-    onderdruk: Joi.number().min(30).max(250).required(),
-    bovendruk: Joi.number().min(30).max(250).required(),
-    hartslag: Joi.number().min(30).max(250).required(),
+    bovendruk: Joi.number().min(30).max(299).required(),
+    onderdruk: Joi.number().min(30).max(299).required(),
+    hartslag: Joi.number().min(30).max(299).required(),
     dag: Joi.string(),
     maand: Joi.string(),
     jaar: Joi.string(),

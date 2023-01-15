@@ -3,13 +3,13 @@ const { Schema } = mongoose;
 const Person = require('./person');
 
 const bloodpressureSchema = new Schema({
-  onderdruk: {
+  bovendruk: {
     type: Number,
     min: 30,
     max: 299,
     required: true,
   },
-  bovendruk: {
+  onderdruk: {
     type: Number,
     min: 30,
     max: 299,

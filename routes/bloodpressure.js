@@ -16,4 +16,8 @@ router
     catchAsync(bloodpressureController.addPressure)
   );
 
+router
+  .route('/raadplegen')
+  .get(isLoggedIn, bloodpressureController.renderConsultation);
+
 module.exports = router;
