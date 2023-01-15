@@ -87,7 +87,7 @@ body {
 
 .btn-tile {
   border: 1px solid var(--clr-hue-pur);
-  background-color: transparent;
+  background-color: var(--clr-pur-whi);
   color: var(--clr-pri-pur);
   font-weight: 700;
   padding-top: 4rem;
@@ -136,8 +136,7 @@ header nav {
 header nav a + a {
   margin-left: 10px;
 }
-
-.tiles-section {
+.dash-element {
   padding: 5rem 2.5rem;
   margin-bottom: 2.5rem;
   background-color: var(--clr-pur-whi);
@@ -147,8 +146,7 @@ header nav a + a {
 .tiles-bloodpressure:first-of-type {
   padding-top: 2.5rem;
 }
-
-.tiles-section h2 {
+.dash-element h2 {
   margin: 0 0 1.2em;
   padding-left: 0.3em;
 }
@@ -290,8 +288,6 @@ header nav a + a {
   outline: hsla(360, 0%, 0%, 0.5) solid 3px;
 }
 
-/* html body main div.container form.form.input-form.subtle-shadow div.form-element input#hartslag */
-
 .form-element #hartslag:placeholder-shown {
   background-image: none;
 }
@@ -403,3 +399,75 @@ header nav a + a {
 }
 
 /* END OF DATE FORM ELEMENTS  */
+
+/* BLOOD PRESSURE RESULTS */
+
+.stats {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+}
+
+.stats div {
+  flex: 1;
+  text-align: center;
+  padding: 1.5rem 1rem;
+}
+
+.stats-num {
+  font-size: 3.2rem;
+  font-weight: 800;
+}
+
+.stats-desc {
+  font-size: 1.6rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1rem;
+}
+
+.section-results h2,
+.section-stats h2,
+.section-graph h2 {
+  display: inline-flex;
+  gap: 1rem;
+  align-items: center;
+  margin: 0;
+}
+
+.icon:hover {
+  cursor: pointer;
+}
+
+.icon img {
+  width: 20px;
+  display: block;
+}
+
+/* END OF BLOOD PRESSURE RESULTS */
+
+/* TABLE RESULTS */
+table {
+  font-size: 1.7rem;
+  margin-top: 2.8rem;
+}
+
+th,
+td {
+  padding: 0.5em 1.5em 0.5em 0.5em;
+  text-align: left;
+}
+
+tbody tr:nth-of-type(1n) {
+  background-color: hsla(1, 100%, 71%, 0.2);
+}
+
+tbody tr:nth-of-type(2n) {
+  background-color: hsla(1, 100%, 71%, 0.7);
+}
+
+table.invisible,
+div.invisible {
+  display: none;
+}
+
+/* END OF TABLE RESULTS */

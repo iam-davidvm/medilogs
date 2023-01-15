@@ -1,12 +1,63 @@
 <% layout('layouts/boilerplate') %>
-    
+   
 
     <h1><%= title %></h1>
 
-    <section class="table table-results">
+    <section class="dash-element section-stats">
+        <h2>
+            <span class="icon" id="icon-stats"><img src="/assets/eye-off.svg" alt="Verberg gemiddelden"></span
+            <p>Gemiddelden</p>
+        </h2>
+        <% 
+            let bovendrukResult = 0, bovendrukCounter = 0,
+            onderdrukResult = 0, onderdrukCounter = 0,
+            hartslagResult = 0, hartslagCounter = 0;
+        %>
+
+        <% for (let result of results) { 
+            bovendrukResult += result.bovendruk;
+            bovendrukCounter++;
+            onderdrukResult += result.onderdruk;
+            onderdrukCounter++;
+            
+            if(result.hartslag !== undefined) {
+                hartslagResult += result.hartslag;
+                hartslagCounter++;
+            }         
+        } %>
+
+        <%
+            let bovendrukStat = Math.round(bovendrukResult / bovendrukCounter);
+            let onderdrukStat = Math.round(onderdrukResult / onderdrukCounter);
+            let hartslagStat = 0
+            if(hartslagCounter !== 0) {
+                hartslagStat = Math.round(hartslagResult / hartslagCounter);
+            }
+        %>
+        <div class="stats">
+            <div class="stats-bovendruk">
+                <p class="stats-num"><%= bovendrukStat %></p> 
+                <p class="stats-desc">bovendruk</p>
+            </div>
+            <div class="stats-onderdruk">
+                <p class="stats-num"><%= onderdrukStat %></p> 
+                <p class="stats-desc">onderdruk</p>
+            </div>
+            <div class="stats-hartslag">
+                <p class="stats-num"><%= hartslagStat !== 0 ? hartslagStat : "" %></p> 
+                <p class="stats-desc"><%= hartslagStat !== 0 ? "hartslag" : "" %></p>
+            </div>
+        </div>
+    </section>
+
+    <section class="dash-element section-table section-results">
+        <h2>
+            <span class="icon" id="icon-results"><img src="/assets/eye-off.svg" alt="Verberg tabel"></span
+            <p>Tabel</p>
+        </h2>
         <% if(results && results.length > 0) { %>
 
-            <table>
+            <table id="table-results">
                 <thead>
                     <tr>
                         <th>Bovendruk</th>
@@ -21,10 +72,17 @@
                         <tr>
                             <td><%= result.bovendruk %></td>
                             <td><%= result.onderdruk %></td>
-                            <td><%= result.hartslag %></td>
+                            <td><%= result.hartslag === undefined ? "0" : `${result.hartslag}` %></td>
                             <td>
-                                <% const date = new Date(result.tijdstip) %>
-                                <%= `${date.getDate()}/${date.getMonth()}/${date.getFullYear()}` %> <!-- BETER VOORAF DEFINIEREN, ZODAT DIT HIER PROPER STAAT -->
+                                <% 
+                                    const date = new Date(result.tijdstip) 
+                                    const day = date.getDate() < 10 ? `0${date.getDate()}` : `${date.getDate()}`;
+                                    const month = (date.getMonth() + 1) < 10 ? `0${date.getMonth() + 1}` : `${date.getMonth() + 1}`;
+                                    const year = date.getFullYear()
+                                    const hours = date.getHours() < 10 ? `0${date.getHours()}` : `${date.getHours()}`;
+                                    const minutes = date.getMinutes() < 10 ? `0${date.getMinutes()}` : `${date.getMinutes()}`;
+                                %>
+                                <%= `${day}/${month}/${year} - ${hours}:${minutes}` %> <!-- BETER VOORAF DEFINIEREN, ZODAT DIT HIER PROPER STAAT -->
                             </td>
                         </tr>
                     <% } %>
@@ -32,3 +90,57 @@
             </table>
         <% } %>
     </section>
+
+    <section class="dash-element section-graph">
+        <h2>
+            <span class="icon" id="icon-graph"><img src="/assets/eye-off.svg" alt="Verberg grafiek"></span
+            <p>Grafiek</p>
+        </h2>
+
+        <div id="graph">
+            <canvas id="myChart"></canvas>
+        </div>
+    </section>  
+
+   <script src="/js/show-hide-result.js"></script>
+   <script>
+        const results = <%- JSON.stringify(results) %>;
+   </script>
+     <script>
+        var ctx = document.getElementById('myChart').getContext('2d');
+       var myChart = new Chart(ctx, {
+           type: 'line',
+           data: {
+             labels: ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],
+             datasets: [{ 
+                 data: [86,114,106,106,107,111,133],
+                 label: "Total",
+                 borderColor: "#3e95cd",
+                 backgroundColor: "#7bb6dd",
+                 fill: False,
+               }, { 
+                 data: [70,90,44,60,83,90,100],
+                 label: "Accepted",
+                 borderColor: "#3cba9f",
+                 backgroundColor: "#71d1bd",
+                 fill: False,
+               }, { 
+                 data: [10,21,60,44,17,21,17],
+                 label: "Pending",
+                 borderColor: "#ffa500",
+                 backgroundColor:"#ffc04d",
+                 fill: False,
+               }, { 
+                 data: [6,3,2,2,7,0,16],
+                 label: "Rejected",
+                 borderColor: "#c45850",
+                 backgroundColor:"#d78f89",
+                 fill: False,
+               }
+             ]
+           },
+         });
+     </script>
+
+     <!-- THIS INSTEAD? https://gionkunz.github.io/chartist-js/examples.html  -->
+   <!-- <script src="/js/render-graph.js" type="module"></script> -->

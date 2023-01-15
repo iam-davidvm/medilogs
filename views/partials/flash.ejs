@@ -17,9 +17,11 @@
 <% } %>
 
 <script>
-    const closeAlert = document.querySelector('.alert-close');
-    closeAlert.addEventListener('click', () => {
-        const alert = document.querySelector('.alert');
-        alert.style.display = 'none';
-    })
+    if (document.querySelector('.alert-close') !== null) {
+        const closeAlert = document.querySelector('.alert-close');
+        closeAlert.addEventListener('click', () => {
+            const alert = document.querySelector('.alert');
+            alert.style.display = 'none';
+        });
+    }
 </script>
