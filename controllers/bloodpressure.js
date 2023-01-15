@@ -17,15 +17,16 @@ module.exports.addPressure = async (req, res) => {
   const bloodpressure = await new Bloodpressure({
     onderdruk: parseInt(onderdruk),
     bovendruk: parseInt(bovendruk),
-    hartslag: parseInt(hartslag),
+    // hartslag: parseInt(hartslag),
     tijdstip: registeredTime,
     persoon: persoonId,
   });
+  console.log(hartslag);
   console.log(registeredTime);
   console.log(bloodpressure);
   await bloodpressure.save();
   req.flash('success', 'De meting werd succesvol bewaard.');
-  res.redirect('/');
+  res.redirect(`/${persoonId}/dashboard/`);
 };
 
 module.exports.renderConsultation = (req, res) => {

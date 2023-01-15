@@ -290,13 +290,20 @@ header nav a + a {
   outline: hsla(360, 0%, 0%, 0.5) solid 3px;
 }
 
+/* html body main div.container form.form.input-form.subtle-shadow div.form-element input#hartslag */
+
+.form-element #hartslag:placeholder-shown {
+  background-image: none;
+}
+
 .form-element input:valid {
-  background: url('../assets/check.png');
+  background-image: url('../assets/check.png');
+  background-color: white;
   background-repeat: no-repeat;
   background-position: 98% 50%;
 }
 
-.form-element input[type='number']:valid {
+.form-element input[type='number'] {
   background-position: 94% 50%;
 }
 

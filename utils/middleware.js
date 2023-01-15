@@ -17,8 +17,7 @@ module.exports.validateBloodpressure = (req, res, next) => {
   if (error) {
     const msg = error.details.map((el) => el.message).join(',');
 
-    req.flash('error', msg);
-    res.redirect('/'); // moet nog naar error page gaan
+    throw new ExpressError(msg, 400);
   } else {
     next();
   }

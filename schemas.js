@@ -30,13 +30,13 @@ module.exports.bloodpressureSchema = Joi.object({
   bloodpressure: Joi.object({
     bovendruk: Joi.number().min(30).max(299).required(),
     onderdruk: Joi.number().min(30).max(299).required(),
-    hartslag: Joi.number().min(30).max(299).required(),
+    hartslag: Joi.number().allow(null, '').max(299).messages({
+      'number.base': `Hartslag moet een nummer zijn.`,
+    }), //
     dag: Joi.string(),
     maand: Joi.string(),
     jaar: Joi.string(),
     uur: Joi.string(),
     min: Joi.string(),
-    //tijdstip: Joi.date().required(),
-    //persoon: Joi.string().required(),
   }).required(),
 });
