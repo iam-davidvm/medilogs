@@ -30,4 +30,15 @@ iconStats.addEventListener('click', function () {
 
 const iconGraph = document.querySelector('#icon-graph');
 const imgGraph = iconGraph.querySelector('img');
-// const stats = document.querySelector('.stats');
+const graph = document.querySelector('#graph');
+
+iconGraph.addEventListener('click', () => {
+  graph.classList.toggle('invisible');
+  if (graph.classList.contains('invisible')) {
+    imgGraph.src = '/assets/eye.svg';
+    imgStats.alt = 'Toon grafiek';
+  } else {
+    imgStats.src = '/assets/eye-off.svg';
+    imgStats.alt = 'Verberg grafiek';
+  }
+});

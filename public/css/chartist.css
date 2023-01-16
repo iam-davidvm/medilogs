@@ -1,0 +1,85 @@
+.ct-chart {
+  position: relative;
+  margin-bottom: 2rem;
+}
+
+.ct-grid {
+  stroke: rgba(0, 0, 0, 0.5);
+}
+
+.ct-label {
+  fill: rgba(0, 0, 0, 0.7);
+  color: rgba(0, 0, 0, 0.7);
+  font-size: 1.2rem;
+}
+
+.ct-label.ct-horizontal.ct-end {
+  line-height: 1.2;
+}
+
+.ct-chart-line {
+  margin: 4rem 0;
+}
+
+.ct-legend {
+  position: relative;
+  z-index: 10;
+  list-style: none;
+  text-align: center;
+  font-size: 1.6rem;
+}
+.ct-legend li {
+  position: relative;
+  padding-left: 23px;
+  margin-right: 20px;
+  margin-bottom: 3px;
+  cursor: pointer;
+  display: inline-block;
+}
+.ct-legend li:before {
+  width: 14px;
+  height: 14px;
+  position: absolute;
+  top: 4px;
+  left: 0;
+  content: '';
+  border: 3px solid transparent;
+  border-radius: 2px;
+}
+.ct-legend li.inactive:before {
+  background: transparent;
+}
+.ct-legend.ct-legend-inside {
+  position: absolute;
+  top: 0;
+  right: 0;
+}
+.ct-legend.ct-legend-inside li {
+  display: block;
+  margin: 0;
+}
+
+/*
+.ct-series-a .ct-line,
+.ct-series-a .ct-point {
+  stroke: blue;
+}
+
+.ct-series-b .ct-line,
+.ct-series-b .ct-point {
+  stroke: green;
+}
+*/
+
+.ct-legend .ct-series-0:before {
+  background-color: #d70206;
+  border-color: #d70206;
+}
+.ct-legend .ct-series-1:before {
+  background-color: #f05b4f;
+  border-color: #f05b4f;
+}
+.ct-legend .ct-series-2:before {
+  background-color: #f4c63d;
+  border-color: #f4c63d;
+}

@@ -1,37 +1,42 @@
-const ctx = document.getElementById('myChart').getContext('2d');
-const chart = new Chart(ctx, {
-  type: 'line',
-  data: {
-    labels: ['2022-01-13', '2022-01-14', '2022-01-15'],
-    datasets: [
-      {
-        label: 'GD',
-        data: [20, 19, 24],
-        backgroundColor: 'rgba(255, 99, 132, 0.2)',
-        borderColor: 'rgba(255, 99, 132, 1)',
-        borderWidth: 1,
-      },
-      {
-        label: 'GA',
-        data: [23, 25, 18],
-        backgroundColor: 'rgba(54, 162, 235, 0.2)',
-        borderColor: 'rgba(54, 162, 235, 1)',
-        borderWidth: 1,
-      },
-      {
-        label: 'GS',
-        data: [44, 50, 42],
-        backgroundColor: 'rgba(255, 206, 86, 0.2)',
-        borderColor: 'rgba(255, 206, 86, 1)',
-        borderWidth: 1,
-      },
+const bovendruk = results.map((result) => result.bovendruk);
+const onderdruk = results.map((result) => result.onderdruk);
+const hartslag = results.map((result) =>
+  result.hartslag ? result.hartslag : null
+);
+const tijdstip = results.map((result) => {
+  const date = new Date(result.tijdstip);
+  const day = date.getDate() < 10 ? `0${date.getDate()}` : `${date.getDate()}`;
+  const month =
+    date.getMonth() + 1 < 10
+      ? `0${date.getMonth() + 1}`
+      : `${date.getMonth() + 1}`;
+  const year = date.getFullYear();
+  const hours =
+    date.getHours() < 10 ? `0${date.getHours()}` : `${date.getHours()}`;
+  const minutes =
+    date.getMinutes() < 10 ? `0${date.getMinutes()}` : `${date.getMinutes()}`;
+  return `${day}/${month}/${year.toString().substring(2)}
+  ${hours}:${minutes}`;
+});
+
+// Initialize a Line chart in the container with the ID chart1
+new Chartist.Line(
+  '.ct-chart',
+  {
+    labels: tijdstip,
+    // series: [bovendruk, onderdruk, hartslag],
+    series: [
+      { name: 'Bovendruk', data: bovendruk },
+      { name: 'Onderdruk', data: onderdruk },
+      { name: 'Hartslag', data: hartslag },
     ],
   },
-  options: {
-    scales: {
-      y: {
-        beginAtZero: true,
-      },
+  {
+    low: 30,
+    fullWidth: true,
+    chartPadding: {
+      right: 80,
     },
-  },
-});
+    plugins: [Chartist.plugins.legend({})],
+  }
+);

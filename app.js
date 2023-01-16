@@ -39,10 +39,6 @@ app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'views'));
 app.use(express.static(path.join(__dirname, 'public')));
 
-// TO USE CHART.JS
-app.use('/chartjs', express.static(__dirname + '/node_modules/chart.js/'));
-const { Chart } = require('chart.js'); // not sure
-
 dbUrl = process.env.DB_URL;
 mongoose
   .connect(dbUrl)
