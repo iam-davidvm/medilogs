@@ -23,6 +23,7 @@ html {
 
 /* GENERAL */
 body {
+  position: relative;
   height: 100vh;
   background-color: var(--clr-off-whi);
 }
@@ -130,7 +131,7 @@ h2 {
 header nav {
   display: flex;
   justify-content: space-between;
-  margin: 20px 0;
+  padding: 20px 0;
 }
 
 header nav a + a {
@@ -199,6 +200,11 @@ header nav a + a {
   opacity: 0.7;
 }
 
+.alert-close:focus {
+  outline-offset: 0.5rem;
+  outline: var(--clr-pri-red) solid 3px;
+}
+
 @supports selector(:focus-visible) {
   .alert-close:focus {
     outline-offset: 0rem;
@@ -226,6 +232,78 @@ header nav a + a {
 
   to {
     opacity: 0;
+  }
+}
+
+.modal {
+  position: absolute;
+  z-index: 999;
+  width: 100vw;
+  height: 100vh;
+  top: 0;
+  left: 0;
+  display: grid;
+  place-content: center;
+  background-color: rgba(0, 0, 0, 0.6);
+}
+
+.warning {
+  width: 420px;
+  padding: 2rem 1.5rem;
+  border-radius: 2rem;
+  background-color: var(--clr-pri-red);
+  color: var(--clr-pur-whi);
+  font-size: 1.7rem;
+  text-align: center;
+}
+
+.warning p {
+  line-height: 1.4;
+  margin-bottom: 2.5rem;
+}
+
+.warning span {
+  font-weight: 700;
+  display: block;
+}
+
+.warning .btn-warning {
+  border: 1px solid var(--clr-pur-whi);
+  background-color: var(--clr-pur-whi);
+  color: var(--clr-pri-red);
+  transition: background-color 230ms ease-in-out, color 230ms ease-in-out;
+}
+
+.warning .btn-warning:hover {
+  background-color: rgba(0, 0, 0, 0.1);
+  color: var(--clr-pur-whi);
+}
+
+.warning a.btn {
+  color: var(--clr-pur-whi);
+}
+
+.warning a.btn:hover {
+  text-decoration: underline;
+}
+
+.warning .btn-warning:focus,
+.warning a.btn:focus {
+  outline-offset: 0.5rem;
+  outline: var(--clr-pri-pur) solid 3px;
+}
+
+@supports selector(:focus-visible) {
+  .warning .btn-warning:focus,
+  .warning a.btn:focus {
+    outline-offset: 0rem;
+    outline: transparent none 0px;
+  }
+
+  .warning .btn-warning:focus-visible,
+  .warning a.btn:focus-visible {
+    outline-offset: 0.5rem;
+    outline: var(--clr-pri-pur) solid 3px;
   }
 }
 

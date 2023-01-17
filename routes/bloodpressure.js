@@ -33,4 +33,9 @@ router
     catchAsync(bloodpressureController.editPressure)
   );
 
+router
+  .route('/:resultId/verwijder')
+  .get(isLoggedIn, catchAsync(bloodpressureController.flashDeletePressure))
+  .delete(isLoggedIn, catchAsync(bloodpressureController.deletePressure));
+
 module.exports = router;

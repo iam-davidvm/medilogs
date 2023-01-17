@@ -38,7 +38,7 @@ module.exports.renderConsultation = (req, res) => {
 };
 
 module.exports.showResults = async (req, res) => {
-  let amount = 30;
+  let amount = '30';
   let sortOption = { tijdstip: 'desc' };
   const { persoonId } = req.params;
   const { days, sort } = req.query;
@@ -85,5 +85,24 @@ module.exports.editPressure = async (req, res) => {
     });
   }
   req.flash('success', 'De meting werd succesvol aangepast.');
+  res.redirect(`/${persoonId}/bloeddruk/overzicht`);
+};
+
+module.exports.flashDeletePressure = async (req, res) => {
+  const { persoonId, resultId } = req.params;
+  const result = await Bloodpressure.findById(resultId);
+  const date = result.tijdstip;
+  req.flash('warning', {
+    resultId,
+    date,
+    persoonId,
+  });
+  res.redirect(`/${persoonId}/bloeddruk/overzicht`);
+};
+
+module.exports.deletePressure = async (req, res) => {
+  const { persoonId, resultId } = req.params;
+  await Bloodpressure.findByIdAndDelete(resultId);
+  req.flash('success', 'De meting werd verwijderd.');
   res.redirect(`/${persoonId}/bloeddruk/overzicht`);
 };
