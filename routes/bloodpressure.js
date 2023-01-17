@@ -24,4 +24,13 @@ router
   .route('/overzicht')
   .get(isLoggedIn, catchAsync(bloodpressureController.showResults));
 
+router
+  .route('/:resultId/bewerk')
+  .get(isLoggedIn, catchAsync(bloodpressureController.renderEditBloodpressure))
+  .patch(
+    validateBloodpressure,
+    isLoggedIn,
+    catchAsync(bloodpressureController.editPressure)
+  );
+
 module.exports = router;

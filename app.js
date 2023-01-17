@@ -15,6 +15,9 @@ app.use(express.urlencoded({ extended: true }));
 // default Error handling
 const ExpressError = require('./utils/ExpressError');
 
+// OVERRIDE DEFAULT HTML METHODS
+const methodOverride = require('method-override');
+
 // session save
 const session = require('express-session');
 const MongoStore = require('connect-mongo');
@@ -38,6 +41,7 @@ app.engine('ejs', engine);
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'views'));
 app.use(express.static(path.join(__dirname, 'public')));
+app.use(methodOverride('_method'));
 
 dbUrl = process.env.DB_URL;
 mongoose

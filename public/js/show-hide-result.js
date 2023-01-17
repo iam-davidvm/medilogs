@@ -42,3 +42,10 @@ iconGraph.addEventListener('click', () => {
     imgStats.alt = 'Verberg grafiek';
   }
 });
+
+const iconSettings = document.querySelector('#btn-results-settings');
+const settings = document.querySelector('#results-settings');
+
+iconSettings.addEventListener('click', () => {
+  settings.classList.toggle('invisible');
+});

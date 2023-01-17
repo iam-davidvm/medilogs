@@ -314,7 +314,8 @@ header nav a + a {
   margin-top: 0.5rem;
 }
 
-.form-element .form-hint {
+.form-element .form-hint,
+.hint {
   margin: 0.5rem;
   font-size: 1.1rem;
   color: hsla(360, 0%, 0%, 0.65);
@@ -402,6 +403,52 @@ header nav a + a {
 
 /* BLOOD PRESSURE RESULTS */
 
+.results-settings {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+}
+
+.results-settings #btn-results-settings {
+  cursor: pointer;
+  background-color: transparent;
+  border: none;
+}
+
+.results-settings img {
+  width: 24px;
+}
+
+section.section-results-settings {
+  border: 1px solid var(--clr-pri-red);
+  background-color: hsla(1, 100%, 71%, 0.03);
+  font-size: 1.6rem;
+  padding: 2.5rem;
+}
+
+.section-results-settings form {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 2rem;
+}
+
+.section-results-settings h3 {
+  margin-bottom: 0.5rem;
+}
+
+.section-results-settings select {
+  height: 4rem;
+  padding: 0 0.7rem;
+  font-family: var(--fnt-nun-san);
+  border-radius: 0.6rem;
+  background-color: var(--clr-pur-whi);
+  border: 1px solid var(--clr-pri-pur);
+}
+
+.section-results-settings #save-results-settings {
+  justify-self: flex-start;
+}
+
 .stats {
   display: flex;
   width: 100%;
@@ -451,10 +498,27 @@ table {
   margin-top: 2.8rem;
 }
 
+thead tr {
+  background-color: var(--clr-pri-red);
+  color: var(--clr-pur-whi);
+}
+
+thead tr .table-icon {
+  filter: invert(100%);
+}
+
 th,
 td {
   padding: 0.5em 1.5em 0.5em 0.5em;
   text-align: left;
+}
+
+th:nth-of-type(5),
+td:nth-of-type(5),
+th:nth-of-type(6),
+td:nth-of-type(6) {
+  padding: 0.5em;
+  text-align: center;
 }
 
 tbody tr:nth-of-type(1n) {
@@ -465,8 +529,32 @@ tbody tr:nth-of-type(2n) {
   background-color: hsla(1, 100%, 71%, 0.7);
 }
 
+.table-icon {
+  width: 24px;
+  margin: 0 auto;
+  display: block;
+}
+
+td a:focus {
+  outline-offset: 0.5rem;
+  outline: var(--clr-pri-red) solid 3px;
+}
+
+@supports selector(:focus-visible) {
+  td a:focus {
+    outline-offset: 0rem;
+    outline: transparent none 0px;
+  }
+
+  td a:focus-visible {
+    outline-offset: 0.25rem;
+    outline: var(--clr-pri-pur) solid 3px;
+  }
+}
+
 table.invisible,
-div.invisible {
+div.invisible,
+section.invisible {
   display: none;
 }
 
