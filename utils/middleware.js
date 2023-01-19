@@ -1,6 +1,20 @@
 const ExpressError = require('./ExpressError');
 const Bloodpressure = require('../models/bloodpressure');
+const User = require('../models/user');
 const { bloodpressureSchema } = require('../schemas');
+
+module.exports.lastSeen = async (req, res, next) => {
+  console.log(req.user);
+  try {
+    const user = await User.findByIdAndUpdate(req.user._id, {
+      laatstGezien: Date.now(),
+    });
+    console.log(user);
+  } catch (e) {
+    console.log(e);
+  }
+  next();
+};
 
 module.exports.isLoggedIn = (req, res, next) => {
   if (!req.isAuthenticated()) {

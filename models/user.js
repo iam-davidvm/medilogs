@@ -23,6 +23,9 @@ const userSchema = new Schema({
       ref: 'Person',
     },
   ],
+  laatstGezien: {
+    type: Date,
+  },
   rollen: {
     type: [String],
   },

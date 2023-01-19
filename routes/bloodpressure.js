@@ -5,11 +5,15 @@ const Person = require('../models/person');
 const bloodpressureController = require('../controllers/bloodpressure');
 
 const catchAsync = require('../utils/catchAsync');
-const { isLoggedIn, validateBloodpressure } = require('../utils/middleware');
+const {
+  isLoggedIn,
+  lastSeen,
+  validateBloodpressure,
+} = require('../utils/middleware');
 
 router
   .route('/nieuw')
-  .get(isLoggedIn, bloodpressureController.renderNewBloodpressure)
+  .get(isLoggedIn, lastSeen, bloodpressureController.renderNewBloodpressure)
   .post(
     validateBloodpressure,
     isLoggedIn,
@@ -18,32 +22,49 @@ router
 
 router
   .route('/raadplegen')
-  .get(isLoggedIn, bloodpressureController.renderConsultation);
+  .get(isLoggedIn, lastSeen, bloodpressureController.renderConsultation);
 
 router
   .route('/overzicht')
-  .get(isLoggedIn, catchAsync(bloodpressureController.showResults));
+  .get(isLoggedIn, lastSeen, catchAsync(bloodpressureController.showResults));
 
 router
   .route('/:resultId/bewerk')
-  .get(isLoggedIn, catchAsync(bloodpressureController.renderEditBloodpressure))
+  .get(
+    isLoggedIn,
+    lastSeen,
+    catchAsync(bloodpressureController.renderEditBloodpressure)
+  )
   .patch(
     validateBloodpressure,
     isLoggedIn,
+    lastSeen,
     catchAsync(bloodpressureController.editPressure)
   );
 
 router
   .route('/:resultId/verwijder')
-  .get(isLoggedIn, catchAsync(bloodpressureController.flashDeletePressure))
-  .delete(isLoggedIn, catchAsync(bloodpressureController.deletePressure));
+  .get(
+    isLoggedIn,
+    lastSeen,
+    catchAsync(bloodpressureController.flashDeletePressure)
+  )
+  .delete(
+    isLoggedIn,
+    lastSeen,
+    catchAsync(bloodpressureController.deletePressure)
+  );
 
 router
   .route('/downloaden')
-  .get(isLoggedIn, bloodpressureController.renderDownloadPage);
+  .get(isLoggedIn, lastSeen, bloodpressureController.renderDownloadPage);
 
 router
   .route('/downloadbestand')
-  .get(isLoggedIn, catchAsync(bloodpressureController.downloadResults));
+  .get(
+    isLoggedIn,
+    lastSeen,
+    catchAsync(bloodpressureController.downloadResults)
+  );
 
 module.exports = router;
