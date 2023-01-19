@@ -9,6 +9,7 @@ const {
   isLoggedIn,
   lastSeen,
   validateBloodpressure,
+  isAuthenticated,
 } = require('../utils/middleware');
 
 router
@@ -17,27 +18,40 @@ router
   .post(
     validateBloodpressure,
     isLoggedIn,
+    catchAsync(isAuthenticated),
     catchAsync(bloodpressureController.addPressure)
   );
 
 router
   .route('/raadplegen')
-  .get(isLoggedIn, lastSeen, bloodpressureController.renderConsultation);
+  .get(
+    isLoggedIn,
+    catchAsync(isAuthenticated),
+    lastSeen,
+    bloodpressureController.renderConsultation
+  );
 
 router
   .route('/overzicht')
-  .get(isLoggedIn, lastSeen, catchAsync(bloodpressureController.showResults));
+  .get(
+    isLoggedIn,
+    catchAsync(isAuthenticated),
+    lastSeen,
+    catchAsync(bloodpressureController.showResults)
+  );
 
 router
   .route('/:resultId/bewerk')
   .get(
     isLoggedIn,
+    catchAsync(isAuthenticated),
     lastSeen,
     catchAsync(bloodpressureController.renderEditBloodpressure)
   )
   .patch(
     validateBloodpressure,
     isLoggedIn,
+    catchAsync(isAuthenticated),
     lastSeen,
     catchAsync(bloodpressureController.editPressure)
   );
@@ -46,23 +60,31 @@ router
   .route('/:resultId/verwijder')
   .get(
     isLoggedIn,
+    catchAsync(isAuthenticated),
     lastSeen,
     catchAsync(bloodpressureController.flashDeletePressure)
   )
   .delete(
     isLoggedIn,
+    catchAsync(isAuthenticated),
     lastSeen,
     catchAsync(bloodpressureController.deletePressure)
   );
 
 router
   .route('/downloaden')
-  .get(isLoggedIn, lastSeen, bloodpressureController.renderDownloadPage);
+  .get(
+    isLoggedIn,
+    catchAsync(isAuthenticated),
+    lastSeen,
+    bloodpressureController.renderDownloadPage
+  );
 
 router
   .route('/downloadbestand')
   .get(
     isLoggedIn,
+    catchAsync(isAuthenticated),
     lastSeen,
     catchAsync(bloodpressureController.downloadResults)
   );

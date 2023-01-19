@@ -4,12 +4,10 @@ const User = require('../models/user');
 const { bloodpressureSchema } = require('../schemas');
 
 module.exports.lastSeen = async (req, res, next) => {
-  console.log(req.user);
   try {
     const user = await User.findByIdAndUpdate(req.user._id, {
       laatstGezien: Date.now(),
     });
-    console.log(user);
   } catch (e) {
     console.log(e);
   }
@@ -23,6 +21,19 @@ module.exports.isLoggedIn = (req, res, next) => {
     return res.redirect('/aanmelden');
   }
   next();
+};
+
+module.exports.isAuthenticated = async (req, res, next) => {
+  const { persoonId } = req.params;
+  const user = await User.find({ _id: req.user._id, personen: persoonId });
+
+  if (user.length === 0) {
+    const msg = 'Je hebt geen rechten tot deze pagina.';
+
+    throw new ExpressError(msg, 403);
+  } else {
+    next();
+  }
 };
 
 module.exports.validateBloodpressure = (req, res, next) => {
