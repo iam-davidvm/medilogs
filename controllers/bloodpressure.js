@@ -48,7 +48,12 @@ module.exports.showResults = async (req, res) => {
   const results = await Bloodpressure.find({ persoon: persoonId })
     .sort({ tijdstip: 'desc' })
     .limit(amount);
-  // console.log(results);
+  if (results.length === 0) {
+    return res.render('bloodpressure/noresults', {
+      title: 'Geen metingen gevonden',
+      persoonId,
+    });
+  }
   res.render('bloodpressure/results', {
     title: `Overzicht laatste ${amount} metingen`,
     results,

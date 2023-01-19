@@ -316,7 +316,8 @@ header nav a + a {
   gap: 2rem;
 }
 
-.input-form {
+.input-form,
+.center-card {
   max-width: 650px;
   margin: 7rem auto 0;
   background-color: var(--clr-pur-whi);
@@ -637,3 +638,38 @@ section.invisible {
 }
 
 /* END OF TABLE RESULTS */
+
+/* NO RESULTS PAGE */
+
+.center-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.center-card h1 {
+  color: var(--clr-pri-red);
+}
+
+.center-card p {
+  font-size: 1.6rem;
+  text-align: center;
+  margin-bottom: 0.5rem;
+}
+
+.center-card a {
+  display: block;
+  border: 1px solid var(--clr-pri-red);
+  background-color: var(--clr-pri-red);
+  color: var(--clr-pur-whi);
+  font-size: 1.6rem;
+  margin-top: 5rem;
+  transition: background-color 230ms ease-in-out, color 230ms ease-in-out;
+}
+
+.center-card a:hover {
+  background-color: var(--clr-hue-red);
+  color: var(--clr-pri-red);
+}
+
+/* END OF NO RESULTS PAGE */

@@ -105,7 +105,7 @@ app.use('/:persoonId/bloeddruk', bloodpressureRoutes);
 
 app.get('/', (req, res) => {
   if (req.user) {
-    res.redirect(`/${req.user.personen[0]._id}/dashboard`);
+    return res.redirect(`/${req.user.personen[0]._id}/dashboard`);
   }
   res.render('index', { title: 'Welkom' });
 });
