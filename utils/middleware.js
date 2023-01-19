@@ -24,8 +24,8 @@ module.exports.isLoggedIn = (req, res, next) => {
 };
 
 module.exports.isAuthenticated = async (req, res, next) => {
-  const { persoonId } = req.params;
-  const user = await User.find({ _id: req.user._id, personen: persoonId });
+  const { patientId } = req.params;
+  const user = await User.find({ _id: req.user._id, patienten: patientId });
 
   if (user.length === 0) {
     const msg = 'Je hebt geen rechten tot deze pagina.';

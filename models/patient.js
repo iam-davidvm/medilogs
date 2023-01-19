@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 const { Schema } = mongoose;
 const User = require('./user');
 
-const personSchema = new Schema({
+const patientSchema = new Schema({
   voornaam: {
     type: String,
     required: true,
@@ -18,4 +18,4 @@ const personSchema = new Schema({
   },
 });
 
-module.exports = mongoose.model('Person', personSchema);
+module.exports = mongoose.model('Patient', patientSchema);

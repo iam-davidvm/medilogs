@@ -1,17 +1,17 @@
 const Bloodpressure = require('../models/bloodpressure');
-const Person = require('../models/person');
+// const Patient = require('../models/patient');      // BIG UPDATENIET MEER NODIG????
 const excelJS = require('exceljs');
 
 module.exports.renderNewBloodpressure = (req, res) => {
-  const { persoonId } = req.params;
+  const { patientId } = req.params;
   res.render('bloodpressure/nieuw', {
-    id: persoonId,
+    id: patientId,
     title: 'Voer uw meting in',
   });
 };
 
 module.exports.addPressure = async (req, res) => {
-  const { persoonId } = req.params;
+  const { patientId } = req.params;
   const { bovendruk, onderdruk, hartslag, dag, maand, jaar, uur, min } =
     req.body.bloodpressure;
   const registeredTime = new Date(jaar, maand, dag, uur, min);
@@ -20,63 +20,63 @@ module.exports.addPressure = async (req, res) => {
     bovendruk: parseInt(bovendruk),
     // hartslag: parseInt(hartslag),
     tijdstip: registeredTime,
-    persoon: persoonId,
+    patient: patientId,
   });
   if (hartslag) {
     bloodpressure.hartslag = parseInt(hartslag);
   }
   await bloodpressure.save();
   req.flash('success', 'De meting werd succesvol bewaard.');
-  res.redirect(`/${persoonId}/dashboard/`);
+  res.redirect(`/${patientId}/dashboard/`);
 };
 
 module.exports.renderConsultation = (req, res) => {
-  const { persoonId } = req.params;
+  const { patientId } = req.params;
   res.render('bloodpressure/index', {
     title: 'Metingen raadplegen',
-    persoonId,
+    patientId,
   });
 };
 
 module.exports.showResults = async (req, res) => {
   let amount = '30';
   let sortOption = { tijdstip: 'desc' };
-  const { persoonId } = req.params;
+  const { patientId } = req.params;
   const { days, sort } = req.query;
   if (days) {
     amount = days;
   }
-  const results = await Bloodpressure.find({ persoon: persoonId })
+  const results = await Bloodpressure.find({ patient: patientId })
     .sort({ tijdstip: 'desc' })
     .limit(amount);
   if (results.length === 0) {
     return res.render('bloodpressure/noresults', {
       title: 'Geen metingen gevonden',
-      persoonId,
+      patientId,
     });
   }
   res.render('bloodpressure/results', {
     title: `Overzicht laatste ${amount} metingen`,
     results,
-    persoonId,
+    patientId,
     sort,
     amount,
   });
 };
 
 module.exports.renderEditBloodpressure = async (req, res) => {
-  const { persoonId, resultId } = req.params;
+  const { patientId, resultId } = req.params;
   const result = await Bloodpressure.findById(resultId);
   // return res.send(result);
   res.render('bloodpressure/edit', {
     title: 'Pas meting aan',
-    persoonId,
+    patientId,
     result,
   });
 };
 
 module.exports.editPressure = async (req, res) => {
-  const { persoonId, resultId } = req.params;
+  const { patientId, resultId } = req.params;
   const { bovendruk, onderdruk, hartslag, dag, maand, jaar, uur, min } =
     req.body.bloodpressure;
   const registeredTime = new Date(jaar, maand, dag, uur, min);
@@ -91,38 +91,38 @@ module.exports.editPressure = async (req, res) => {
     });
   }
   req.flash('success', 'De meting werd succesvol aangepast.');
-  res.redirect(`/${persoonId}/bloeddruk/overzicht`);
+  res.redirect(`/${patientId}/bloeddruk/overzicht`);
 };
 
 module.exports.flashDeletePressure = async (req, res) => {
-  const { persoonId, resultId } = req.params;
+  const { patientId, resultId } = req.params;
   const result = await Bloodpressure.findById(resultId);
   const date = result.tijdstip;
   req.flash('warning', {
     resultId,
     date,
-    persoonId,
+    patientId,
   });
-  res.redirect(`/${persoonId}/bloeddruk/overzicht`);
+  res.redirect(`/${patientId}/bloeddruk/overzicht`);
 };
 
 module.exports.deletePressure = async (req, res) => {
-  const { persoonId, resultId } = req.params;
+  const { patientId, resultId } = req.params;
   await Bloodpressure.findByIdAndDelete(resultId);
   req.flash('success', 'De meting werd verwijderd.');
-  res.redirect(`/${persoonId}/bloeddruk/overzicht`);
+  res.redirect(`/${patientId}/bloeddruk/overzicht`);
 };
 
 module.exports.renderDownloadPage = (req, res) => {
-  const { persoonId } = req.params;
+  const { patientId } = req.params;
   res.render('bloodpressure/download', {
     title: 'Download metingen',
-    persoonId,
+    patientId,
   });
 };
 
 module.exports.downloadResults = async (req, res) => {
-  const { persoonId } = req.params;
+  const { patientId } = req.params;
   const workbook = new excelJS.Workbook();
   const worksheet = workbook.addWorksheet('Mijn metingen', {
     views: [{ state: 'frozen', ySplit: 1 }],
@@ -140,14 +140,14 @@ module.exports.downloadResults = async (req, res) => {
     new Date().setFullYear(new Date().getFullYear() - 1)
   );
   const results = await Bloodpressure.find({
-    persoon: persoonId,
+    patient: patientId,
     tijdstip: { $gte: yearAgo },
   }).sort({ tijdstip: 'desc' });
 
   if (results.length === 0) {
     return res.render('bloodpressure/noresults', {
       title: 'Geen metingen gevonden',
-      persoonId,
+      patientId,
     });
   }
 
@@ -223,6 +223,6 @@ module.exports.downloadResults = async (req, res) => {
       'error',
       'Er ging iets fout, geef een seintje als dit probleem aanhoudt.'
     );
-    return res.redirect(`/${persoonId}/bloeddruk/raadplegen`);
+    return res.redirect(`/${patientId}/bloeddruk/raadplegen`);
   }
 };

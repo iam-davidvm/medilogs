@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 const { Schema } = mongoose;
-const Person = require('./person');
+const Patient = require('./patient');
 const passportLocalMongoose = require('passport-local-mongoose');
 
 const userSchema = new Schema({
@@ -17,10 +17,10 @@ const userSchema = new Schema({
     type: String,
     required: true,
   },
-  personen: [
+  patienten: [
     {
       type: Schema.Types.ObjectId,
-      ref: 'Person',
+      ref: 'Patient',
     },
   ],
   laatstGezien: {
@@ -45,7 +45,7 @@ const options = {
     MissingUsernameError: 'Er was geen e-mailadres ingevuld',
     UserExistsError: 'Er bestaat al een gebruiker met dit e-mailadres.',
   },
-  populateFields: 'personen',
+  populateFields: 'patienten',
 };
 
 userSchema.plugin(passportLocalMongoose, options);

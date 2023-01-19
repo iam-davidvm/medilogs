@@ -28,7 +28,7 @@
                     <% if(!currentUser) { %>
                         <p><a href="/">medilog</a></p>
                     <% } else { %>
-                        <p><a href="/<%= currentUser.personen[0]._id %>/dashboard/">medilog</a></p>
+                        <p><a href="/<%= currentUser.patienten[0]._id %>/dashboard/">medilog</a></p>
                     <% } %>
                 </div>
                 <div class="navbar-user">

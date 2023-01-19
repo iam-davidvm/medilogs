@@ -43,7 +43,9 @@ app.set('views', path.join(__dirname, 'views'));
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(methodOverride('_method'));
 
-dbUrl = process.env.DB_URL;
+//const dbUrl = process.env.DB_URL;
+const dbUrl = 'mongodb://localhost:27017/medipas-v2';
+
 mongoose
   .connect(dbUrl)
   .then(() => {
@@ -62,6 +64,10 @@ const store = MongoStore.create({
   crypto: {
     secret: process.env.SECRET,
   },
+});
+
+store.on('error', function (e) {
+  console.log('SESSION STORE ERROR', e);
 });
 
 const sessionConfig = {
@@ -101,18 +107,18 @@ app.use((req, res, next) => {
 });
 
 app.use('/', userRoutes);
-app.use('/:persoonId/bloeddruk', bloodpressureRoutes);
+app.use('/:patientId/bloeddruk', bloodpressureRoutes);
 
 app.get('/', (req, res) => {
   if (req.user) {
-    return res.redirect(`/${req.user.personen[0]._id}/dashboard`);
+    return res.redirect(`/${req.user.patienten[0]._id}/dashboard`);
   }
   res.render('index', { title: 'Welkom' });
 });
 
-app.get('/:persoonId/dashboard', (req, res) => {
-  const { persoonId } = req.params;
-  res.render('dashboard/index', { title: 'Dashboard', persoonId });
+app.get('/:patientId/dashboard', (req, res) => {
+  const { patientId } = req.params;
+  res.render('dashboard/index', { title: 'Dashboard', patientId });
 });
 
 app.all('*', (req, res, next) => {
@@ -125,6 +131,8 @@ app.use((err, req, res, next) => {
   res.status(statusCode).render('error', { err });
 });
 
-app.listen(3000, () => {
-  console.log('Listening to port 3000');
+const port = process.env.PORT || 3000;
+
+app.listen(port, () => {
+  console.log(`Serving on port ${port}`);
 });

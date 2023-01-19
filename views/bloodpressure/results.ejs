@@ -159,8 +159,8 @@
                                 %>
                                 <%= `${day}/${month}/${year} - ${hours}:${minutes}` %> 
                             </td>                            
-                            <td><a href="/<%= persoonId %>/bloeddruk/<%= result._id %>/bewerk"><img src="/assets/edit.svg" alt="Pas meting aan" class="table-icon"></a></td>
-                            <td><a href="/<%= persoonId %>/bloeddruk/<%= result._id %>/verwijder"><img src="/assets/delete.svg" alt="Verwijder meting" class="table-icon"></a></td>
+                            <td><a href="/<%= patientId %>/bloeddruk/<%= result._id %>/bewerk"><img src="/assets/edit.svg" alt="Pas meting aan" class="table-icon"></a></td>
+                            <td><a href="/<%= patientId %>/bloeddruk/<%= result._id %>/verwijder"><img src="/assets/delete.svg" alt="Verwijder meting" class="table-icon"></a></td>
                         </tr>
                     <% } %>
                 </tbody>
@@ -182,7 +182,7 @@
    <script src="/js/show-hide-result.js"></script>
    <script>
        const results = <%- JSON.stringify(sortedResults) %>;
-       const persoonId = <%- JSON.stringify(persoonId) %>;
+       const patientId = <%- JSON.stringify(patientId) %>;
     </script>
 
    <script src="/js/change-results-settings.js"></script>

@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router({ mergeParams: true });
-const Bloodpressure = require('../models/bloodpressure');
-const Person = require('../models/person');
+// const Bloodpressure = require('../models/bloodpressure');    / BIG UPDATE NODIG?
+// const Patient = require('../models/patient');    / BIG UPDATE NODIG?
 const bloodpressureController = require('../controllers/bloodpressure');
 
 const catchAsync = require('../utils/catchAsync');

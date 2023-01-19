@@ -7,8 +7,8 @@ form.addEventListener('submit', function (e) {
   const days = data.get('days');
   const sort = data.get('sort');
 
-  console.log(days, sort, persoonId);
+  console.log(days, sort, patientId);
   window.location.assign(
-    `/${persoonId}/bloeddruk/overzicht?days=${days}&sort=${sort}`
+    `/${patientId}/bloeddruk/overzicht?days=${days}&sort=${sort}`
   );
 });

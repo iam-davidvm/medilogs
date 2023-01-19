@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 const { Schema } = mongoose;
-const Person = require('./person');
+const Patient = require('./patient');
 
 const bloodpressureSchema = new Schema({
   bovendruk: {
@@ -24,9 +24,9 @@ const bloodpressureSchema = new Schema({
     type: Date,
     required: true,
   },
-  persoon: {
+  patient: {
     type: Schema.Types.ObjectId,
-    ref: 'Person',
+    ref: 'Patient',
     required: true,
   },
 });
