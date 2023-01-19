@@ -1,5 +1,6 @@
 const Bloodpressure = require('../models/bloodpressure');
 const Person = require('../models/person');
+const excelJS = require('exceljs');
 
 module.exports.renderNewBloodpressure = (req, res) => {
   const { persoonId } = req.params;
@@ -110,4 +111,118 @@ module.exports.deletePressure = async (req, res) => {
   await Bloodpressure.findByIdAndDelete(resultId);
   req.flash('success', 'De meting werd verwijderd.');
   res.redirect(`/${persoonId}/bloeddruk/overzicht`);
+};
+
+module.exports.renderDownloadPage = (req, res) => {
+  const { persoonId } = req.params;
+  res.render('bloodpressure/download', {
+    title: 'Download metingen',
+    persoonId,
+  });
+};
+
+module.exports.downloadResults = async (req, res) => {
+  const { persoonId } = req.params;
+  const workbook = new excelJS.Workbook();
+  const worksheet = workbook.addWorksheet('Mijn metingen', {
+    views: [{ state: 'frozen', ySplit: 1 }],
+    properties: { defaultRowHeight: 20 },
+  });
+
+  worksheet.columns = [
+    { header: 'Bovendruk', key: 'bovendruk', width: 15 },
+    { header: 'Onderdruk', key: 'onderdruk', width: 15 },
+    { header: 'Hartslag', key: 'hartslag', width: 15 },
+    { header: 'Tijdstip', key: 'tijdstip', width: 20 },
+  ];
+
+  const yearAgo = new Date(
+    new Date().setFullYear(new Date().getFullYear() - 1)
+  );
+  const results = await Bloodpressure.find({
+    persoon: persoonId,
+    tijdstip: { $gte: yearAgo },
+  }).sort({ tijdstip: 'desc' });
+
+  if (results.length === 0) {
+    return res.render('bloodpressure/noresults', {
+      title: 'Geen metingen gevonden',
+      persoonId,
+    });
+  }
+
+  results.forEach((result) => {
+    const date = result.tijdstip;
+    worksheet.addRow({
+      bovendruk: result.bovendruk,
+      onderdruk: result.onderdruk,
+      hartslag: result.hartslag,
+      tijdstip: new Date(
+        Date.UTC(
+          date.getFullYear(),
+          date.getMonth(),
+          date.getDate(),
+          date.getHours(),
+          date.getMinutes(),
+          date.getSeconds()
+        )
+      ),
+    });
+  });
+
+  // layout first column
+  worksheet.getRow(1).eachCell((cell) => {
+    cell.font = { bold: true, color: { argb: 'ffffff' } };
+    cell.fill = {
+      type: 'pattern',
+      pattern: 'solid',
+      fgColor: { argb: 'ff6e6b' },
+    };
+  });
+
+  worksheet.eachRow({ includeEmpty: false }, function (row, rowNumber) {
+    if (rowNumber === 1) {
+      return;
+    }
+
+    if (rowNumber % 2 === 0) {
+      worksheet.getRow(rowNumber).eachCell((cell) => {
+        cell.fill = {
+          type: 'pattern',
+          pattern: 'solid',
+          fgColor: { argb: 'fbdcd9' },
+        };
+      });
+    } else {
+      worksheet.getRow(rowNumber).eachCell((cell) => {
+        cell.fill = {
+          type: 'pattern',
+          pattern: 'solid',
+          fgColor: { argb: 'fe9794' },
+        };
+      });
+    }
+  });
+
+  worksheet.autoFilter = 'A1:D1';
+
+  res.setHeader(
+    'Content-Type',
+    'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'
+  );
+  res.setHeader(
+    'Content-Disposition',
+    'attachment; filename=' + 'metingen.xlsx'
+  );
+  try {
+    workbook.xlsx.write(res).then(function (data) {
+      res.end();
+    });
+  } catch (e) {
+    req.flash(
+      'error',
+      'Er ging iets fout, geef een seintje als dit probleem aanhoudt.'
+    );
+    return res.redirect(`/${persoonId}/bloeddruk/raadplegen`);
+  }
 };

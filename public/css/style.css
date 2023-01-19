@@ -1,6 +1,6 @@
 :root {
   --fnt-nun-san: 'Nunito Sans', sans-serif;
-  --clr-pri-red: hsl(1, 100%, 71%);
+  --clr-pri-red: #ff6e6b;
   --clr-pri-pur: hsl(263, 57%, 9%); /* was hsl(262, 49%, 14%); */
   --clr-hue-red: hsla(1, 100%, 71%, 0.25);
   --clr-hue-pur: hsla(263, 57%, 9%, 0.7); /* was hsl(262, 49%, 14%); */
@@ -605,7 +605,7 @@ tbody tr:nth-of-type(1n) {
 }
 
 tbody tr:nth-of-type(2n) {
-  background-color: hsla(1, 100%, 71%, 0.7);
+  background-color: hsla(1, 100%, 71%, 0.702);
 }
 
 .table-icon {
@@ -614,18 +614,21 @@ tbody tr:nth-of-type(2n) {
   display: block;
 }
 
-td a:focus {
+td a:focus,
+.center-card .link:focus {
   outline-offset: 0.5rem;
   outline: var(--clr-pri-red) solid 3px;
 }
 
 @supports selector(:focus-visible) {
-  td a:focus {
+  td a:focus,
+  .center-card .link:focus {
     outline-offset: 0rem;
     outline: transparent none 0px;
   }
 
-  td a:focus-visible {
+  td a:focus-visible,
+  .center-card .link:focus-visible {
     outline-offset: 0.25rem;
     outline: var(--clr-pri-pur) solid 3px;
   }
@@ -657,7 +660,7 @@ section.invisible {
   margin-bottom: 0.5rem;
 }
 
-.center-card a {
+.center-card .btn {
   display: block;
   border: 1px solid var(--clr-pri-red);
   background-color: var(--clr-pri-red);
@@ -667,9 +670,25 @@ section.invisible {
   transition: background-color 230ms ease-in-out, color 230ms ease-in-out;
 }
 
-.center-card a:hover {
+.center-card .btnhover {
   background-color: var(--clr-hue-red);
   color: var(--clr-pri-red);
 }
 
 /* END OF NO RESULTS PAGE */
+
+/* DOWNLOAD PAGE */
+
+.center-card .link {
+  display: block;
+  text-decoration: none;
+  font-size: 1.6rem;
+  margin-top: 5rem;
+  color: var(--clr-pri-red);
+}
+
+.center-card .link:hover {
+  text-decoration: underline;
+}
+
+/* END OF DOWNLOAD PAGE */

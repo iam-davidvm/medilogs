@@ -38,4 +38,12 @@ router
   .get(isLoggedIn, catchAsync(bloodpressureController.flashDeletePressure))
   .delete(isLoggedIn, catchAsync(bloodpressureController.deletePressure));
 
+router
+  .route('/downloaden')
+  .get(isLoggedIn, bloodpressureController.renderDownloadPage);
+
+router
+  .route('/downloadbestand')
+  .get(isLoggedIn, catchAsync(bloodpressureController.downloadResults));
+
 module.exports = router;
