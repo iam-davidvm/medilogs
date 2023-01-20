@@ -367,12 +367,17 @@ header nav a + a {
   outline: hsla(360, 0%, 0%, 0.5) solid 3px;
 }
 
+.user-form .form-element input {
+  padding-right: 4rem;
+}
+
 .form-element #hartslag:placeholder-shown {
   background-image: none;
 }
 
 .form-element input:valid {
   background-image: url('../assets/check.png');
+  background-size: 2.5rem;
   background-color: white;
   background-repeat: no-repeat;
   background-position: 98% 50%;
@@ -380,6 +385,34 @@ header nav a + a {
 
 .form-element input[type='number'] {
   background-position: 94% 50%;
+}
+
+#password {
+  padding-left: 5.5rem;
+}
+
+.password-container {
+  position: relative;
+}
+
+.password-eye {
+  width: 5rem;
+  position: absolute;
+  display: block;
+  height: 6rem;
+  left: 0;
+  top: 0;
+  padding: 2rem 1.5rem;
+  background-color: rgba(0, 0, 0, 0.2);
+  border-radius: 0.6rem 0 0 0.6rem;
+  border-right: 1px solid rgba(0, 0, 0, 0.2);
+}
+
+#toggle-password {
+  width: 2rem;
+  cursor: pointer;
+  display: block;
+  filter: invert(40%);
 }
 
 .form-element .form-alert {

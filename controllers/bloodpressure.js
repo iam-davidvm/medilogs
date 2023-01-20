@@ -1,5 +1,4 @@
 const Bloodpressure = require('../models/bloodpressure');
-// const Patient = require('../models/patient');      // BIG UPDATENIET MEER NODIG????
 const excelJS = require('exceljs');
 
 module.exports.renderNewBloodpressure = (req, res) => {
