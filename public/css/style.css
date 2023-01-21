@@ -83,7 +83,7 @@ body {
 
 .btn-sec:hover {
   background-color: var(--clr-hue-pur);
-  color: white;
+  color: var(--clr-pur-whi);
 }
 
 .btn-tile {
@@ -176,17 +176,17 @@ header nav a + a {
 }
 
 .is-success {
-  background-color: #2e7d32;
+  background-color: #1fb978;
 }
 
 .is-error {
-  background-color: #c62828;
+  background-color: #e74c3c;
 }
 
 .alert-close {
   background-color: transparent;
   border: none;
-  color: white;
+  color: var(--clr-pur-whi);
   position: absolute;
   top: 0.5rem;
   right: 0.5rem;
@@ -378,7 +378,7 @@ header nav a + a {
 .form-element input:valid {
   background-image: url('../assets/check.png');
   background-size: 2.5rem;
-  background-color: white;
+  background-color: var(--clr-pur-whi);
   background-repeat: no-repeat;
   background-position: 98% 50%;
 }
@@ -478,7 +478,7 @@ header nav a + a {
 }
 
 .form-date-element select {
-  background-color: white;
+  background-color: var(--clr-pur-whi);
 }
 
 .form-date-element label,
@@ -512,6 +512,114 @@ header nav a + a {
 }
 
 /* END OF DATE FORM ELEMENTS  */
+
+/* TOGGLE BUTTON FOR EMAILS */
+
+/* SOURCE: https://kittygiraudel.com/2021/04/05/an-accessible-toggle/ */
+.toggle {
+  display: inline-flex;
+  align-items: center;
+  flex-wrap: wrap;
+  position: relative;
+  gap: 1ch;
+}
+
+.toggle p {
+  margin-bottom: 0.7rem;
+}
+
+.toggle-display {
+  --offset: 0.25em;
+  --diameter: 1.8em;
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: space-around;
+
+  width: calc(var(--diameter) * 2 + var(--offset) * 2);
+  height: calc(var(--diameter) + var(--offset) * 2);
+  box-sizing: content-box;
+
+  border: 0.1em solid rgb(0 0 0 / 0.2);
+
+  position: relative;
+  border-radius: 100vw;
+  background-color: #e74c3c;
+
+  transition: 250ms;
+  cursor: pointer;
+}
+
+.toggle-display::before {
+  content: '';
+
+  width: var(--diameter);
+  height: var(--diameter);
+  border-radius: 50%;
+
+  box-sizing: border-box;
+  border: 0.1 solid rgb(0 0 0 / 0.2);
+
+  position: absolute;
+  z-index: 2;
+  top: 50%;
+  left: var(--offset);
+  transform: translate(0, -50%);
+
+  background-color: var(--clr-pur-whi);
+  transition: inherit;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .toggle-display {
+    transition-duration: 0ms;
+  }
+}
+
+.toggle-input {
+  position: absolute;
+  opacity: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.toggle-input:focus + .toggle-display {
+  outline: 1px dotted #212121;
+  outline: 1px auto -webkit-focus-ring-color;
+}
+
+.toggle-input:focus:not(:focus-visible) + .toggle-display {
+  outline: 0;
+}
+
+.toggle-input:checked + .toggle-display {
+  background-color: #1fb978;
+}
+
+.toggle-input:checked + .toggle-display::before {
+  transform: translate(100%, -50%);
+}
+
+.toggle-input:disabled + .toggle-display {
+  opacity: 0.6;
+  filter: grayscale(40%);
+  cursor: not-allowed;
+}
+
+.toggle-icon {
+  display: inline-block;
+  width: 1em;
+  height: 1em;
+  color: var(--clr-pur-whi);
+  fill: currentcolor;
+  vertical-align: middle;
+}
+
+.toggle-icon-cross {
+  font-size: 85%;
+}
+
+/* END OF TOGGLE BUTTON FOR EMAILS */
 
 /* BLOOD PRESSURE RESULTS */
 

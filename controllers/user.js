@@ -7,14 +7,27 @@ module.exports.renderRegister = (req, res) => {
 
 module.exports.register = async (req, res, next) => {
   try {
-    const { email, voornaam, familienaam, wachtwoord, registratiecode } =
-      req.body;
+    const {
+      email,
+      voornaam,
+      familienaam,
+      wachtwoord,
+      registratiecode,
+      updates,
+    } = req.body;
+    const wilUpdates = updates ? true : false;
     if (registratiecode !== process.env.BETA_CODE) {
       req.flash('error', 'Dit is niet de juiste registratiecode.');
       return res.redirect('/registreren');
     }
     const patient = await new Patient({ voornaam, familienaam });
-    const user = new User({ email, voornaam, familienaam, username: email });
+    const user = new User({
+      email,
+      voornaam,
+      familienaam,
+      username: email,
+      wilUpdates,
+    });
 
     user.patienten.push(patient);
     user.rollen.push('betasquad');

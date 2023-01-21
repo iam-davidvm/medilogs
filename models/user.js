@@ -29,6 +29,9 @@ const userSchema = new Schema({
   rollen: {
     type: [String],
   },
+  wilUpdates: {
+    type: Boolean,
+  },
 });
 
 // https://stackoverflow.com/a/45602063
