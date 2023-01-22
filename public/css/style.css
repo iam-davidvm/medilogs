@@ -331,10 +331,16 @@ header nav a + a {
 }
 
 .form-element label,
-.form-element input {
+.form-element input,
+.form-element textarea {
   display: block;
   width: 100%;
   font-size: 1.6rem;
+}
+
+.form-element textarea {
+  padding: 1rem;
+  font-family: var(--fnt-nun-san);
 }
 
 .form-element label {
@@ -835,15 +841,43 @@ section.invisible {
 /* END OF DOWNLOAD PAGE */
 
 /* MAINTENANCE MESSAGE */
-.maintenance-block {
+.maintenance-bar {
   background-color: hsl(44, 73%, 46%);
   font-size: 1.6rem;
   padding: 0.6em 0;
   display: none;
+  margin-bottom: 1.5em;
 }
 
-.maintenance-block p {
+.maintenance-bar p {
   text-align: center;
 }
 
 /* END OF MAINTENANCE MESSAGE */
+
+.admin-bar {
+  background-color: black;
+  font-size: 1.6rem;
+  padding: 1em 2em;
+}
+
+.admin-bar ul {
+  display: flex;
+  gap: 1.5rem;
+}
+
+.admin-bar ul li {
+  list-style-type: none;
+}
+
+.admin-bar ul li a {
+  display: block;
+  text-decoration: none;
+  color: var(--clr-pur-whi);
+}
+
+.admin-bar ul li a:hover {
+  text-decoration: underline;
+}
+
+/* ADMIN NAV BAR */

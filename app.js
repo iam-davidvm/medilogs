@@ -36,6 +36,7 @@ const mongoSanitize = require('express-mongo-sanitize');
 // ROUTES
 const userRoutes = require('./routes/user');
 const bloodpressureRoutes = require('./routes/bloodpressure');
+const adminRoutes = require('./routes/admin');
 
 app.engine('ejs', engine);
 app.set('view engine', 'ejs');
@@ -107,6 +108,7 @@ app.use((req, res, next) => {
 });
 
 app.use('/', userRoutes);
+app.use('/admin', adminRoutes);
 app.use('/:patientId/bloeddruk', bloodpressureRoutes);
 
 app.get('/', (req, res) => {

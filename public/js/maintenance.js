@@ -1,18 +1,18 @@
-function showMsg(data) {
-  const maintenanceBlock = document.querySelector('.maintenance-block');
+function showMsg(message) {
+  const maintenanceBar = document.querySelector('.maintenance-bar');
   const maintenanceMsg = document.querySelector('#maintenance-msg');
-  maintenanceBlock.style.display = 'block';
-  maintenanceMsg.innerHTML = data.message;
+  maintenanceBar.style.display = 'block';
+  maintenanceMsg.innerHTML = message;
   console.log('show');
 }
 
 (function () {
-  fetch('/data.json')
+  fetch('/json/data.json')
     .then((response) => response.json())
-    .then((data) => showMsg(data))
+    .then((data) => showMsg(data.messages[0]))
     .catch((e) => {
-      const maintenanceBlock = document.querySelector('.maintenance-block');
-      maintenanceBlock.style.display = 'none';
+      const maintenanceBar = document.querySelector('.maintenance-bar');
+      maintenanceBar.style.display = 'none';
       console.log('hide');
       console.log(e);
     });
