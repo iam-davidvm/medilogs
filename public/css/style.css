@@ -833,3 +833,17 @@ section.invisible {
 }
 
 /* END OF DOWNLOAD PAGE */
+
+/* MAINTENANCE MESSAGE */
+.maintenance-block {
+  background-color: hsl(44, 73%, 46%);
+  font-size: 1.6rem;
+  padding: 0.6em 0;
+  display: none;
+}
+
+.maintenance-block p {
+  text-align: center;
+}
+
+/* END OF MAINTENANCE MESSAGE */

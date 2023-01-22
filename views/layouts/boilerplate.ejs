@@ -20,6 +20,11 @@
     <%- include('../partials/title') %>
 </head>
 <body>
+    <section class="maintenance-block">
+        <div class="container">
+            <p id="maintenance-msg" aria-live="polite"></p>
+        </div>
+    </section>
     <%- include('../partials/warning') %>
     <header>
         <div class="container">
@@ -49,5 +54,7 @@
             <%- body %>
         </div>
     </main>
+
+    <script src="/js/maintenance.js"></script>
 </body>
 </html>
