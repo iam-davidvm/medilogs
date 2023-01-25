@@ -1,0 +1,35 @@
+.section-stats,
+.section-table,
+.section-graph,
+.modal,
+.admin-bar,
+.maintenance-bar,
+nav {
+  outline: 1px solid red;
+}
+
+.section-stats > *,
+.section-table > *,
+.section-graph > *,
+.modal > *,
+.admin-bar > *,
+.maintenance-bar > *,
+nav > * {
+  outline: 1px solid blue;
+}
+
+/* .container {
+  outline: 1px solid purple;
+}
+
+.container > * {
+  outline: 1px solid seagreen;
+} */
+
+body {
+  outline: 1px solid seagreen;
+}
+
+body > * {
+  outline: 1px solid yellow;
+}

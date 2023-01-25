@@ -9,23 +9,32 @@
     <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@400;700;800&display=swap" rel="stylesheet" crossorigin> 
     <link rel="stylesheet" href="/css/style.css">
     <% if(typeof results !== 'undefined') { %>
-
+<!-- WEG
         <script src="https://cdn.jsdelivr.net/chartist.js/latest/chartist.min.js" crossorigin></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/chartist-plugin-legend/0.6.2/chartist-plugin-legend.min.js" crossorigin></script>
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/chartist.js/latest/chartist.min.css" crossorigin>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/chartist.js/latest/chartist.min.css" crossorigin> -->
         <link rel="stylesheet" href="/css/chartist.css">
+        <!-- <link rel="stylesheet" href="/css/overflow-test.css"> -->
             
     <% } %>
 
     <%- include('../partials/title') %>
 </head>
 <body>
+    <div class="modal invisible " id="cookies-modal">
+        <section class="cookies-consent box hard-shadow">
+            <h2>Wij gebruiken cookies</h2>
+            <p>Wij maken gebruik van essentiële cookies om deze website te laten werken. Dit zijn strikt noodzakelijke cookies die niet van derde partijen komen.</p>
+            <a href="" class="cta cookies-accept">Ik heb het begrepen</a>
+        </section>
+    </div>
+
     <nav class="admin-bar">
         <ul>
-            <li><a href="/admin/users">Users</a></li>
-            <li><a href="/admin/maintenance">Maintenance</a></li>
-            <li><a href="/admin/maintenance">Maintenance</a></li>
-            <li><a href="/admin/maintenance">Maintenance</a></li>
+            <li><a href="/admin/users" class="cta">Users</a></li>
+            <li><a href="/admin/maintenance" class="cta">Maintenance</a></li>
+            <li><a href="/admin/maintenance" class="cta">Maintenance</a></li>
+            <li><a href="/admin/maintenance" class="cta">Maintenance</a></li>
         </ul>
     </nav>
 
@@ -37,7 +46,7 @@
     <%- include('../partials/warning') %>
     <header>
         <div class="container">
-            <nav>
+            <nav class="navbar">
                 <div class="navbar-brand">
                     <% if(!currentUser) { %>
                         <p><a href="/">medilog</a></p>
@@ -65,5 +74,6 @@
     </main>
 
     <script src="/js/maintenance.js"></script>
+    <script src="/js/cookies-consent.js"></script>
 </body>
 </html>

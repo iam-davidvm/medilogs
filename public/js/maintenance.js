@@ -3,7 +3,6 @@ function showMsg(message) {
   const maintenanceMsg = document.querySelector('#maintenance-msg');
   maintenanceBar.style.display = 'block';
   maintenanceMsg.innerHTML = message;
-  console.log('show');
 }
 
 (function () {
@@ -13,7 +12,6 @@ function showMsg(message) {
     .catch((e) => {
       const maintenanceBar = document.querySelector('.maintenance-bar');
       maintenanceBar.style.display = 'none';
-      console.log('hide');
       console.log(e);
     });
 })();

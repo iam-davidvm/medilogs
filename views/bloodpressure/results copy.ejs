@@ -1,7 +1,7 @@
 <% layout('layouts/boilerplate') %>
    
 
-    <div class="results-settings title-with-icon"><h1><%= title %></h1><button id="btn-results-settings" class="icon"><img src="/assets/settings.svg" alt="Open de instellingen" class="icon-small"></button></div>
+    <div class="results-settings"><h1><%= title %></h1><button id="btn-results-settings"><img src="/assets/settings.svg" alt="Open de instellingen"></button></div>
 
     <%  
 
@@ -38,7 +38,7 @@
         } 
     %>
 
-    <section class="subtle-pane invisible" id="results-settings" role="settings" aria-live="polite">
+    <section class="dash-element section-results-settings invisible" id="results-settings" role="settings" aria-live="polite">
         <form action="#" id="results-settings-form">
             <div class="results-filter">
                 <h3>Periode:</h3>
@@ -73,11 +73,11 @@
         </form>
     </section>
 
-    <section class="pane">
-        <div class="title-with-icon">
-            <span class="icon" id="icon-stats"><img src="/assets/minus.svg"class="icon-small" alt="Verberg gemiddelden"></span>
-            <h2>Statistieken</h2>
-        </div>
+    <section class="dash-element section-stats">
+        <h2>
+            <span class="icon" id="icon-stats"><img src="/assets/minus.svg" alt="Verberg gemiddelden"></span>
+            <p>Gemiddelden</p>
+        </h2>
         <% 
             let bovendrukResult = 0, bovendrukCounter = 0,
             onderdrukResult = 0, onderdrukCounter = 0,
@@ -105,44 +105,41 @@
             }
         %>
         <div class="stats">
-            <div class="stat">
-                <h3>Gemiddelden</h3>
-                <div class="stats-bovendruk">
-                    <p class="stats-num"><%= bovendrukStat %></p> 
-                    <p class="stats-desc">bovendruk</p>
-                </div>
-                <div class="stats-onderdruk">
-                    <p class="stats-num"><%= onderdrukStat %></p> 
-                    <p class="stats-desc">onderdruk</p>
-                </div>
-                <div class="stats-hartslag">
-                    <p class="stats-num"><%= hartslagStat !== 0 ? hartslagStat : "" %></p> 
-                    <p class="stats-desc"><%= hartslagStat !== 0 ? "hartslag" : "" %></p>
-                </div>
+            <div class="stats-bovendruk">
+                <p class="stats-num"><%= bovendrukStat %></p> 
+                <p class="stats-desc">bovendruk</p>
+            </div>
+            <div class="stats-onderdruk">
+                <p class="stats-num"><%= onderdrukStat %></p> 
+                <p class="stats-desc">onderdruk</p>
+            </div>
+            <div class="stats-hartslag">
+                <p class="stats-num"><%= hartslagStat !== 0 ? hartslagStat : "" %></p> 
+                <p class="stats-desc"><%= hartslagStat !== 0 ? "hartslag" : "" %></p>
             </div>
         </div>
     </section>
 
-    <section class="pane">
-        <div class="title-with-icon">
-            <span class="icon" id="icon-results"><img src="/assets/minus.svg" class="icon-small" alt="Verberg tabel"></span>
-            <h2>Tabel</h2>
-        </div>
+    <section class="dash-element section-table section-results">
+        <h2>
+            <span class="icon" id="icon-results"><img src="/assets/minus.svg" alt="Verberg tabel"></span
+            <p>Tabel</p>
+        </h2>
         <% if(results && results.length > 0) { %>
 
             <table id="table-results">
-                <thead>
+                <thead id="table-results-head">
                     <tr>
                         <th><%= labels[0] %></th>
                         <th><%= labels[1] %></th>
                         <th><%= labels[2] %></th>
                         <th><%= labels[3] %></th>
-                        <th><img src="/assets/edit.svg" alt="" class="table-icon icon-small"></th>
-                        <th><img src="/assets/delete.svg" alt="" class="table-icon icon-small"></th>
+                        <th><img src="/assets/edit.svg" alt="" class="table-icon"></th>
+                        <th><img src="/assets/delete.svg" alt="" class="table-icon"></th>
                     </tr>
                 </thead>
 
-                <tbody>
+                <tbody id="table-results-body">
                     <% for (let result of sortedResults) { %>
                         <tr>
                             <td><%= result.bovendruk %></td>
@@ -159,8 +156,8 @@
                                 %>
                                 <%= `${day}/${month}/${year} - ${hours}:${minutes}` %> 
                             </td>                            
-                            <td><a href="/<%= patientId %>/bloeddruk/<%= result._id %>/bewerk"><img src="/assets/edit.svg" alt="Pas meting aan" class="table-icon icon-small"></a></td>
-                            <td><a href="/<%= patientId %>/bloeddruk/<%= result._id %>/verwijder"><img src="/assets/delete.svg" alt="Verwijder meting" class="table-icon icon-small"></a></td>
+                            <td><a href="/<%= patientId %>/bloeddruk/<%= result._id %>/bewerk"><img src="/assets/edit.svg" alt="Pas meting aan" class="table-icon"></a></td>
+                            <td><a href="/<%= patientId %>/bloeddruk/<%= result._id %>/verwijder"><img src="/assets/delete.svg" alt="Verwijder meting" class="table-icon"></a></td>
                         </tr>
                     <% } %>
                 </tbody>
@@ -168,15 +165,13 @@
         <% } %>
     </section>
 
-    <section class="pane">
-        <div class="title-with-icon">
-            <span class="icon" id="icon-graph"><img src="/assets/minus.svg" class="icon-small" alt="Verberg grafiek"></span>
-            <h2>Grafiek</h2>
-        </div>
+    <section class="dash-element section-graph">
+        <h2>
+            <span class="icon" id="icon-graph"><img src="/assets/minus.svg" alt="Verberg grafiek"></span
+            <p>Grafiek</p>
+        </h2>
 
-        <div id="graph">
-            <canvas id="myChart"></canvas>
-          </div>
+        <div class="ct-chart ct-major-tenth" id="graph"></div>
       
     </section>  
 
@@ -185,8 +180,6 @@
        const results = <%- JSON.stringify(sortedResults) %>;
        const patientId = <%- JSON.stringify(patientId) %>;
     </script>
-
-<script src="https://cdn.jsdelivr.net/npm/chart.js" crossorigin=""></script>
 
    <script src="/js/change-results-settings.js"></script>
 

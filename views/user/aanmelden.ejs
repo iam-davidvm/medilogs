@@ -1,6 +1,6 @@
 <% layout('layouts/boilerplate') %>
 
-<form action="/aanmelden" class="form input-form user-form subtle-shadow" method="POST">
+<form action="/aanmelden" class="form user-form full-width-form box subtle-shadow" method="POST">
     <h1><%= title %></h1>
     <div class="form-element">
         <label for="username">E-mailadres</label>
@@ -15,7 +15,10 @@
         </div>
     </div>
 
-    <button class="btn btn-form">Aanmelden</button>
+    <button class="btn btn-pri">Aanmelden</button>
+
+    <p class="text-center">Heeft u nog geen account? <a href="registreren" class="cta">Account aanmaken</a></p>
+
 
 </form>
 
