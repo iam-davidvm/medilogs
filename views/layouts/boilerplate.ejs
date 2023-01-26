@@ -50,11 +50,15 @@
                 <div class="navbar-brand">
                     <% if(!currentUser) { %>
                         <p><a href="/">medilog</a></p>
-                    <% } else { %>
-                        <p><a href="/<%= currentUser.patienten[0]._id %>/dashboard/">medilog</a></p>
+                        <% } else { %>
+                            <p><a href="/<%= currentUser.patienten[0]._id %>/dashboard/">medilog</a></p>
                     <% } %>
                 </div>
-                <div class="navbar-user">
+                <div class="navbar-mobile" aria-expanded="false">
+                    <input type="checkbox" name="nav-mobile" id="mobile-menu">
+                    <label for="mobile-menu" id="nav-icon"></label>
+                </div>
+                <div class="navbar-user" aria-live="polite">
                     <% if(!currentUser) { %>
                         <a href="/registreren" class="btn btn-sec">Registreren</a>
                         <a href="/aanmelden" class="btn btn-pri">Aanmelden</a>
@@ -75,5 +79,24 @@
 
     <script src="/js/maintenance.js"></script>
     <script src="/js/cookies-consent.js"></script>
+    <script>
+        const mobileMenu = document.getElementById('mobile-menu');
+        mobileMenu.checked = false;
+        if (mobileMenu) {
+            mobileMenu.addEventListener('change', function() {
+                const navbarUser = document.getElementsByClassName('navbar-user')[0];
+                const navbarMobile = document.getElementsByClassName('navbar-mobile')[0];
+                if (this.checked) {
+                    console.log("Checkbox is checked..");
+                    navbarUser.classList.add('reveal-mobile');
+                    navbarMobile.setAttribute('aria-expanded', true);
+                } else {
+                    console.log("Checkbox is not checked..");
+                    navbarUser.classList.remove('reveal-mobile');
+                    navbarMobile.setAttribute('aria-expanded', false);
+                }
+            })
+        }
+    </script>
 </body>
 </html>
