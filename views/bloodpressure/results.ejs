@@ -123,7 +123,7 @@
         </div>
     </section>
 
-    <section class="pane">
+    <section class="pane table">
         <div class="title-with-icon">
             <span class="icon" id="icon-results"><img src="/assets/minus.svg" class="icon-small" alt="Verberg tabel"></span>
             <h2>Tabel</h2>
@@ -159,7 +159,7 @@
                                 %>
                                 <%= `${day}/${month}/${year} - ${hours}:${minutes}` %> 
                             </td>                            
-                            <td><a href="/<%= patientId %>/bloeddruk/<%= result._id %>/bewerk"><img src="/assets/edit.svg" alt="Pas meting aan" class="table-icon icon-small"></a></td>
+                            <td><a hr1ef="/<%= patientId %>/bloeddruk/<%= result._id %>/bewerk"><img src="/assets/edit.svg" alt="Pas meting aan" class="table-icon icon-small"></a></td>
                             <td><a href="/<%= patientId %>/bloeddruk/<%= result._id %>/verwijder"><img src="/assets/delete.svg" alt="Verwijder meting" class="table-icon icon-small"></a></td>
                         </tr>
                     <% } %>
@@ -168,7 +168,7 @@
         <% } %>
     </section>
 
-    <section class="pane">
+    <section class="pane hide-mobile">
         <div class="title-with-icon">
             <span class="icon" id="icon-graph"><img src="/assets/minus.svg" class="icon-small" alt="Verberg grafiek"></span>
             <h2>Grafiek</h2>

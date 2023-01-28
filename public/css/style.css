@@ -19,7 +19,7 @@
 html,
 body {
   width: 100%;
-  height: 100%;
+  min-height: 100%;
 }
 
 html {
@@ -260,17 +260,18 @@ nav .btn + .btn {
 .admin-bar {
   background-color: black;
   width: 100%;
-  padding-left: 2rem;
+  padding: 2rem;
+  /* display: none; */
 }
 
 .admin-bar ul {
   display: flex;
+  flex-wrap: wrap;
   gap: 2rem;
 }
 
 .admin-bar ul li {
   list-style-type: none;
-  padding: 2rem 1rem;
 }
 
 .admin-bar ul li a {
@@ -586,6 +587,7 @@ td a:focus {
 .full-width-form label {
   padding: 0 0.5rem;
   margin-bottom: 0.5rem;
+  font-weight: 700;
 }
 
 .full-width-form input,
@@ -686,19 +688,15 @@ td a:focus {
   background-color: var(--clr-pur-whi);
 }
 
-.date-labels {
-  margin-bottom: 0.5rem;
-}
-
-.date-labels,
 .date-input {
   display: grid;
-  gap: 1.3rem;
+  column-gap: 1.3rem;
   grid-template-columns: 9rem 18rem 9rem;
-}
-
-.date-input {
-  margin-bottom: 2rem;
+  grid-template-rows: 1fr 3fr;
+  grid-template-areas:
+    '. . .'
+    '. . .';
+  margin-bottom: 0.5rem;
 }
 
 .form-date-element .date-time input,
@@ -921,8 +919,16 @@ td a:focus {
 }
 
 @media screen and (max-width: 560px) {
+  .highlight {
+    color: var(--clr-pri-pur);
+  }
+
+  .admin-bar {
+    padding: 3rem 1.5rem;
+    margin: 0;
+  }
+
   .navbar {
-    padding: 0 3rem;
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     grid-template-areas:
@@ -985,10 +991,17 @@ td a:focus {
   .container {
     max-width: 100%;
     width: auto;
+    padding: 0 1.5rem;
+  }
+
+  main .container {
+    margin-bottom: 3rem;
+    padding-bottom: 3rem;
+    min-height: 100%;
   }
 
   h1 {
-    margin: 3rem;
+    margin: 3rem 0;
     color: var(--clr-pur-whi);
   }
 
@@ -1003,23 +1016,28 @@ td a:focus {
 
   .card h1,
   .box h1 {
-    color: var(--clr-pur-whi);
+    /* color: var(--clr-pur-whi); */
+    color: var(--clr-pri-pur);
+
     margin: 3rem 0 0;
   }
 
-  .pane {
-    padding: 3rem;
-    margin: 0;
-    border-radius: 0;
+  h2 {
+    color: var(--clr-pri-pur);
   }
 
-  .pane + .pane {
-    border-top: 1px solid var(--clr-pri-red);
+  .pane {
+    padding: 3rem 2rem;
+    margin: 0 0 3rem;
+    border-radius: 0.3rem;
+    background-color: hsla(45, 29%, 97%, 0.3);
   }
 
   .full-width-form {
-    padding: 0 3rem;
+    padding: 0 2rem 3rem;
     margin: 3rem 0;
+    border-radius: 0.3rem;
+    background-color: hsla(45, 29%, 97%, 0.3);
   }
 
   .full-width-form label,
@@ -1037,6 +1055,99 @@ td a:focus {
 
   .full-width-form .btn {
     margin-top: 2.5rem;
+  }
+
+  .date-input {
+    display: grid;
+    column-gap: 0.5rem;
+    row-gap: 1.3rem;
+    align-items: center;
+    grid-template-columns: 7.5rem auto;
+    grid-template-rows: repeat(3, 1fr);
+    grid-template-areas:
+      'label-dag dag'
+      'label-maand maand'
+      'label-jaar jaar';
+    margin-bottom: 1.3rem;
+  }
+
+  .date-input #label-dag {
+    grid-area: label-dag;
+  }
+
+  .date-input #dag {
+    grid-area: dag;
+  }
+
+  .date-input #label-maand {
+    grid-area: label-maand;
+  }
+
+  .date-input #maand {
+    grid-area: maand;
+  }
+
+  .date-input #label-jaar {
+    grid-area: label-jaar;
+  }
+
+  .date-input #jaar {
+    grid-area: jaar;
+  }
+
+  #results-settings-form {
+    grid-template-columns: 1fr;
+  }
+
+  #results-settings-form .results-sort h3 {
+    margin-top: 3rem;
+  }
+
+  #results-settings-form button {
+    justify-self: stretch;
+    margin-top: 2rem;
+  }
+
+  #btn-results-settings .icon-small {
+    width: 5rem;
+  }
+
+  .stat {
+    grid-template-columns: 1fr;
+    grid-template-areas: unset;
+    justify-content: space-between;
+    gap: 2rem;
+    text-align: center;
+  }
+
+  .pane .stat h3 {
+    grid-area: unset;
+  }
+
+  .pane .stat h3,
+  .pane .stat p {
+    color: var(--clr-pur-whi);
+  }
+
+  .table {
+    overflow-x: scroll;
+  }
+
+  .pane table {
+    margin-top: 3rem;
+    font-size: 1.6rem;
+  }
+
+  tbody tr:nth-of-type(1n) {
+    background-color: white;
+  }
+
+  tbody tr:nth-of-type(2n) {
+    background-color: hsla(1, 100%, 71%, 0.702);
+  }
+
+  .hide-mobile {
+    display: none;
   }
 }
 

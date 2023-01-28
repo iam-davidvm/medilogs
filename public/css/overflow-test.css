@@ -1,4 +1,4 @@
-.section-stats,
+/* .section-stats,
 .section-table,
 .section-graph,
 .modal,
@@ -16,7 +16,7 @@ nav {
 .maintenance-bar > *,
 nav > * {
   outline: 1px solid blue;
-}
+} */
 
 /* .container {
   outline: 1px solid purple;
@@ -26,10 +26,8 @@ nav > * {
   outline: 1px solid seagreen;
 } */
 
-body {
-  outline: 1px solid seagreen;
-}
-
+*,
+body,
 body > * {
-  outline: 1px solid yellow;
+  outline: 4px solid red;
 }
