@@ -36,6 +36,16 @@ module.exports.isAuthenticated = async (req, res, next) => {
   }
 };
 
+module.exports.isAdmin = (req, res, next) => {
+  if (!req.user.rollen.includes('admin')) {
+    const msg = 'Je hebt geen rechten tot deze pagina.';
+
+    throw new ExpressError(msg, 403);
+  } else {
+    next();
+  }
+};
+
 module.exports.validateBloodpressure = (req, res, next) => {
   const { error } = bloodpressureSchema.validate(req.body);
 

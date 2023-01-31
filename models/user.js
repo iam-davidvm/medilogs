@@ -1,6 +1,7 @@
 const mongoose = require('mongoose');
 const { Schema } = mongoose;
-const Patient = require('./patient');
+const Patient = require('../models/patient');
+const Bloodpressure = require('../models/bloodpressure');
 const passportLocalMongoose = require('passport-local-mongoose');
 
 const userSchema = new Schema({
@@ -63,6 +64,19 @@ userSchema.post('save', function (err, doc, next) {
     next(new Error('Er bestaat al een gebruiker met dit e-mailadres'));
   } else {
     next(err);
+  }
+});
+
+// delete action when a user gets deleted
+userSchema.post('findOneAndDelete', async function (user) {
+  if (user) {
+    const patients = await Patient.find({ eigenaar: user._id });
+    for (let patient of patients) {
+      await Bloodpressure.deleteMany({
+        patient: patient._id,
+      });
+    }
+    await Patient.deleteMany({ eigenaar: user._id });
   }
 });
 

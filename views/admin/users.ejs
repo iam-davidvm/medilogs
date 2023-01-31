@@ -1,0 +1,55 @@
+<% layout('layouts/boilerplate') %>
+
+<h1><%= title %></h1>
+
+<section class="pane users-table-pane">
+
+    <table id="users-table">
+        <thead>
+            <tr>
+                <th>E-mail</th>
+                <th>Voornaam</th>
+                <th>Familienaam</th>
+                <th>Laatste login</th>
+                <th><img src="/assets/delete.svg" alt="" class="table-icon icon-small"></th>
+            </tr>
+        </thead>
+        <tbody>
+            <% for(let user of users) { %>
+                <tr>
+                    <td><%= user.email %></td>
+                    <td><%= user.voornaam %></td>
+                    <td><%= user.familienaam %></td>
+                    <td>
+                        <% 
+                                let lastSeenDate = '';
+                                if(user.laatstGezien) {
+                                    const date = new Date(user.laatstGezien) 
+                                    const day = date.getDate() < 10 ? `0${date.getDate()}` : `${date.getDate()}`;
+                                    const month = (date.getMonth() + 1) < 10 ? `0${date.getMonth() + 1}` : `${date.getMonth() + 1}`;
+                                    const year = date.getFullYear()
+                                    lastSeenDate = `${day}/${month}/${year}`
+                                }
+                                %>
+                                <%= lastSeenDate %>     
+                    </td>
+                    <td><a href="/admin/users/<%= user._id %>/"><img src="/assets/delete.svg" alt="Verwijder user" class="table-icon icon-small"></a></td>
+                </tr>
+            <% } %>
+        </tbody>
+    </table>
+    <div class="pager">
+        <% if(start >= 20) { %>
+            <a href="?page=0" class="pager-btn"><img src="/assets/first-page.svg" class="icon-pager" alt=""></a>
+        <% } %>
+        <% if(start >= 40) { %>
+            <a href="?page=<%= start - 20 %>" class="pager-btn"><img src="/assets/previous-page.svg" class="icon-pager" alt=""></a>
+        <% } %>
+        <% if(usersLength - start >= 40) { %>
+            <a href="?page=<%= start + 20 %>" class="pager-btn"><img src="/assets/next-page.svg" class="icon-pager" alt=""></a>
+        <% } %>
+        <% if(usersLength - start >= 20) { %>
+            <a href="?page=<%= ((usersLength) - (usersLength % 20)) %>" class="pager-btn"><img src="/assets/last-page.svg" class="icon-pager" alt=""></a>
+        <% } %>
+    </div>
+</section>

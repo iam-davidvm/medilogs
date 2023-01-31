@@ -73,7 +73,7 @@
         </form>
     </section>
 
-    <section class="pane">
+    <section class="pane statistieken">
         <div class="title-with-icon">
             <span class="icon" id="icon-stats"><img src="/assets/minus.svg"class="icon-small" alt="Verberg gemiddelden"></span>
             <h2>Statistieken</h2>
@@ -133,10 +133,10 @@
             <table id="table-results">
                 <thead>
                     <tr>
-                        <th><%= labels[0] %></th>
-                        <th><%= labels[1] %></th>
-                        <th><%= labels[2] %></th>
-                        <th><%= labels[3] %></th>
+                        <th><%= labels[0][0] %><span class="hide-small"><%= labels[0].substring(1) %>  %></span></th>
+                        <th><%= labels[1][0] %><span class="hide-small"><%= labels[1].substring(1) %></span></th>
+                        <th><%= labels[2][0] %><span class="hide-small"><%= labels[2].substring(1) %></span></th>
+                        <th class="hide-small"><%= labels[3] %></span></th>
                         <th><img src="/assets/edit.svg" alt="" class="table-icon icon-small"></th>
                         <th><img src="/assets/delete.svg" alt="" class="table-icon icon-small"></th>
                     </tr>
@@ -148,7 +148,7 @@
                             <td><%= result.bovendruk %></td>
                             <td><%= result.onderdruk %></td>
                             <td><%= result.hartslag === undefined ? "0" : `${result.hartslag}` %></td>
-                            <td>
+                            <td class="hide-small">
                                 <% 
                                     const date = new Date(result.tijdstip) 
                                     const day = date.getDate() < 10 ? `0${date.getDate()}` : `${date.getDate()}`;
@@ -159,12 +159,13 @@
                                 %>
                                 <%= `${day}/${month}/${year} - ${hours}:${minutes}` %> 
                             </td>                            
-                            <td><a hr1ef="/<%= patientId %>/bloeddruk/<%= result._id %>/bewerk"><img src="/assets/edit.svg" alt="Pas meting aan" class="table-icon icon-small"></a></td>
+                            <td><a href="/<%= patientId %>/bloeddruk/<%= result._id %>/bewerk"><img src="/assets/edit.svg" alt="Pas meting aan" class="table-icon icon-small"></a></td>
                             <td><a href="/<%= patientId %>/bloeddruk/<%= result._id %>/verwijder"><img src="/assets/delete.svg" alt="Verwijder meting" class="table-icon icon-small"></a></td>
                         </tr>
                     <% } %>
                 </tbody>
             </table>
+            <p class="hint show-small text-center">* B = Bovendruk | O = Onderdruk | H = Hartslag</p>
         <% } %>
     </section>
 

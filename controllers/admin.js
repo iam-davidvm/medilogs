@@ -1,5 +1,8 @@
 const fs = require('fs/promises');
 const { writeFileSync } = require('fs');
+const User = require('../models/user');
+const Patient = require('../models/patient');
+const Bloodpressure = require('../models/bloodpressure');
 
 module.exports.renderMaintenance = (req, res) => {
   let url = `.${process.env.MAINTENANCE}`;
@@ -50,4 +53,35 @@ module.exports.saveMaintenance = (req, res) => {
       error: `Er is iets mis gegaan: ${e}`,
     });
   }
+};
+
+module.exports.renderUsers = async (req, res) => {
+  const { page } = req.query;
+  const start = parseInt(page) || 0;
+  const end = start + 20;
+  const allUsers = await User.find({});
+
+  const users = allUsers.slice(start, end);
+  const usersLength = allUsers.length;
+
+  res.render('admin/users', {
+    title: 'Overzicht alle users',
+    users,
+    start,
+    usersLength,
+  });
+};
+
+module.exports.deleteUser = async (req, res) => {
+  const { id } = req.params;
+  // const patients = await Patient.find({ eigenaar: req.user._id });
+  // for (let patient of patients) {
+  //   await Bloodpressure.deleteMany({
+  //     patient: patient._id,
+  //   });
+  // }
+  // await Patient.deleteMany({ eigenaar: req.user._id });
+  await User.findByIdAndDelete(id);
+  req.flash('success', 'De gebruiker werd verwijderd.');
+  res.redirect('/admin/users');
 };

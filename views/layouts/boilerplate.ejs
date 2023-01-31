@@ -88,11 +88,9 @@
                 const navbarUser = document.getElementsByClassName('navbar-user')[0];
                 const navbarMobile = document.getElementsByClassName('navbar-mobile')[0];
                 if (this.checked) {
-                    console.log("Checkbox is checked..");
                     navbarUser.classList.add('reveal-mobile');
                     navbarMobile.setAttribute('aria-expanded', true);
                 } else {
-                    console.log("Checkbox is not checked..");
                     navbarUser.classList.remove('reveal-mobile');
                     navbarMobile.setAttribute('aria-expanded', false);
                 }
