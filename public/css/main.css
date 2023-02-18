@@ -71,6 +71,17 @@ body {
   background-color: rgba(0, 0, 0, 0.1);
 }
 
+.btn-whi {
+  background-color: white;
+  color: var(--clr-pri-red);
+  border: 1px solid white;
+}
+
+.btn-whi:hover {
+  background-color: var(--clr-pri-red);
+  color: white;
+}
+
 .cta {
   text-decoration: none;
   font-size: 1.6rem;
@@ -412,6 +423,216 @@ p {
   border-bottom: 1px solid var(--clr-pri-red);
 }
 
+.aanmelden,
+.registreren {
+  left: 0;
+  width: unset;
+  display: grid;
+  place-items: center;
+  min-height: 100vh;
+}
+
+.aanmelden-box {
+  margin: 0;
+  margin: 1.7rem 0;
+  padding: 0;
+  width: 95%;
+  display: grid;
+  grid-template-columns: 1fr;
+}
+
+.account {
+  display: flex;
+  flex-direction: column;
+}
+
+.account {
+  padding: 3rem 1.7rem;
+}
+
+.registreren .box {
+  margin: 0;
+  display: grid;
+  grid-template-columns: 1fr;
+}
+
+.account h1,
+.registreren h1 {
+  margin-bottom: 3rem;
+}
+
+.account .form-element,
+.registreren .form-element {
+  margin-bottom: 2rem;
+}
+
+.account .password-container,
+.registreren .password-container {
+  position: relative;
+}
+
+.account .password-eye,
+.registreren .password-eye {
+  width: 4rem;
+  position: absolute;
+  display: block;
+  height: 4rem;
+  left: 0;
+  top: 0;
+  padding: 1rem 1rem;
+  background-color: rgba(0, 0, 0, 0.2);
+  border-radius: 0.6rem 0 0 0.6rem;
+  border-right: 1px solid rgba(0, 0, 0, 0.2);
+  cursor: pointer;
+}
+
+#password {
+  padding-left: 4.5rem;
+}
+
+.account .btn,
+.registreren .btn {
+  align-self: center;
+  margin-top: 3rem;
+}
+
+.no-account {
+  background-color: var(--clr-pri-red);
+  color: white;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 3rem 1.7rem;
+}
+
+.no-account h2 {
+  color: white;
+  margin-bottom: 1.5rem;
+  text-align: center;
+}
+
+.no-account p {
+  text-align: center;
+}
+
+.no-account .btn {
+  align-self: center;
+  margin-top: 3rem;
+}
+
+.registreren .btn {
+  margin-bottom: 3rem;
+}
+
+/* toggle mails */
+
+/* SOURCE: https://kittygiraudel.com/2021/04/05/an-accessible-toggle/ */
+.toggle {
+  display: inline-flex;
+  align-items: center;
+  flex-wrap: wrap;
+  position: relative;
+  gap: 1ch;
+}
+
+.toggle p {
+  margin-bottom: 0.7rem;
+}
+
+.toggle-display {
+  --offset: 0.25em;
+  --diameter: 1.8em;
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: space-around;
+
+  width: calc(var(--diameter) * 2 + var(--offset) * 2);
+  height: calc(var(--diameter) + var(--offset) * 2);
+  box-sizing: content-box;
+
+  border: 0.1em solid rgb(0 0 0 / 0.2);
+
+  position: relative;
+  border-radius: 100%;
+  border-radius: 100px;
+  background-color: #e74c3c;
+
+  transition: 250ms;
+  cursor: pointer;
+}
+
+.toggle-display::before {
+  content: '';
+
+  width: var(--diameter);
+  height: var(--diameter);
+  border-radius: 50%;
+
+  box-sizing: border-box;
+  border: 0.1 solid rgb(0 0 0 / 0.2);
+
+  position: absolute;
+  z-index: 2;
+  top: 50%;
+  left: var(--offset);
+  transform: translate(0, -50%);
+
+  background-color: white;
+  transition: inherit;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .toggle-display {
+    transition-duration: 0ms;
+  }
+}
+
+.toggle-input {
+  position: absolute;
+  opacity: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.toggle-input:focus + .toggle-display {
+  outline: 1px dotted #212121;
+  outline: 1px auto -webkit-focus-ring-color;
+}
+
+.toggle-input:focus:not(:focus-visible) + .toggle-display {
+  outline: 0;
+}
+
+.toggle-input:checked + .toggle-display {
+  background-color: #1fb978;
+}
+
+.toggle-input:checked + .toggle-display::before {
+  transform: translate(100%, -50%);
+}
+
+.toggle-input:disabled + .toggle-display {
+  opacity: 0.6;
+  filter: grayscale(40%);
+  cursor: not-allowed;
+}
+
+.toggle-icon {
+  display: inline-block;
+  width: 1em;
+  height: 1em;
+  color: var(--clr-pur-whi);
+  fill: currentcolor;
+  vertical-align: middle;
+}
+
+.toggle-icon-cross {
+  font-size: 85%;
+}
+
+/* end of toggle mails */
+
 @media screen and (min-width: 750px) {
   .container {
     padding-top: 1.7rem;
@@ -445,6 +666,13 @@ p {
     grid-column: 1/4;
   }
 
+  .aanmelden-box {
+    display: grid;
+    grid-template-columns: 10fr 9fr;
+    align-items: stretch;
+    max-width: 800px;
+  }
+
   .hide-mobile {
     display: block;
   }
@@ -465,6 +693,15 @@ p {
   .date-input,
   .date-time {
     grid-template-columns: repeat(3, 1fr);
+    grid-column: 1/3;
+  }
+
+  .registreren .box {
+    grid-template-columns: repeat(2, 1fr);
+    column-gap: 3rem;
+  }
+
+  .registreren h1 {
     grid-column: 1/3;
   }
 }

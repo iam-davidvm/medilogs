@@ -1,25 +1,42 @@
-<% layout('layouts/boilerplate') %>
-
-<form action="/aanmelden" class="form user-form full-width-form box subtle-shadow" method="POST">
-    <h1><%= title %></h1>
-    <div class="form-element">
-        <label for="username">E-mailadres</label>
-        <input type="email" name="username" id="username" pattern="[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?" required>
-    </div>
-
-    <div class="form-element">
-        <label for="password">Wachtwoord</label>
-        <div class="password-container">
-            <input type="password" name="password" id="password" required placeholder=" ">
-            <span class="password-eye"><img src="/assets/eye.svg" id="toggle-password" alt=""></span>
-        </div>
-    </div>
-
-    <button class="btn btn-pri">Aanmelden</button>
-
-    <p class="text-center">Heeft u nog geen account? <a href="registreren" class="cta">Account aanmaken</a></p>
-
-
-</form>
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aanmelden | medilogs</title>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@300;400;700;800&display=swap" rel="stylesheet" crossorigin> 
+    <link rel="stylesheet" href="/css/main.css">
+</head>
+<body>
+    <main class="aanmelden">
+        <section class="box aanmelden-box">
+            <form action="/aanmelden" class="form account" method="POST">
+                <h1><%= title %></h1>
+                <div class="form-element">
+                    <label for="username">E-mailadres</label>
+                    <input type="email" name="username" id="username" pattern="[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?" required>
+                </div>
+            
+                <div class="form-element">
+                    <label for="password">Wachtwoord</label>
+                    <div class="password-container">
+                        <input type="password" name="password" id="password" required placeholder=" ">
+                        <span class="password-eye"><img src="/assets/eye.svg" id="toggle-password" alt=""></span>
+                    </div>
+                </div>
+            
+                <button class="btn btn-pri">Aanmelden</button>
+            </form>
+            <div class="no-account">
+                <h2>Nog geen account?</h2>
+                <p>Maak dan snel een account aan en start met jouw medisch logboek.</p>
+                <a href="/registreren" class="btn btn-whi">Registreren</a>
+            </div>
+        </section>
+    </main>
 
 <script src="/js/userform.js"></script>
+    
+</body>
+</html>

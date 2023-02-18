@@ -117,7 +117,8 @@ app.get('/', (req, res) => {
   if (req.user) {
     return res.redirect(`/${req.user.patienten[0]._id}/dashboard`);
   }
-  res.render('index', { title: 'Welkom' });
+  res.redirect('/aanmelden');
+  // res.render('index', { title: 'Welkom' });
 });
 
 app.get('/:patientId/dashboard', (req, res) => {
