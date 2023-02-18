@@ -2,7 +2,7 @@
 
 <h1><%= title %></h1>
 
-<section class="pane users-table-pane">
+<section class="box">
 
     <table id="users-table">
         <thead>
@@ -11,7 +11,7 @@
                 <th>Voornaam</th>
                 <th>Familienaam</th>
                 <th>Laatste login</th>
-                <th><img src="/assets/delete.svg" alt="" class="table-icon icon-small"></th>
+                <th>Verwijderen</th>
             </tr>
         </thead>
         <tbody>
@@ -33,7 +33,7 @@
                                 %>
                                 <%= lastSeenDate %>     
                     </td>
-                    <td><a href="/admin/users/<%= user._id %>/"><img src="/assets/delete.svg" alt="Verwijder user" class="table-icon icon-small"></a></td>
+                    <td><a class="cta" href="/admin/users/<%= user._id %>/">Verwijderen</a></td>
                 </tr>
             <% } %>
         </tbody>

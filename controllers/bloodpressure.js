@@ -5,7 +5,7 @@ module.exports.renderNewBloodpressure = (req, res) => {
   const { patientId } = req.params;
   res.render('bloodpressure/nieuw', {
     id: patientId,
-    title: 'Voer uw meting in',
+    title: 'Meting toevoegen',
   });
 };
 

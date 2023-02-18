@@ -1,12 +1,12 @@
 <% layout('layouts/boilerplate') %>
 
-<form action="/admin/maintenance?_method=PATCH" class="form full-width-form card subtle-shadow" method="POST">
-    <h1><%= title %></h1>
+<h1><%= title %></h1>
+<form action="/admin/maintenance?_method=PATCH" class="form box" method="POST">
     <div class="form-element">
         <label for="message">Boodschap</label>
         <textarea name="message" id="message" cols="30" rows="10"><%= message %></textarea>
     </div>
 
 
-    <button class="btn btn-pri">Bewaren</button>
+    <button class="btn btn-pri mt3">Bewaren</button>
 </form>

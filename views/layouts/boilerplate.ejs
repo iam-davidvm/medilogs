@@ -6,35 +6,74 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@400;700;800&display=swap" rel="stylesheet" crossorigin> 
-    <link rel="stylesheet" href="/css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@300;400;700;800&display=swap" rel="stylesheet" crossorigin> 
+    <link rel="stylesheet" href="/css/sidebar.css">
+    <link rel="stylesheet" href="/css/main.css">
     <% if(typeof results !== 'undefined') { %>
-<!-- WEG
-        <script src="https://cdn.jsdelivr.net/chartist.js/latest/chartist.min.js" crossorigin></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/chartist-plugin-legend/0.6.2/chartist-plugin-legend.min.js" crossorigin></script>
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/chartist.js/latest/chartist.min.css" crossorigin> -->
-        <link rel="stylesheet" href="/css/chartist.css">
-        <!-- <link rel="stylesheet" href="/css/overflow-test.css"> -->
-            
+        <link rel="stylesheet" href="/css/chartist.css">            
     <% } %>
 
     <%- include('../partials/title') %>
 </head>
 <body>
-        <div class="modal invisible " id="cookies-modal">
-            <section class="cookies-consent box hard-shadow">
-                <h2>Wij gebruiken cookies</h2>
-                <p>Wij maken gebruik van essentiële cookies om deze website te laten werken. Dit zijn strikt noodzakelijke cookies die niet van derde partijen komen.</p>
-                <a href="" class="cta cookies-accept">Ik heb het begrepen</a>
-            </section>
-        </div>
+    <div class="modal invisible " id="cookies-modal">
+        <section class="cookies-consent box hard-shadow">
+            <h2>Wij gebruiken cookies</h2>
+            <p>Wij maken gebruik van essentiële cookies om deze website te laten werken. Dit zijn strikt noodzakelijke cookies die niet van derde partijen komen.</p>
+            <a href="" class="cta cookies-accept">Ik heb het begrepen</a>
+        </section>
     </div>
+    <!-- </div> -->
+
+    <aside class="menu">
+        <div class="menu-brand">
+            <!-- <img src="/assets/logo/medilogs_white.svg" alt="" class="menu-logo"> -->
+            <a href="/<%= currentUser.patienten[0]._id %>/dashboard" class="menu-logo"><img src="/assets/logo/medilogs_white.svg" alt=""></a>
+            <button class="menu-btn" aria-expanded="false"><img class="menu-btn-icon" src="/assets/icons/menu-open.svg" alt=""></button>
+        </div>
+        
+        <% if(!currentUser) { %>
+            <div class="menu-user">
+                <a href="/aanmelden" class="menu-user-logout">
+                    <img src="/assets/icons/afmelden.svg" alt="" class="menu-link-icon">
+                    <span class="menu-user-text">Aanmelden</span>
+                </a>
+                <a href="/registreren" class="menu-user-logout">
+                    <img src="/assets/icons/afmelden.svg" alt="" class="menu-link-icon">
+                    <span class="menu-user-text">Registreren</span>
+                </a>
+            </div>
+        <% } else { %>
+            <div class="menu-links">
+                <h1 class="menu-groupname">Bloeddruk</h1>
+                        <a class="menu-link" href="/<%= currentUser.patienten[0]._id %>/bloeddruk/nieuw" title="Meting toevoegen">
+                            <img src="/assets/icons/toevoegen.svg" alt="" class="menu-link-icon">
+                            <span class="menu-link-text">Meting toevoegen</span>
+                        </a>
+                    <a class="menu-link" href="/<%= currentUser.patienten[0]._id %>/bloeddruk/overzicht" title="Meting raadplegen">
+                        <img src="/assets/icons/raadplegen.svg" alt="" class="menu-link-icon">
+                        <span class="menu-link-text">Metingen raadplegen</span>
+
+                    </a>
+                    <a class="menu-link" href="/<%= currentUser.patienten[0]._id %>/bloeddruk/downloaden" title="Meting downloaden">
+                        <img src="/assets/icons/downloaden.svg" alt="" class="menu-link-icon">
+                        <span class="menu-link-text">Metingen downloaden</span>
+                    </a>
+            </div>
+            
+            
+            <div class="menu-user">
+                <a href="/afmelden" class="menu-user-logout">
+                    <img src="/assets/icons/afmelden.svg" alt="" class="menu-link-icon">
+                    <span class="menu-user-text">Afmelden</span>
+                </a>
+            </div>
+        <% } %>
+    </aside>
 
         <nav class="admin-bar">
             <ul>
                 <li><a href="/admin/users" class="cta">Users</a></li>
-                <li><a href="/admin/maintenance" class="cta">Maintenance</a></li>
-                <li><a href="/admin/maintenance" class="cta">Maintenance</a></li>
                 <li><a href="/admin/maintenance" class="cta">Maintenance</a></li>
             </ul>
         </nav>
@@ -45,31 +84,6 @@
         </div>
     </section>
     <%- include('../partials/warning') %>
-    <header>
-        <div class="container">
-            <nav class="navbar">
-                <div class="navbar-brand">
-                    <% if(!currentUser) { %>
-                        <p><a href="/">medilog</a></p>
-                        <% } else { %>
-                            <p><a href="/<%= currentUser.patienten[0]._id %>/dashboard/">medilog</a></p>
-                    <% } %>
-                </div>
-                <div class="navbar-mobile" aria-expanded="false">
-                    <input type="checkbox" name="nav-mobile" id="mobile-menu">
-                    <label for="mobile-menu" id="nav-icon"></label>
-                </div>
-                <div class="navbar-user" aria-live="polite">
-                    <% if(!currentUser) { %>
-                        <a href="/registreren" class="btn btn-sec">Registreren</a>
-                        <a href="/aanmelden" class="btn btn-pri">Aanmelden</a>
-                    <% } else { %>
-                        <a href="/afmelden" class="btn btn-sec">Afmelden</a>
-                    <% } %>
-                </div>
-            </nav>
-        </div>
-    </header>
     <main>
         <div class="container">
             <%- include('../partials/flash') %>
@@ -78,24 +92,9 @@
         </div>
     </main>
 
+    <script src="/js/responsive-menu.js"></script>
     <script src="/js/maintenance.js"></script>
     <script src="/js/cookies-consent.js"></script>
-    <script>
-        const mobileMenu = document.getElementById('mobile-menu');
-        mobileMenu.checked = false;
-        if (mobileMenu) {
-            mobileMenu.addEventListener('change', function() {
-                const navbarUser = document.getElementsByClassName('navbar-user')[0];
-                const navbarMobile = document.getElementsByClassName('navbar-mobile')[0];
-                if (this.checked) {
-                    navbarUser.classList.add('reveal-mobile');
-                    navbarMobile.setAttribute('aria-expanded', true);
-                } else {
-                    navbarUser.classList.remove('reveal-mobile');
-                    navbarMobile.setAttribute('aria-expanded', false);
-                }
-            })
-        }
-    </script>
+
 </body>
 </html>

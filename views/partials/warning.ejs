@@ -1,6 +1,6 @@
 <% if(warning && warning.length) { %>
 <div class="modal">
-    <div class="warning hard-shadow box" role="alert" aria-live="polite">
+    <div class="warning box" role="alert" aria-live="polite">
         <% 
             const date = new Date(warning[0].date) 
             const day = date.getDate() < 10 ? `0${date.getDate()}` : `${date.getDate()}`;
@@ -9,10 +9,10 @@
             const hours = date.getHours() < 10 ? `0${date.getHours()}` : `${date.getHours()}`;
             const minutes = date.getMinutes() < 10 ? `0${date.getMinutes()}` : `${date.getMinutes()}`;
         %>
-        <p>Ben je zeker dat je de meting van <span class="warning[0]-date"><%= `${day}/${month}/${year} - ${hours}:${minutes}` %></span> wil verwijderen?</p>
+        <p>Ben je zeker dat je de meting van <span class="warning-date"><%= `${day}/${month}/${year} - ${hours}:${minutes}` %></span> wil verwijderen?</p>
         <form action="/<%= warning[0].patientId %>/bloeddruk/<%= warning[0].resultId %>/verwijder?_method=DELETE" method="POST">
-            <div class="warning-buttons">
-                <button class="btn btn-warning">Ja</button>
+            <div class="form-btns">
+                <button class="btn btn-pri">Ja</button>
                 <a href="/<%= warning[0].patientId %>/bloeddruk/overzicht" class="cta">Nee</a>
             </div>
         </form>

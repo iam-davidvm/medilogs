@@ -15,7 +15,7 @@ const min = document.getElementById('min');
 
 dag.value = currentDay < 10 ? `0${currentDay}` : currentDay;
 
-for (const i = 0; i < maand.options.length; i++) {
+for (let i = 0; i < maand.options.length; i++) {
   if (maand.options[i].value == currentMonth) {
     maand.options[i].selected = true;
     break;

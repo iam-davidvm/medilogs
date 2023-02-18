@@ -1,16 +1,18 @@
 <% layout('layouts/boilerplate') %>
 
-<section class="card box subtle-shadow">
-    <h1><%= title %></h1>
+<h1><%= title %></h1>
+<section class="box">
 
     <p>Binnen enkele ogenblikken wordt een excel-bestand gedownload met jouw metingen van het afgelopen jaar. Even geduld a.u.b.</p>
     <p>Start het downloaden na <strong>30 seconden</strong> nog steeds niet? Probeer dan opnieuw:</p>
 
-    <a href="/<%= patientId %>/bloeddruk/downloadbestand" class="cta">Probeer opnieuw</a>
+    <a href="/<%= patientId %>/bloeddruk/downloadbestand" class="cta mt3">Probeer opnieuw</a>
 
 </section>
 
 <script>
-    const patientId = <%- JSON.stringify(patientId) %>;
-    window.location.href = `/${patientId}/bloeddruk/downloadbestand`;
+    setTimeout(() => {
+        const patientId = <%- JSON.stringify(patientId) %>;
+        window.location.href = `/${patientId}/bloeddruk/downloadbestand`;
+    }, 1000);
  </script>

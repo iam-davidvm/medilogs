@@ -1,58 +1,69 @@
 <% layout('layouts/boilerplate') %>
 
-<form action="/<%= id %>/bloeddruk/nieuw" class="form full-width-form box subtle-shadow" method="POST">
-    <h1><%= title %></h1>
+<h1><%= title %></h1>
+<form action="/<%= id %>/bloeddruk/nieuw" class="form bloodpressure-form box" method="POST">
     <div class="form-element">
         <label for="bovendruk">Bovendruk <span class="highlight">*</span></label>
-        <input type="number" name="bloodpressure[bovendruk]" id="bovendruk" min="30" max="299" aria-describedby="bovendruk-hint" required>
+        <input type="number" name="bloodpressure[bovendruk]" class="focus-red" id="bovendruk" min="30" max="299" aria-describedby="bovendruk-hint" required>
         <p id="bovendruk-hint" class="hint">Dit is in principe de hoogste waarde.</p>
     </div>
     <div class="form-element">
         <label for="onderdruk">Onderdruk <span class="highlight">*</span></label>
-        <input type="number" name="bloodpressure[onderdruk]" id="onderdruk" min="30" max="299" aria-describedby="onderdruk-hint" required>
+        <input type="number" name="bloodpressure[onderdruk]" class="focus-red" id="onderdruk" min="30" max="299" aria-describedby="onderdruk-hint" required>
         <p id="onderdruk-hint" class="hint">Dit is in principe de laagste waarde.</p>
     </div>
     <div class="form-element">
         <label for="hartslag">Hartslag</label>
-        <input type="number" name="bloodpressure[hartslag]" pattern="^(3[0-9]|[4-9][0-9]|[1-2][0-9]{2})$" placeholder="" id="hartslag" min="30" max="299">
+        <input type="number" name="bloodpressure[hartslag]"  class="focus-red" pattern="^(3[0-9]|[4-9][0-9]|[1-2][0-9]{2})$" placeholder="" id="hartslag" min="30" max="299">
     </div>
-    <div class="form-date-element">
+    <!-- <div class="form-date-element"> -->
         <div class="date-input">
-            <label for="dag" id="label-dag">Dag <span class="highlight">*</span></label>
-            <label for="maand" id="label-maand">Maand <span class="highlight">*</span></label>
-            <label for="jaar" id="label-jaar">Jaar <span class="highlight">*</span></label>
-            <input type="text" name="bloodpressure[dag]" id="dag" maxlength="2" pattern="^(0?[1-9]|[1|2][0-9]|3[01])$" required>
-            <select id="maand" name="bloodpressure[maand]" required>
-                <option value="0">Januari</option>
-                <option value="1">Februari</option>
-                <option value="2">Maart</option>
-                <option value="3">April</option>
-                <option value="4">Mei</option>
-                <option value="5">Juni</option>
-                <option value="6">Juli</option>
-                <option value="7">Augustus</option>
-                <option value="8">September</option>
-                <option value="9">Oktober</option>
-                <option value="10">November</option>
-                <option value="11">December</option>
-              </select>
-    
-            <input type="text" id="jaar" name="bloodpressure[jaar]" maxlength="4" pattern="^((20)[0-9]{2})$" required>
+            <div>
+                <label for="dag" id="label-dag">Dag <span class="highlight">*</span></label>
+                <input type="text" name="bloodpressure[dag]" id="dag"  class="focus-red" maxlength="2" pattern="^(0?[1-9]|[1|2][0-9]|3[01])$" required>
+            </div>
+
+            <div>
+                <label for="maand" id="label-maand">Maand <span class="highlight">*</span></label>
+                <select id="maand" name="bloodpressure[maand]"  class="focus-red" required>
+                    <option value="0">Januari</option>
+                    <option value="1">Februari</option>
+                    <option value="2">Maart</option>
+                    <option value="3">April</option>
+                    <option value="4">Mei</option>
+                    <option value="5">Juni</option>
+                    <option value="6">Juli</option>
+                    <option value="7">Augustus</option>
+                    <option value="8">September</option>
+                    <option value="9">Oktober</option>
+                    <option value="10">November</option>
+                    <option value="11">December</option>
+                </select>
+            </div>
+            
+            <div>
+                <label for="jaar" id="label-jaar">Jaar <span class="highlight">*</span></label>
+                <input type="text" id="jaar" name="bloodpressure[jaar]"  class="focus-red" maxlength="4" pattern="^((20)[0-9]{2})$" required>
+            </div>
         </div>
 
         <div class="date-time">
-            <input type="text" id="uur" name="bloodpressure[uur]" maxlength="2" pattern="^(0|0?[0-9]|[1][0-9]|2[0-4])$" required>
-            <label for="uur">u: <span class="highlight">*</span></label>
+            <div>
+                <label for="uur">Uur <span class="highlight">*</span></label>
+                <input type="text" id="uur" name="bloodpressure[uur]"  class="focus-red" maxlength="2" pattern="^(0|0?[0-9]|[1][0-9]|2[0-4])$" required>
+            </div>
     
-            <input type="text" id="min" name="bloodpressure[min]" maxlength="2" pattern="[0-5]\d|[0-9]" required>
-            <label for="min">min <span class="highlight">*</span></label>
+            <div>
+                <label for="min">Minuten <span class="highlight">*</span></label>
+                <input type="text" id="min" name="bloodpressure[min]"  class="focus-red" maxlength="2" pattern="[0-5]\d|[0-9]" required>
+            </div>
         </div>
 
 
-    </div>
+    <!-- </div> -->
 
 
-    <button class="btn btn-pri">Bewaren</button>
+    <button class="btn btn-pri focus-red">Bewaren</button>
 </form>
 
 <script src="/js/current-time.js"></script>

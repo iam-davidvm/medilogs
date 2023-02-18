@@ -3,6 +3,11 @@ const settings = document.querySelector('#results-settings');
 
 iconSettings.addEventListener('click', () => {
   settings.classList.toggle('invisible');
+  if (settings.classList.contains('invisible')) {
+    iconSettings.innerText = 'Toon instellingen';
+  } else {
+    iconSettings.innerText = 'Verberg instellingen';
+  }
 });
 
 const iconStats = document.querySelector('#icon-stats');
@@ -40,6 +45,7 @@ const imgGraph = iconGraph.querySelector('img');
 const graph = document.getElementById('graph');
 
 iconGraph.addEventListener('click', () => {
+  console.log('click');
   graph.classList.toggle('invisible');
   if (graph.classList.contains('invisible')) {
     imgGraph.src = '/assets/plus.svg';

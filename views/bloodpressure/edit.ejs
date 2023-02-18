@@ -1,7 +1,7 @@
 <% layout('layouts/boilerplate') %>
 
-<form action="/<%= patientId %>/bloeddruk/<%= result._id %>/bewerk?_method=PATCH" class="form full-width-form box subtle-shadow" method="POST">
-    <h1><%= title %></h1>
+<h1><%= title %></h1>
+<form action="/<%= patientId %>/bloeddruk/<%= result._id %>/bewerk?_method=PATCH" class="form bloodpressure-form box" method="POST">
     <div class="form-element">
         <label for="bovendruk">Bovendruk <span class="highlight">*</span></label>
         <input type="number" name="bloodpressure[bovendruk]" value="<%= result.bovendruk %>" id="bovendruk" min="30" max="299" aria-describedby="bovendruk-hint" required>
@@ -16,7 +16,7 @@
         <label for="hartslag">Hartslag</label>
         <input type="number" name="bloodpressure[hartslag]" value="<%= result.hartslag ? result.hartslag : "" %>" pattern="^(3[0-9]|[4-9][0-9]|[1-2][0-9]{2})$" placeholder="" id="hartslag" min="30" max="299">
     </div>
-    <div class="form-date-element">
+    <!-- <div class="form-date-element"> -->
         <%
             const date = new Date(result.tijdstip);
             const day = date.getDate() < 10 ? `0${date.getDate()}` : `${date.getDate()}`;
@@ -26,39 +26,53 @@
             const minutes = date.getMinutes() < 10 ? `0${date.getMinutes()}` : `${date.getMinutes()}`;
         %> 
         <div class="date-input">
-            <label for="dag">Dag <span class="highlight">*</span></label>
-            <label for="maand">Maand <span class="highlight">*</span></label>
-            <label for="jaar">Jaar <span class="highlight">*</span></label>
-            <input type="text" name="bloodpressure[dag]" value="<%= day %>" id="dag" maxlength="2" pattern="^(0?[1-9]|[1|2][0-9]|3[01])$" required>
-            <select id="maand" name="bloodpressure[maand]" required>
-                <option value="0" <%= month === 0? "selected" : "" %> >Januari</option>
-                <option value="1" <%= month === 1? "selected" : "" %> >Februari</option>
-                <option value="2" <%= month === 2? "selected" : "" %> >Maart</option>
-                <option value="3" <%= month === 3? "selected" : "" %> >April</option>
-                <option value="4" <%= month === 4? "selected" : "" %> >Mei</option>
-                <option value="5" <%= month === 5? "selected" : "" %> >Juni</option>
-                <option value="6" <%= month === 6? "selected" : "" %> >Juli</option>
-                <option value="7" <%= month === 7? "selected" : "" %> >Augustus</option>
-                <option value="8" <%= month === 8? "selected" : "" %> >September</option>
-                <option value="9" <%= month === 9? "selected" : "" %> >Oktober</option>
-                <option value="10" <%= month === 10? "selected" : "" %> >November</option>
-                <option value="11" <%= month === 11? "selected" : "" %> >December</option>
-              </select>
-    
-            <input type="text" id="jaar" value="<%= year %>" name="bloodpressure[jaar]" maxlength="4" pattern="^((20)[0-9]{2})$" required>
+            <div>
+                <label for="dag">Dag <span class="highlight">*</span></label>
+                <input type="text" name="bloodpressure[dag]" value="<%= day %>" id="dag" maxlength="2" pattern="^(0?[1-9]|[1|2][0-9]|3[01])$" required>
+            </div>
+
+            <div>
+                <label for="maand">Maand <span class="highlight">*</span></label>
+                <select id="maand" name="bloodpressure[maand]" required>
+                    <option value="0" <%= month === 0? "selected" : "" %> >Januari</option>
+                    <option value="1" <%= month === 1? "selected" : "" %> >Februari</option>
+                    <option value="2" <%= month === 2? "selected" : "" %> >Maart</option>
+                    <option value="3" <%= month === 3? "selected" : "" %> >April</option>
+                    <option value="4" <%= month === 4? "selected" : "" %> >Mei</option>
+                    <option value="5" <%= month === 5? "selected" : "" %> >Juni</option>
+                    <option value="6" <%= month === 6? "selected" : "" %> >Juli</option>
+                    <option value="7" <%= month === 7? "selected" : "" %> >Augustus</option>
+                    <option value="8" <%= month === 8? "selected" : "" %> >September</option>
+                    <option value="9" <%= month === 9? "selected" : "" %> >Oktober</option>
+                    <option value="10" <%= month === 10? "selected" : "" %> >November</option>
+                    <option value="11" <%= month === 11? "selected" : "" %> >December</option>
+                  </select>
+            </div>
+            <div>
+                <label for="jaar">Jaar <span class="highlight">*</span></label>
+                <input type="text" id="jaar" value="<%= year %>" name="bloodpressure[jaar]" maxlength="4" pattern="^((20)[0-9]{2})$" required>
+            </div>
         </div>
 
         <div class="date-time">
-            <input type="text" id="uur" value="<%= hours %>" name="bloodpressure[uur]" maxlength="2" pattern="^(0|0?[0-9]|[1][0-9]|2[0-4])$" required>
-            <label for="uur">u: <span class="highlight">*</span></label>
+            <div>
+                <label for="uur">Uur <span class="highlight">*</span></label>
+                <input type="text" id="uur" value="<%= hours %>" name="bloodpressure[uur]" maxlength="2" pattern="^(0|0?[0-9]|[1][0-9]|2[0-4])$" required>
+            </div>
     
-            <input type="text" id="min" value="<%= minutes %>" name="bloodpressure[min]" maxlength="2" pattern="[0-5]\d|[0-9]" required>
-            <label for="min">min<span class="highlight">*</span></label>
+            <div>
+                <label for="min">Minuten <span class="highlight">*</span></label>
+                <input type="text" id="min" value="<%= minutes %>" name="bloodpressure[min]" maxlength="2" pattern="[0-5]\d|[0-9]" required>
+            </div>
         </div>
 
 
+    <!-- </div> -->
+
+
+    <div class="form-btns">
+        <button class="btn btn-pri">Aanpassen</button>
+        <a href="/<%= patientId %>/bloeddruk/<%= result._id %>/verwijder" class="cta">Verwijder meting</a>
     </div>
-
-
-    <button class="btn btn-pri">Aanpassen</button>
 </form>
+

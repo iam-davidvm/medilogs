@@ -1,7 +1,7 @@
 <% layout('layouts/boilerplate') %>
    
 
-    <div class="results-settings title-with-icon"><h1><%= title %></h1><button id="btn-results-settings" class="icon"><img src="/assets/settings.svg" alt="Open de instellingen" class="icon-small"></button></div>
+    <div class="results-settings"><h1><%= title %></h1><button id="btn-results-settings" class="btn btn-sec focus-red">Toon instellingen</button></div>
 
     <%  
 
@@ -64,8 +64,8 @@
                         <option value="onderdruk-asc">Onderdruk oplopend</option>
                         <option value="onderdruk-desc">Onderdruk aflopend</option>
                     </select>
+                    <p class="hint">Op basis van de gekozen periode.</p>
                 </div>
-                <p class="hint">Op basis van de gekozen periode.</p>
             </div>
             <button class="btn btn-pri" id="save-results-settings">
                 Pas toe
@@ -73,7 +73,7 @@
         </form>
     </section>
 
-    <section class="pane statistieken">
+    <section class="box statistieken">
         <div class="title-with-icon">
             <span class="icon" id="icon-stats"><img src="/assets/minus.svg"class="icon-small" alt="Verberg gemiddelden"></span>
             <h2>Statistieken</h2>
@@ -105,7 +105,7 @@
             }
         %>
         <div class="stats">
-            <div class="stat">
+            <div class="gemiddelden">
                 <h3>Gemiddelden</h3>
                 <div class="stats-bovendruk">
                     <p class="stats-num"><%= bovendrukStat %></p> 
@@ -123,7 +123,7 @@
         </div>
     </section>
 
-    <section class="pane table">
+    <section class="box table">
         <div class="title-with-icon">
             <span class="icon" id="icon-results"><img src="/assets/minus.svg" class="icon-small" alt="Verberg tabel"></span>
             <h2>Tabel</h2>
@@ -133,12 +133,11 @@
             <table id="table-results">
                 <thead>
                     <tr>
-                        <th><%= labels[0][0] %><span class="hide-small"><%= labels[0].substring(1) %>  %></span></th>
-                        <th><%= labels[1][0] %><span class="hide-small"><%= labels[1].substring(1) %></span></th>
-                        <th><%= labels[2][0] %><span class="hide-small"><%= labels[2].substring(1) %></span></th>
-                        <th class="hide-small"><%= labels[3] %></span></th>
-                        <th><img src="/assets/edit.svg" alt="" class="table-icon icon-small"></th>
-                        <th><img src="/assets/delete.svg" alt="" class="table-icon icon-small"></th>
+                        <th><%= labels[0]  %></span></th>
+                        <th><%= labels[1] %></span></th>
+                        <th><%= labels[2] %></span></th>
+                        <th><%= labels[3] %></span></th>
+                        <th>Bewerken</th>
                     </tr>
                 </thead>
 
@@ -148,7 +147,7 @@
                             <td><%= result.bovendruk %></td>
                             <td><%= result.onderdruk %></td>
                             <td><%= result.hartslag === undefined ? "0" : `${result.hartslag}` %></td>
-                            <td class="hide-small">
+                            <td>
                                 <% 
                                     const date = new Date(result.tijdstip) 
                                     const day = date.getDate() < 10 ? `0${date.getDate()}` : `${date.getDate()}`;
@@ -159,17 +158,15 @@
                                 %>
                                 <%= `${day}/${month}/${year} - ${hours}:${minutes}` %> 
                             </td>                            
-                            <td><a href="/<%= patientId %>/bloeddruk/<%= result._id %>/bewerk"><img src="/assets/edit.svg" alt="Pas meting aan" class="table-icon icon-small"></a></td>
-                            <td><a href="/<%= patientId %>/bloeddruk/<%= result._id %>/verwijder"><img src="/assets/delete.svg" alt="Verwijder meting" class="table-icon icon-small"></a></td>
+                            <td><a href="/<%= patientId %>/bloeddruk/<%= result._id %>/bewerk" class="cta focus-red">Bewerken</a></td>
                         </tr>
                     <% } %>
                 </tbody>
             </table>
-            <p class="hint show-small text-center">* B = Bovendruk | O = Onderdruk | H = Hartslag</p>
         <% } %>
     </section>
 
-    <section class="pane hide-mobile">
+    <section class="box hide-mobile">
         <div class="title-with-icon">
             <span class="icon" id="icon-graph"><img src="/assets/minus.svg" class="icon-small" alt="Verberg grafiek"></span>
             <h2>Grafiek</h2>

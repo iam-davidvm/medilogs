@@ -8,10 +8,13 @@ function showMsg(message) {
 (function () {
   fetch('/json/data.json')
     .then((response) => response.json())
-    .then((data) => showMsg(data.messages[0]))
+    .then((data) => {
+      if (data.messages[0]) {
+        showMsg(data.messages[0]);
+      }
+    })
     .catch((e) => {
       const maintenanceBar = document.querySelector('.maintenance-bar');
       maintenanceBar.style.display = 'none';
-      console.log(e);
     });
 })();
