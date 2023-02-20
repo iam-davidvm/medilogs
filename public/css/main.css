@@ -301,10 +301,6 @@ p {
   background-repeat: no-repeat;
   background-position: 98% 50%;
 }
-/* 
-.form-element input[type='number'] {
-  background-position: 98% 50%;
-} */
 
 .date-input,
 .date-time {
@@ -524,6 +520,65 @@ p {
   margin-bottom: 3rem;
 }
 
+.dash-box {
+  padding-top: 1.7rem;
+}
+
+.dash-date {
+  color: rgba(0, 0, 0, 0.5);
+}
+
+.dash-stats {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 3rem;
+  text-align: center;
+}
+
+.dash-links {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: column;
+  gap: 2rem;
+  margin-top: 5rem;
+}
+
+.dash-link {
+  display: inline-flex;
+  width: 100%;
+  font-size: 1.6rem;
+  gap: 2.1rem;
+  align-items: center;
+  text-decoration: none;
+}
+
+.dash-link-icon {
+  width: 2.4rem;
+  transition: filter 230ms ease-in-out;
+}
+
+.dash-links .btn {
+  width: 100%;
+}
+
+.dash-links .btn-whi {
+  border-color: var(--clr-pri-red);
+}
+
+.dash-links .btn-whi .dash-link-icon {
+  filter: invert(50%) sepia(28%) saturate(3377%) hue-rotate(325deg)
+    brightness(123%) contrast(110%);
+}
+
+.dash-links .btn-whi:hover .dash-link-icon {
+  filter: none;
+}
+
+.dash-links .btn-pri:hover .dash-link-icon {
+  filter: invert(50%) sepia(28%) saturate(3377%) hue-rotate(325deg)
+    brightness(123%) contrast(110%);
+}
+
 /* toggle mails */
 
 /* SOURCE: https://kittygiraudel.com/2021/04/05/an-accessible-toggle/ */
@@ -671,6 +726,15 @@ p {
     grid-template-columns: 10fr 9fr;
     align-items: stretch;
     max-width: 800px;
+  }
+
+  .dash-stats {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .dash-links {
+    flex-direction: row;
+    gap: 6rem;
   }
 
   .hide-mobile {

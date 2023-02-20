@@ -37,6 +37,7 @@ const mongoSanitize = require('express-mongo-sanitize');
 const userRoutes = require('./routes/user');
 const bloodpressureRoutes = require('./routes/bloodpressure');
 const adminRoutes = require('./routes/admin');
+const dashboardRoutes = require('./routes/dashboard');
 const testRoutes = require('./routes/test');
 
 app.engine('ejs', engine);
@@ -111,6 +112,7 @@ app.use((req, res, next) => {
 app.use('/', userRoutes);
 app.use('/admin', adminRoutes);
 app.use('/test', testRoutes);
+app.use('/:patientId/dashboard', dashboardRoutes);
 app.use('/:patientId/bloeddruk', bloodpressureRoutes);
 
 app.get('/', (req, res) => {

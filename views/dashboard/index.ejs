@@ -1,13 +1,47 @@
 <% layout('layouts/boilerplate') %>
     
 
-    <h1><%= title %></h1>
 
-    <section class="pane tiles-section tiles-bloodpressure" aria-label="Bloeddruk">
-        <h2>Bloeddruk</h2>
-        <div class="tiles">
-            <a href="/<%= patientId %>/bloeddruk/nieuw" class="btn btn-tile"><img src="/assets/tile-icons/bloeddruk-meting.png" alt=""><span>Meting invoeren</span></a>
-            <a href="/<%= patientId %>/bloeddruk/raadplegen" class="btn btn-tile"><img src="/assets/tile-icons/metingen-raadplegen.png" alt=""><span>Metingen raadplegen</span></a>
-            <a href="/test/errortest" class="btn btn-tile">test</a>
+    <h1>Hallo <%= currentUser.voornaam %>!</h1>
+
+    <!-- NOG EEN VARIANT VOOR GEEN RESULTATEN -->
+
+    <section class="box dash-box">
+        <h2>Laatste meting</h2>
+
+        <% 
+            const date = new Date(lastResult[0].tijdstip);
+            const day = date.getDate() < 10 ? `0${date.getDate()}` : `${date.getDate()}`;
+            const month = (date.getMonth() + 1) < 10 ? `0${date.getMonth() + 1}` : `${date.getMonth() + 1}`;
+            const year = date.getFullYear();
+            const lastDate = `${day}/${month}/${year}`
+        %>
+        <p class="dash-date"><%= lastDate %></p>
+        <div class="stats dash-stats mt3">
+            <div class="stats-bovendruk">
+                <p class="stats-num"><%= lastResult[0].bovendruk %></p> 
+                <p class="stats-desc">bovendruk</p>
+            </div>
+            <div class="stats-onderdruk">
+                <p class="stats-num"><%= lastResult[0].onderdruk %></p> 
+                <p class="stats-desc">onderdruk</p>
+            </div>
+            <% if (lastResult[0].hartslag) { %>
+                <div class="stats-hartslag">
+                    <p class="stats-num"><%= lastResult[0].hartslag %></p> 
+                    <p class="stats-desc">hartslag</p>
+                </div>
+            <% } %>
+        </div>
+        <div class="dash-links">
+            <a class="dash-link btn btn-pri" href="/<%= currentUser.patienten[0]._id %>/bloeddruk/nieuw" title="Meting toevoegen">
+                <img src="/assets/icons/toevoegen.svg" alt="" class="dash-link-icon">
+                <span class="dash-link-text">Meting toevoegen</span>
+            </a>
+        <a class="dash-link btn btn-whi" href="/<%= currentUser.patienten[0]._id %>/bloeddruk/overzicht" title="Meting raadplegen">
+            <img src="/assets/icons/raadplegen.svg" alt="" class="dash-link-icon">
+            <span class="dash-link-text">Metingen raadplegen</span>
+
+        </a>
         </div>
     </section>
