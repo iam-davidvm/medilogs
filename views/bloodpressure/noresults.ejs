@@ -1,12 +1,16 @@
 <% layout('layouts/boilerplate') %>
 
-<section class="center-card subtle-shadow">
-    <h1><%= title %></h1>
+<h1><%= title %></h1>
+<section class="box">
 
-    <p>We hebben geen metingen gevonden.</p>
-    <p>Voeg snel jouw eerste meting toe:</p>
+    <p>Er zijn nog geen metingen geregistreerd</p>
 
-    <a href="/<%= patientId %>/bloeddruk/nieuw" class="btn">Nieuwe meting</a>
+    <div class="dash-links">
+        <a class="dash-link btn btn-pri" href="/<%= patientId %>/bloeddruk/nieuw" title="Meting toevoegen">
+            <img src="/assets/icons/toevoegen.svg" alt="" class="dash-link-icon">
+            <span class="dash-link-text">Meting toevoegen</span>
+        </a>
+    </div>
 
 </section>
 

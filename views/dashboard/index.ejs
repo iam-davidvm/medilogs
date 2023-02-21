@@ -7,6 +7,7 @@
     <!-- NOG EEN VARIANT VOOR GEEN RESULTATEN -->
 
     <section class="box dash-box">
+        <% if (lastResult.length > 0) { %>
         <h2>Laatste meting</h2>
 
         <% 
@@ -44,4 +45,13 @@
 
         </a>
         </div>
+        <% } else { %>
+            <h2>Nog geen meting gekend</h2>
+            <div class="dash-links">
+                <a class="dash-link btn btn-pri" href="/<%= currentUser.patienten[0]._id %>/bloeddruk/nieuw" title="Meting toevoegen">
+                    <img src="/assets/icons/toevoegen.svg" alt="" class="dash-link-icon">
+                    <span class="dash-link-text">Meting toevoegen</span>
+                </a>
+            </div>
+        <% } %>
     </section>
