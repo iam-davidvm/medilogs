@@ -40,16 +40,16 @@
     </table>
     <div class="pager">
         <% if(start >= 20) { %>
-            <a href="?page=0" class="pager-btn"><img src="/assets/first-page.svg" class="icon-pager" alt=""></a>
+            <a href="?page=0" class="pager-btn"><img src="/assets/icons/first-page.svg" class="icon-pager" alt=""></a>
         <% } %>
         <% if(start >= 40) { %>
-            <a href="?page=<%= start - 20 %>" class="pager-btn"><img src="/assets/previous-page.svg" class="icon-pager" alt=""></a>
+            <a href="?page=<%= start - 20 %>" class="pager-btn"><img src="/assets/icons/previous-page.svg" class="icon-pager" alt=""></a>
         <% } %>
         <% if(usersLength - start >= 40) { %>
-            <a href="?page=<%= start + 20 %>" class="pager-btn"><img src="/assets/next-page.svg" class="icon-pager" alt=""></a>
+            <a href="?page=<%= start + 20 %>" class="pager-btn"><img src="/assets/icons/next-page.svg" class="icon-pager" alt=""></a>
         <% } %>
         <% if(usersLength - start >= 20) { %>
-            <a href="?page=<%= ((usersLength) - (usersLength % 20)) %>" class="pager-btn"><img src="/assets/last-page.svg" class="icon-pager" alt=""></a>
+            <a href="?page=<%= ((usersLength) - (usersLength % 20)) %>" class="pager-btn"><img src="/assets/icons/last-page.svg" class="icon-pager" alt=""></a>
         <% } %>
     </div>
 </section>

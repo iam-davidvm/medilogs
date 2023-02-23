@@ -21,15 +21,6 @@ router
   );
 
 router
-  .route('/raadplegen')
-  .get(
-    isLoggedIn,
-    catchAsync(isAuthenticated),
-    lastSeen,
-    bloodpressureController.renderConsultation
-  );
-
-router
   .route('/overzicht')
   .get(
     isLoggedIn,

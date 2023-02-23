@@ -18,7 +18,7 @@ togglePassword.addEventListener('click', function () {
   password.setAttribute('type', type);
   const eye =
     password.getAttribute('type') === 'password'
-      ? '/assets/eye.svg'
-      : '/assets/eye-off.svg';
+      ? '/assets/icons/eye.svg'
+      : '/assets/icons/eye-off.svg';
   togglePassword.src = eye;
 });

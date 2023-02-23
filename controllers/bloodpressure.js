@@ -29,14 +29,6 @@ module.exports.addPressure = async (req, res) => {
   res.redirect(`/${patientId}/dashboard/`);
 };
 
-module.exports.renderConsultation = (req, res) => {
-  const { patientId } = req.params;
-  res.render('bloodpressure/index', {
-    title: 'Metingen raadplegen',
-    patientId,
-  });
-};
-
 module.exports.showResults = async (req, res) => {
   let amount = '30';
   let sortOption = { tijdstip: 'desc' };

@@ -295,7 +295,7 @@ p {
 }
 
 .form-element input:valid {
-  background-image: url('../assets/check.png');
+  background-image: url('../assets/icons/check.png');
   background-size: 2.3rem;
   background-color: var(--clr-pur-whi);
   background-repeat: no-repeat;
@@ -584,7 +584,6 @@ p {
 }
 
 /* toggle mails */
-
 /* SOURCE: https://kittygiraudel.com/2021/04/05/an-accessible-toggle/ */
 .toggle {
   display: inline-flex;
@@ -769,7 +768,8 @@ p {
     column-gap: 3rem;
   }
 
-  .registreren h1 {
+  .registreren h1,
+  .registreren .btn {
     grid-column: 1/3;
   }
 }

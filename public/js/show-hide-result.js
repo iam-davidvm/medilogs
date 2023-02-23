@@ -17,10 +17,10 @@ const stats = document.querySelector('.stats');
 iconStats.addEventListener('click', function () {
   stats.classList.toggle('invisible');
   if (stats.classList.contains('invisible')) {
-    imgStats.src = '/assets/plus.svg';
+    imgStats.src = '/assets/icons/plus.svg';
     imgStats.alt = 'Toon gemiddelden';
   } else {
-    imgStats.src = '/assets/minus.svg';
+    imgStats.src = '/assets/icons/minus.svg';
     imgStats.alt = 'Verberg gemiddelden';
   }
 });
@@ -32,10 +32,10 @@ const tableResults = document.getElementById('table-results');
 iconResults.addEventListener('click', function () {
   tableResults.classList.toggle('invisible');
   if (tableResults.classList.contains('invisible')) {
-    imgResults.src = '/assets/plus.svg';
+    imgResults.src = '/assets/icons/plus.svg';
     imgResults.alt = 'Toon tabel';
   } else {
-    imgResults.src = '/assets/minus.svg';
+    imgResults.src = '/assets/icons/minus.svg';
     imgResults.alt = 'Verberg tabel';
   }
 });
@@ -48,10 +48,10 @@ iconGraph.addEventListener('click', () => {
   console.log('click');
   graph.classList.toggle('invisible');
   if (graph.classList.contains('invisible')) {
-    imgGraph.src = '/assets/plus.svg';
+    imgGraph.src = '/assets/icons/plus.svg';
     imgGraph.alt = 'Toon grafiek';
   } else {
-    imgGraph.src = '/assets/minus.svg';
+    imgGraph.src = '/assets/icons/minus.svg';
     imgGraph.alt = 'Verberg grafiek';
   }
 });

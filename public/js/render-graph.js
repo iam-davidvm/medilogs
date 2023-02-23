@@ -21,29 +21,6 @@ const tijdstip = results.map((result) => {
 
 const ctx = document.getElementById('myChart');
 
-// Initialize a Line chart in the container with the ID chart1
-// new Chartist.Line(
-//   '.ct-chart',
-//   {
-//     labels: tijdstip,
-//     // series: [bovendruk, onderdruk, hartslag],
-//     series: [
-//       { name: 'Bovendruk', data: bovendruk },
-//       { name: 'Onderdruk', data: onderdruk },
-//       { name: 'Hartslag', data: hartslag },
-//     ],
-//   },
-//   {
-//     low: 30,
-//     fullWidth: true,
-//     height: '100%',
-//     chartPadding: {
-//       right: 80,
-//     },
-//     plugins: [Chartist.plugins.legend({})],
-//   }
-// );
-
 new Chart(ctx, {
   type: 'line',
   data: {
