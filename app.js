@@ -30,6 +30,7 @@ const LocalStrategy = require('passport-local');
 
 // security
 const mongoSanitize = require('express-mongo-sanitize');
+const helmet = require('helmet');
 
 // models
 
@@ -59,6 +60,27 @@ mongoose
     console.log(e);
   });
 mongoose.set('strictQuery', false);
+
+// HELMET SECURITY
+const scriptSrcUrls = ['https://cdn.jsdelivr.net/npm/chart.js'];
+const styleSrcUrls = ['https://fonts.googleapis.com/', 'fonts.gstatic.com'];
+const fontSrcUrls = ['https://fonts.googleapis.com/', 'fonts.gstatic.com'];
+app.use(
+  helmet.contentSecurityPolicy({
+    directives: {
+      defaultSrc: [],
+      connectSrc: ["'self'"],
+      scriptSrc: ["'unsafe-inline'", "'self'", ...scriptSrcUrls],
+      styleSrc: ["'self'", "'unsafe-inline'", ...styleSrcUrls],
+      workerSrc: ["'self'", 'blob:'],
+      objectSrc: [],
+      imgSrc: ["'self'", 'blob:', 'data:'],
+      fontSrc: ["'self'", ...fontSrcUrls],
+      mediaSrc: [],
+      childSrc: ['blob:'],
+    },
+  })
+);
 
 // we store the session into our mongodb
 const store = MongoStore.create({
