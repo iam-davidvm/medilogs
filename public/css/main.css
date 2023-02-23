@@ -302,6 +302,11 @@ p {
   background-position: 98% 50%;
 }
 
+/* there are better ways, but I want to avoid a checkmark at the aanmelden screen */
+.aanmelden .aanmelden-box .form .form-element input:valid {
+  background-image: none;
+}
+
 .date-input,
 .date-time {
   display: grid;
