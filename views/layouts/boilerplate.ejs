@@ -73,12 +73,14 @@
         <% } %>
     </aside>
 
+     <% if(currentUser && currentUser.rollen.includes('admin')) { %>
         <nav class="admin-bar">
             <ul>
                 <li><a href="/admin/users" class="cta">Users</a></li>
                 <li><a href="/admin/maintenance" class="cta">Maintenance</a></li>
             </ul>
         </nav>
+    <% } %>
 
     <section class="maintenance-bar">
         <div class="container">

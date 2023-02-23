@@ -172,7 +172,6 @@ input[type='number'] {
 
 /* END OF GENERAL STUFF */
 
-/* DISPLAY NOG AAN TE PASSEN: */
 .admin-bar,
 .maintenance-bar {
   position: relative;
@@ -234,6 +233,14 @@ h1 {
   color: var(--clr-pri-red);
   font-size: 3.6rem;
   word-wrap: break-word;
+}
+
+h1 {
+  padding-top: 0;
+}
+
+html[style*='--width: 30rem'] h1 {
+  padding-top: 1.9rem;
 }
 
 h2 {
@@ -698,7 +705,7 @@ p {
 
 @media screen and (min-width: 750px) {
   .container {
-    padding-top: 1.7rem;
+    padding-top: 1.2rem;
   }
 
   .date-input,
