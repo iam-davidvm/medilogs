@@ -1,3 +1,9 @@
+/* I feel only the table should show the results in a requested way. To see a chart from the oldest to the newest is weird to me
+if (results[0].tijdstip > results[results.length - 1].tijdstip) {
+  results = results.reverse();
+}
+*/
+
 const bovendruk = results.map((result) => result.bovendruk);
 const onderdruk = results.map((result) => result.onderdruk);
 const hartslag = results.map((result) =>

@@ -48,7 +48,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use(methodOverride('_method'));
 
 //const dbUrl = process.env.DB_URL;
-const dbUrl = 'mongodb://localhost:27017/medipas-v2';
+const dbUrl = 'mongodb://127.0.0.1:27017/medipas-v2';
 
 mongoose
   .connect(dbUrl)
