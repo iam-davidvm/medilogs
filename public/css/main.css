@@ -239,6 +239,7 @@ h1 {
   padding-top: 0;
 }
 
+html[style*='--width:30rem'] h1,
 html[style*='--width: 30rem'] h1 {
   padding-top: 1.9rem;
 }
