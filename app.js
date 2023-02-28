@@ -52,8 +52,6 @@ if (process.env.NODE_ENV == 'production') {
   dbUrl = process.env.DB_URL;
 }
 
-console.log(dbUrl);
-
 mongoose
   .connect(dbUrl)
   .then(() => {
@@ -112,6 +110,11 @@ const sessionConfig = {
     maxAge: 1000 * 60 * 60 * 24 * 7,
   },
 };
+
+if (app.get('env') === 'production') {
+  app.set('trust proxy', 1); // trust first proxy
+  sessionConfig.cookie.secure = true; // serve secure cookies
+}
 
 app.use(session(sessionConfig));
 app.use(flash());
