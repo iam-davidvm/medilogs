@@ -47,10 +47,9 @@ app.set('views', path.join(__dirname, 'views'));
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(methodOverride('_method'));
 
-if (process.env.NODE_ENV !== 'production') {
-  const dbUrl = process.env.DB_URL;
-} else {
-  const dbUrl = 'mongodb://127.0.0.1:27017/medipas-v2';
+let dbUrl = 'mongodb://127.0.0.1:27017/medipas-v2';
+if (process.env.NODE_ENV == 'production') {
+  dbUrl = process.env.DB_URL;
 }
 
 mongoose
