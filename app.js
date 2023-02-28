@@ -52,6 +52,8 @@ if (process.env.NODE_ENV == 'production') {
   dbUrl = process.env.DB_URL;
 }
 
+console.log(dbUrl);
+
 mongoose
   .connect(dbUrl)
   .then(() => {
