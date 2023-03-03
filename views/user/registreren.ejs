@@ -14,9 +14,8 @@
     <meta name="theme-color" content="#4a4a4a">
 </head>
 <body>
+    <%- include('../partials/cookies') %>
     
-</body>
-</html>
 <main class="registreren">
     <form action="/registreren" class="form box" method="POST">
     <h1><%= title %></h1>
@@ -70,7 +69,11 @@
 
 </form>
 
-<script src="/js/userform.js"></script>
-
 </main>
 
+<script src="/js/userform.js"></script>
+<script src="/js/cookies-consent.js"></script>
+
+
+</body>
+</html>
