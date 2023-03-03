@@ -315,6 +315,40 @@ p {
   background-image: none;
 }
 
+.select-element {
+  position: relative;
+}
+
+.select {
+  position: relative;
+}
+
+.select::after {
+  content: '';
+  position: absolute;
+  display: block;
+  border: 3px solid var(--clr-pri-red);
+  border-right: 0;
+  border-top: 0;
+  border-radius: 0.2rem;
+  transform: rotate(-45deg);
+  transform-origin: center;
+  height: 1.25rem;
+  width: 1.25rem;
+  margin-top: -1rem;
+  top: 50%;
+  right: 1.2rem;
+  pointer-events: none;
+}
+
+.select select {
+  -moz-appearance: none;
+  -webkit-appearance: none;
+  appearance: none;
+  background-color: #fff;
+  cursor: pointer;
+}
+
 .date-input,
 .date-time {
   display: grid;
