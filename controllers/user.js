@@ -69,7 +69,7 @@ module.exports.logout = (req, res, next) => {
   });
 };
 
-module.exports.renderAccount = catchAsync(async (req, res) => {
+module.exports.renderAccount = async (req, res) => {
   const { accountId } = req.params;
   const account = await User.find({ _id: accountId });
   const patienten = await Patient.find({ eigenaar: account });
@@ -78,4 +78,30 @@ module.exports.renderAccount = catchAsync(async (req, res) => {
     account,
     patienten,
   });
-});
+};
+
+module.exports.renderKoppelen = (req, res) => {
+  console.log(req.user);
+  const { accountId } = req.params;
+  res.render('user/koppelen', { title: 'Koppel een persoon', accountId });
+};
+
+module.exports.koppelAccount = async (req, res) => {
+  const { accountId } = req.params;
+  const { voornaam, familienaam } = req.body.persoon;
+  const account = await User.findOne({ _id: accountId });
+  if (account.patienten.length === 4) {
+    req.flash('error', 'Je hebt al 3 personen gekoppeld');
+    return res.redirect(`/${accountId}`);
+  }
+  const patient = await new Patient({ voornaam, familienaam });
+  account.patienten.push(patient);
+  patient.eigenaar = account;
+  await account.save();
+  await patient.save();
+  req.flash(
+    'success',
+    `${voornaam} ${familienaam} werd gekoppeld aan jouw account.`
+  );
+  return res.redirect(`/${accountId}`);
+};

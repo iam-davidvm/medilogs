@@ -36,6 +36,18 @@ module.exports.isAuthenticated = async (req, res, next) => {
   }
 };
 
+module.exports.isAccount = async (req, res, next) => {
+  const { accountId } = req.params;
+  const account = await User.findOne({ _id: accountId });
+  if (String(req.user._id) !== String(account._id)) {
+    const msg = 'Je hebt geen rechten tot deze pagina.';
+
+    throw new ExpressError(msg, 403);
+  } else {
+    next();
+  }
+};
+
 module.exports.isAdmin = (req, res, next) => {
   if (!req.user.rollen.includes('admin')) {
     const msg = 'Je hebt geen rechten tot deze pagina.';

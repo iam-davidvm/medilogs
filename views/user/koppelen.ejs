@@ -1,0 +1,19 @@
+<% layout('layouts/boilerplate') %>
+
+<h1><%= title %></h1>
+<form action="/<%= accountId %>/koppelen" class="box form" method="POST">
+    <div class="form-element">
+        <label for="voornaam">Voornaam <span class="highlight">*</span></label>
+        <input type="text" name="persoon[voornaam]" class="focus-red" required>
+    </div>
+
+    <div class="form-element mt3">
+        <label for="familienaam">Familienaam <span class="highlight">*</span></label>
+        <input type="text" name="persoon[familienaam]" class="focus-red" required>
+    </div>
+
+    <div class="form-btns mt3">
+        <button class="btn btn-pri focus-red">Bewaren</button>
+        <a href="/<%= accountId %>" class="cta">Annuleren</a>
+    </div>
+</form>

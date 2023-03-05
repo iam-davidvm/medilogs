@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 
 const catchAsync = require('../utils/catchAsync');
+const { isLoggedIn, lastSeen, isAccount } = require('../utils/middleware');
 
 const User = require('../models/user');
 const userController = require('../controllers/user');
@@ -28,6 +29,28 @@ router
 
 router.get('/afmelden', userController.logout);
 
-router.route('/:accountId').get(userController.renderAccount);
+router
+  .route('/:accountId')
+  .get(
+    isLoggedIn,
+    catchAsync(isAccount),
+    lastSeen,
+    catchAsync(userController.renderAccount)
+  );
+
+router
+  .route('/:accountId/koppelen')
+  .get(
+    isLoggedIn,
+    catchAsync(isAccount),
+    lastSeen,
+    userController.renderKoppelen
+  )
+  .post(
+    isLoggedIn,
+    catchAsync(isAccount),
+    lastSeen,
+    catchAsync(userController.koppelAccount)
+  );
 
 module.exports = router;
