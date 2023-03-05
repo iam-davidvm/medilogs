@@ -1,5 +1,7 @@
 const User = require('../models/user');
 const Patient = require('../models/patient');
+const catchAsync = require('../utils/catchAsync');
+const { ObjectId } = require('mongodb');
 
 module.exports.renderRegister = (req, res) => {
   res.render('user/registreren', { title: 'Maak een account aan' });
@@ -42,7 +44,6 @@ module.exports.register = async (req, res, next) => {
       res.redirect(`/${registeredUser.patienten[0]._id}/dashboard/`);
     });
   } catch (e) {
-    // res.send(`Niet aangemeld, dit is mijn error ${e.message}`);
     req.flash('error', `Er ging iets fout: ${e.message}`);
     res.redirect('/registreren');
   }
@@ -67,3 +68,14 @@ module.exports.logout = (req, res, next) => {
     res.redirect('/');
   });
 };
+
+module.exports.renderAccount = catchAsync(async (req, res) => {
+  const { accountId } = req.params;
+  const account = await User.find({ _id: accountId });
+  const patienten = await Patient.find({ eigenaar: account });
+  res.render('user/account', {
+    title: 'Mijn account',
+    account,
+    patienten,
+  });
+});

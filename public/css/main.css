@@ -97,6 +97,10 @@ body {
   display: block;
 }
 
+.block {
+  display: block;
+}
+
 input[type='number']::-webkit-outer-spin-button,
 input[type='number']::-webkit-inner-spin-button {
   -webkit-appearance: none;
@@ -624,6 +628,20 @@ p {
 .dash-links .btn-pri:hover .dash-link-icon {
   filter: invert(50%) sepia(28%) saturate(3377%) hue-rotate(325deg)
     brightness(123%) contrast(110%);
+}
+
+.account-gegeven {
+  margin: 1rem 0;
+  display: flex;
+  gap: 0.3rem;
+}
+
+.account-gegeven:first-of-type {
+  margin-top: 3rem;
+}
+
+.account-gegeven label {
+  width: 30rem;
 }
 
 #cookies-modal p {

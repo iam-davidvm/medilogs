@@ -28,4 +28,6 @@ router
 
 router.get('/afmelden', userController.logout);
 
+router.route('/:accountId').get(userController.renderAccount);
+
 module.exports = router;
