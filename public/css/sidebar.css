@@ -26,6 +26,9 @@ img {
   left: 0;
   padding: 2.4rem 0;
   z-index: 998;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
 
 .menu-links,
@@ -169,6 +172,10 @@ img {
 
 .menu-user-logout:hover .menu-link-icon {
   filter: brightness(0) invert(1);
+}
+
+.side-bottom {
+  margin-bottom: 2.4rem;
 }
 
 @media screen and (min-width: 750px) {

@@ -23,6 +23,7 @@
 
     <!-- </div> -->
     <aside class="menu">
+        <div class="side-top">
         <% if(currentUser) { %>
             <div class="menu-brand">
                 <a href="/<%= currentUser.patienten[0]._id %>/dashboard" class="menu-logo"><img src="/assets/logo/medilogs_white.svg" alt=""></a>
@@ -46,6 +47,7 @@
                     <span class="menu-user-text">Registreren</span>
                 </a>
             </div>
+        </div>
         <% } else { %>
             <div class="menu-links">
                 <h1 class="menu-groupname">Bloeddruk</h1>
@@ -63,13 +65,16 @@
                         <span class="menu-link-text">Metingen downloaden</span>
                     </a>
             </div>
+            </div>
             
-            
-            <div class="menu-user">
-                <a href="/afmelden" class="menu-user-logout">
-                    <img src="/assets/icons/afmelden.svg" alt="" class="menu-link-icon">
-                    <span class="menu-user-text">Afmelden</span>
-                </a>
+            <div class="side-bottom">
+
+                <div class="menu-user">
+                    <a href="/afmelden" class="menu-user-logout">
+                        <img src="/assets/icons/afmelden.svg" alt="" class="menu-link-icon">
+                        <span class="menu-user-text">Afmelden</span>
+                    </a>
+                </div>
             </div>
         <% } %>
     </aside>
