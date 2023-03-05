@@ -148,6 +148,28 @@ img {
   margin-right: auto;
 }
 
+.menu-user-account {
+  display: inline-flex;
+  gap: 2.1rem;
+  width: 100%;
+  padding: 1.8rem;
+  background-color: transparent;
+  color: white;
+  text-decoration: none;
+  align-items: center;
+  font-size: 1.6rem;
+  border-radius: 0.6rem;
+  border: 1px solid white;
+  transition: background-color 230ms ease-in-out, color 230ms ease-in-out,
+    border-color 230ms ease-in-out;
+  margin-bottom: 1.7rem;
+}
+
+.menu-user-account:hover {
+  background-color: rgba(0, 0, 0, 0.15);
+  border-color: rgba(0, 0, 0, 0.15);
+}
+
 .menu-user-logout {
   display: inline-flex;
   gap: 2.1rem;
