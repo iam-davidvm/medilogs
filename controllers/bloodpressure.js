@@ -142,6 +142,7 @@ module.exports.downloadResults = async (req, res) => {
     return res.render('bloodpressure/noresults', {
       title: 'Geen metingen gevonden',
       patientId,
+      url: 'bloeddruk/overzicht',
     });
   }
 

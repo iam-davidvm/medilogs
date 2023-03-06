@@ -21,12 +21,13 @@
 <body>
     <%- include('../partials/cookies') %>
 
-    <!-- </div> -->
+    <% const asideUrl = typeof patientId !== 'undefined' ? patientId : currentUser.patienten[0]._id; %>
+
     <aside class="menu">
         <div class="side-top">
         <% if(currentUser) { %>
             <div class="menu-brand">
-                <a href="/<%= currentUser.patienten[0]._id %>/dashboard" class="menu-logo"><img src="/assets/logo/medilogs_white.svg" alt=""></a>
+                <a href=<%= `/${asideUrl}/dashboard` %> class="menu-logo"><img src="/assets/logo/medilogs_white.svg" alt=""></a>
                 <button class="menu-btn" aria-expanded="false"><img class="menu-btn-icon" src="/assets/icons/menu-open.svg" alt=""></button>
             </div>
         <% } else { %>
@@ -51,16 +52,16 @@
         <% } else { %>
             <div class="menu-links">
                 <h1 class="menu-groupname">Bloeddruk</h1>
-                        <a class="menu-link" href="/<%= currentUser.patienten[0]._id %>/bloeddruk/nieuw" title="Meting toevoegen">
+                        <a class="menu-link" href=<%= `/${asideUrl}/bloeddruk/nieuw` %> title="Meting toevoegen">
                             <img src="/assets/icons/toevoegen.svg" alt="" class="menu-link-icon">
                             <span class="menu-link-text">Meting toevoegen</span>
                         </a>
-                    <a class="menu-link" href="/<%= currentUser.patienten[0]._id %>/bloeddruk/overzicht" title="Meting raadplegen">
+                    <a class="menu-link" href=<%= `/${asideUrl}/bloeddruk/overzicht` %> title="Meting raadplegen">
                         <img src="/assets/icons/raadplegen.svg" alt="" class="menu-link-icon">
                         <span class="menu-link-text">Metingen raadplegen</span>
 
                     </a>
-                    <a class="menu-link" href="/<%= currentUser.patienten[0]._id %>/bloeddruk/downloaden" title="Meting downloaden">
+                    <a class="menu-link" href=<%= `/${asideUrl}/bloeddruk/downloaden` %> title="Meting downloaden">
                         <img src="/assets/icons/downloaden.svg" alt="" class="menu-link-icon">
                         <span class="menu-link-text">Metingen downloaden</span>
                     </a>

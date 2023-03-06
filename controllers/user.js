@@ -81,7 +81,6 @@ module.exports.renderAccount = async (req, res) => {
 };
 
 module.exports.renderKoppelen = (req, res) => {
-  console.log(req.user);
   const { accountId } = req.params;
   res.render('user/koppelen', { title: 'Koppel een persoon', accountId });
 };

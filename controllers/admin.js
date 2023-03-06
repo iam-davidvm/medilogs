@@ -15,12 +15,14 @@ module.exports.renderMaintenance = (req, res) => {
       return res.render('admin/maintenance', {
         title: 'Stel een onderhoudsboodschap in',
         message,
+        patientId: '',
       });
     })
     .catch((e) => {
       return res.render('admin/maintenance', {
         title: 'Stel een onderhoudsboodschap in',
         message: '',
+        patientId: '',
       });
     });
 };
@@ -45,11 +47,13 @@ module.exports.saveMaintenance = (req, res) => {
     return res.render('admin/maintenance', {
       title: 'Stel een onderhoudsboodschap in',
       message,
+      patientId: '',
       success: 'De maintenance boodschap werd aangepast',
     });
   } catch (e) {
     return res.render('admin/maintenance', {
       title: 'Stel een onderhoudsboodschap in',
+      patientId: '',
       error: `Er is iets mis gegaan: ${e}`,
     });
   }
@@ -69,6 +73,7 @@ module.exports.renderUsers = async (req, res) => {
     users,
     start,
     usersLength,
+    patientId: '',
   });
 };
 
