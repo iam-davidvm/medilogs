@@ -1,0 +1,19 @@
+<% if(currentUser.patienten.length > 1) { %>
+    <div class="select-person-element">
+    <label for="persons">Aangemeld in hoedanigheid van:</label>
+    <div class="select">
+        <select id="select-person" name="persons"  class="focus-red" required>
+            <% for(let i = 0; i < currentUser.patienten.length; i++) { %>
+                <option value="<%= currentUser.patienten[i]._id %>" <%= String(patientId) === String(currentUser.patienten[i]._id) ? 'selected' : '' %>><%= currentUser.patienten[i].voornaam + " " + currentUser.patienten[i].familienaam %></option>
+            <% } %>
+        </select>
+    </div>
+</div>
+<script>
+    const selectPerson = document.querySelector('#select-person');
+    selectPerson.addEventListener('change', function() {
+        window.location.href = `/${this.value}/<%= url %>`;
+    });
+
+</script>
+<% } %>

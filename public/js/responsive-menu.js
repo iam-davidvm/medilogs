@@ -115,9 +115,6 @@ function changePage(changeIcon = false) {
     window.innerWidth ||
     document.documentElement.clientWidth ||
     document.body.clientWidth;
-
-  console.log('Width: ', width);
-  console.log('window.screen.width: ', window.screen.width);
   const isMenuExpanded = getMenuState();
   const iconState = setIcon(width, isMenuExpanded, false, changeIcon);
   changeMenuState(iconState);

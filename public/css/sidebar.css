@@ -29,6 +29,8 @@ img {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  height: 100%;
+  overflow-y: auto;
 }
 
 .menu-links,
@@ -54,8 +56,8 @@ img {
 
 .expand-mobile-menu {
   background-color: var(--clr-pri-red);
-  height: 100%;
-  flex-wrap: wrap;
+  /* height: 100%; */ /* noreah */
+  /* flex-wrap: wrap; */ /* noreah */
   width: 100vw;
   padding: 2.4rem 0;
 }
@@ -207,7 +209,7 @@ img {
     top: 0;
     left: 0;
     height: 100%;
-    flex-wrap: wrap;
+    /*flex-wrap: wrap;*/ /* noreah */
     width: 7rem;
     padding: 1rem 0 0;
   }
@@ -278,6 +280,11 @@ img {
   .menu-user .menu-link-icon {
     margin: 0 auto;
     filter: brightness(0) invert(1);
+  }
+
+  .menu .menu-user-account {
+    border-radius: 0;
+    border: 1px solid var(--clr-pri-red);
   }
 
   .expand-tablet-menu {
@@ -368,6 +375,11 @@ img {
   .expand-tablet-menu .menu-user-logout:hover .menu-link-icon {
     filter: brightness(0) invert(1);
   }
+
+  .expand-tablet-menu .menu-user-account {
+    border-radius: 0.6rem;
+    border: 1px solid white;
+  }
 }
 
 @media screen and (min-width: 1040px) {
@@ -376,8 +388,8 @@ img {
     position: fixed;
     top: 0;
     left: 0;
-    height: 100%;
-    flex-wrap: wrap;
+    /* height: 100%; */ /* noreah */
+    /* flex-wrap: wrap; */ /* noreah */
     width: 30rem;
     padding: 2.4rem 0;
   }
@@ -489,13 +501,18 @@ img {
     filter: brightness(0) invert(1);
   }
 
+  .menu .menu-user-account {
+    border-radius: 0.6rem;
+    border: 1px solid white;
+  }
+
   .fold-desktop-menu {
     background-color: var(--clr-pri-red);
     position: fixed;
     top: 0;
     left: 0;
-    height: 100%;
-    flex-wrap: wrap;
+    /* height: 100%; */ /* noreah */
+    /* flex-wrap: wrap; */ /* noreah */
     width: 7rem;
     padding: 1rem 0 0;
   }
@@ -574,5 +591,10 @@ img {
   .fold-desktop-menu .menu-user .menu-link-icon {
     margin: 0 auto;
     filter: brightness(0) invert(1);
+  }
+
+  .fold-desktop-menu .menu-user-account {
+    border-radius: 0;
+    border: 1px solid var(--clr-pri-red);
   }
 }

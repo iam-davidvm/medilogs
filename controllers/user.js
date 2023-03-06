@@ -87,7 +87,6 @@ module.exports.renderKoppelen = (req, res) => {
 };
 
 module.exports.koppelAccount = async (req, res) => {
-  const { accountId } = req.params;
   const { voornaam, familienaam } = req.body.persoon;
   const account = await User.findOne({ _id: accountId });
   if (account.patienten.length === 4) {

@@ -272,7 +272,8 @@ p {
   gap: 3rem;
 }
 
-.form label {
+.form label,
+.select-person-element label {
   display: block;
   font-weight: 700;
   padding-left: 0.3rem;
@@ -281,7 +282,8 @@ p {
 }
 
 .form input,
-.form select {
+.form select,
+.select-person-element select {
   height: 4rem;
   width: 100%;
   border-radius: 0.6rem;
@@ -289,6 +291,11 @@ p {
   font-size: 1.6rem;
   font-family: var(--fnt-nun-san);
   padding: 0rem 0.5rem;
+}
+
+.select-person-element {
+  margin-bottom: 6rem;
+  max-width: 35rem;
 }
 
 .form textarea {
@@ -319,7 +326,8 @@ p {
   background-image: none;
 }
 
-.select-element {
+.select-element,
+.select-person-element {
   position: relative;
 }
 

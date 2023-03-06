@@ -24,6 +24,7 @@ router.get(
       title: 'Mijn dashboard',
       lastResult,
       patientId,
+      url: 'dashboard',
     });
   })
 );

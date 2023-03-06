@@ -4,8 +4,9 @@ const excelJS = require('exceljs');
 module.exports.renderNewBloodpressure = (req, res) => {
   const { patientId } = req.params;
   res.render('bloodpressure/nieuw', {
-    id: patientId,
+    patientId,
     title: 'Meting toevoegen',
+    url: 'bloeddruk/nieuw',
   });
 };
 
@@ -44,6 +45,7 @@ module.exports.showResults = async (req, res) => {
     return res.render('bloodpressure/noresults', {
       title: 'Geen metingen gevonden',
       patientId,
+      url: 'bloeddruk/overzicht',
     });
   }
   res.render('bloodpressure/results', {
@@ -52,6 +54,7 @@ module.exports.showResults = async (req, res) => {
     patientId,
     sort,
     amount,
+    url: 'bloeddruk/overzicht',
   });
 };
 
