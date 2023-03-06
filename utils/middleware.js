@@ -1,6 +1,7 @@
 const ExpressError = require('./ExpressError');
 const Bloodpressure = require('../models/bloodpressure');
 const User = require('../models/user');
+const Patient = require('../models/patient');
 const { bloodpressureSchema } = require('../schemas');
 
 module.exports.lastSeen = async (req, res, next) => {
@@ -38,13 +39,25 @@ module.exports.isAuthenticated = async (req, res, next) => {
 
 module.exports.isAccount = async (req, res, next) => {
   const { accountId } = req.params;
-  const account = await User.findOne({ _id: accountId });
-  if (String(req.user._id) !== String(account._id)) {
-    const msg = 'Je hebt geen rechten tot deze pagina.';
+  if (typeof accountId !== 'undefined') {
+    const account = await User.findOne({ _id: accountId });
+    if (String(req.user._id) !== String(account._id)) {
+      const msg = 'Je hebt geen rechten tot deze pagina.';
 
-    throw new ExpressError(msg, 403);
+      throw new ExpressError(msg, 403);
+    } else {
+      next();
+    }
   } else {
-    next();
+    const { patientId } = req.params;
+    const patient = await Patient.findOne({ _id: patientId });
+    if (String(req.user._id) !== String(patient.eigenaar)) {
+      const msg = 'Je hebt geen rechten tot deze pagina.';
+
+      throw new ExpressError(msg, 403);
+    } else {
+      next();
+    }
   }
 };
 

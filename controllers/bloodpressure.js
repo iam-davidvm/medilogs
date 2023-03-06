@@ -92,7 +92,7 @@ module.exports.flashDeletePressure = async (req, res) => {
   const { patientId, resultId } = req.params;
   const result = await Bloodpressure.findById(resultId);
   const date = result.tijdstip;
-  req.flash('warning', {
+  req.flash('warningBloodpressure', {
     resultId,
     date,
     patientId,

@@ -1,0 +1,26 @@
+<% if(warningPatient && warningPatient.length) { %>
+<div class="modal">
+    <div class="warning box" role="alert" aria-live="polite">
+        <p>Ben je zeker dat je <span class="warning-date"><%= warningPatient[0].voornaam + " " + warningPatient[0].familienaam  %></span> wil verwijderen?</p>
+        <form action="/<%= warningPatient[0].patientId %>/verwijderen?_method=DELETE" method="POST">
+            <div class="form-btns">
+                <button class="btn btn-pri">Ja</button>
+                <a href="/<%= warningPatient[0].eigenaar %>" class="cta">Nee</a>
+            </div>
+        </form>
+    </div>
+</div>
+
+<script>
+    scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+    scrollLeft = window.pageXOffset || document.documentElement.scrollLeft,
+
+    window.onscroll = function() {
+        window.scrollTo(scrollLeft, scrollTop);
+    };
+</script>
+<% } else { %>
+    <script>
+        window.onscroll = null;
+    </script>
+<% } %>

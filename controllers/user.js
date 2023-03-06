@@ -103,3 +103,15 @@ module.exports.koppelAccount = async (req, res) => {
   );
   return res.redirect(`/${accountId}`);
 };
+
+module.exports.flashDeletePatient = async (req, res) => {
+  const { patientId } = req.params;
+  const patient = await Patient.findOne({ _id: patientId });
+  req.flash('warningPatient', {
+    eigenaar: patient.eigenaar,
+    voornaam: patient.voornaam,
+    familienaam: patient.familienaam,
+    patientId,
+  });
+  res.redirect(`/${patient.eigenaar}`);
+};

@@ -1,0 +1,34 @@
+<% if(warningBloodpressure && warningBloodpressure.length) { %>
+<div class="modal">
+    <div class="warning box" role="alert" aria-live="polite">
+        <% 
+            const date = new Date(warningBloodpressure[0].date) 
+            const day = date.getDate() < 10 ? `0${date.getDate()}` : `${date.getDate()}`;
+            const month = (date.getMonth() + 1) < 10 ? `0${date.getMonth() + 1}` : `${date.getMonth() + 1}`;
+            const year = date.getFullYear()
+            const hours = date.getHours() < 10 ? `0${date.getHours()}` : `${date.getHours()}`;
+            const minutes = date.getMinutes() < 10 ? `0${date.getMinutes()}` : `${date.getMinutes()}`;
+        %>
+        <p>Ben je zeker dat je de meting van <span class="warning-date"><%= `${day}/${month}/${year} - ${hours}:${minutes}` %></span> wil verwijderen?</p>
+        <form action="/<%= warningBloodpressure[0].patientId %>/bloeddruk/<%= warningBloodpressure[0].resultId %>/verwijder?_method=DELETE" method="POST">
+            <div class="form-btns">
+                <button class="btn btn-pri">Ja</button>
+                <a href="/<%= warningBloodpressure[0].patientId %>/bloeddruk/overzicht" class="cta">Nee</a>
+            </div>
+        </form>
+    </div>
+</div>
+
+<script>
+    scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+    scrollLeft = window.pageXOffset || document.documentElement.scrollLeft,
+
+    window.onscroll = function() {
+        window.scrollTo(scrollLeft, scrollTop);
+    };
+</script>
+<% } else { %>
+    <script>
+        window.onscroll = null;
+    </script>
+<% } %>

@@ -452,7 +452,8 @@ p {
 }
 
 #table-results,
-#users-table {
+#users-table,
+#table-personen {
   margin-top: 1.7rem;
   font-size: 1.6rem;
   border-collapse: collapse;
@@ -461,20 +462,24 @@ p {
 }
 
 #table-results thead,
-#users-table thead {
+#users-table thead,
+#table-personen thead {
   background-color: var(--clr-pri-red);
   color: white;
 }
 
 #table-results th,
 #users-table th,
+#table-personen th,
 #table-results td,
-#users-table td {
+#users-table td,
+#table-personen td {
   padding: 2rem 1.3rem;
 }
 
 #table-results tbody tr,
-#users-table tbody tr {
+#users-table tbody tr,
+#table-personen tbody tr {
   border-bottom: 1px solid var(--clr-pri-red);
 }
 
@@ -873,7 +878,13 @@ p {
   #users-table tbody,
   #users-table th,
   #users-table td,
-  #users-table tr {
+  #users-table tr,
+  #table-personen,
+  #table-personen thead,
+  #table-personen tbody,
+  #table-personen th,
+  #table-personen td,
+  #table-personen tr {
     display: block;
   }
 
@@ -883,19 +894,22 @@ p {
 
   /* Hide table headers (but not display: none;, for accessibility) */
   #table-results thead tr,
-  #users-table thead tr {
+  #users-table thead tr,
+  #table-personen thead tr {
     position: absolute;
     top: -9999px;
     left: -9999px;
   }
 
   #table-results tr,
-  #users-table tr {
+  #users-table tr,
+  #table-personen tr {
     margin: 0 0 1rem 0;
   }
 
   #table-results td,
-  #users-table td {
+  #users-table td,
+  #table-personen td {
     /* Behave  like a "row" */
     border: none;
     position: relative;
@@ -903,7 +917,8 @@ p {
   }
 
   #table-results td:before,
-  #users-table td:before {
+  #users-table td:before,
+  #table-personen td:before {
     /* Now like a table header */
     position: absolute;
     /* Top/left values mimic padding */
@@ -951,6 +966,16 @@ p {
     content: 'Laatste login';
   }
   #users-table td:nth-of-type(5):before {
+    content: 'Verwijderen';
+  }
+
+  #table-personen td:nth-of-type(1):before {
+    content: 'Voornaam';
+  }
+  #table-personen td:nth-of-type(2):before {
+    content: 'Familienaam';
+  }
+  #table-personen td:nth-of-type(3):before {
     content: 'Verwijderen';
   }
 }

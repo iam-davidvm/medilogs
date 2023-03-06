@@ -61,7 +61,7 @@
                         <tr>
                             <td><%= patienten[i].voornaam %></td>
                             <td><%= patienten[i].familienaam %></td>
-                            <td><a href="/<%= account[0]._id %>/<% patienten[i]._id %>/verwijderen" class="cta focus-red">Verwijderen</a></td>
+                            <td><a href="/<%= patienten[i]._id %>/verwijderen" class="cta focus-red">Verwijderen</a></td>
                         </tr>
                     <% } %> 
                 </tbody>

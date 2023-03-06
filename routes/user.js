@@ -53,4 +53,13 @@ router
     catchAsync(userController.koppelAccount)
   );
 
+router
+  .route('/:patientId/verwijderen')
+  .get(
+    isLoggedIn,
+    catchAsync(isAccount),
+    lastSeen,
+    catchAsync(userController.flashDeletePatient)
+  );
+
 module.exports = router;
