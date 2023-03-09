@@ -160,7 +160,7 @@ module.exports.requestWachtwoordReset = async (req, res) => {
   }
 
   const link = `${url}/${user._id}/wachtwoord-reset?token=${resetToken}`;
-  console.log(link);
+  console.log(link); // moet gemaild worden
   req.flash('success', 'U ontvangt zo dadelijk een e-mail met instructies.');
   res.redirect('/');
 };
@@ -179,13 +179,13 @@ module.exports.saveNieuwWachtwoord = async (req, res) => {
   const { accountId } = req.params;
   const { token } = req.query;
   const { password } = req.body;
-  const passwordResetToken = await Token.findOne({ accountId });
+  const passwordResetToken = await Token.findOne({ userId: accountId });
   if (!passwordResetToken) {
     req.flash(
       'error',
       'De gebruikte token is foutief of vervallen, probeer opnieuw.'
     );
-    return res.redirect('/');
+    return res.redirect('/wachtwoord-reset');
   }
 
   const isValid = await bcrypt.compare(token, passwordResetToken.token);
@@ -194,11 +194,41 @@ module.exports.saveNieuwWachtwoord = async (req, res) => {
       'error',
       'De gebruikte token is foutief of vervallen, probeer opnieuw.'
     );
-    return res.redirect('/');
+    return res.redirect('/wachtwoord-reset');
   }
+
+  let url = 'http://localhost:3000';
+  if (process.env.NODE_ENV == 'production') {
+    url = process.env.SITE_URL;
+  }
+
+  User.findOne({ _id: accountId })
+    .then((user) => {
+      user.setPassword(password, function (e, user) {
+        if (e) {
+          req.flash(
+            'error',
+            'Jouw nieuw wachtwoord kon niet bewaard worden, probeer opnieuw.'
+          );
+          return res.redirect(
+            `${url}/${accountId}/wachtwoord-reset?token=${token}`
+          );
+        } else {
+          user.save();
+          req.flash('success', 'Jouw wachtwoord is aangepast.');
+          return res.redirect('/aanmelden');
+        }
+      });
+    })
+    .catch((e) => {
+      req.flash('error', e);
+      return res.redirect(
+        `${url}/${accountId}/wachtwoord-reset?token=${token}`
+      );
+    });
   // VOLGENDE STAP IS WACHTWOORD SAVE STOREN (ZIE STACKOVERFLOW) EN DAN CODE VAN LOGROCKET OPNIEUW VOLGEN
-  console.log(accountId, token, password);
-  res.redirect('/');
+  // console.log(accountId, token, password);
+  // res.redirect('/');
 };
 
 module.exports.flashDeletePatient = async (req, res) => {
