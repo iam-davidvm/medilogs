@@ -227,6 +227,7 @@ main {
   top: 0;
   left: var(--width);
   width: calc(100% - var(--width));
+  overflow: hidden;
 }
 
 .container {

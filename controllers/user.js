@@ -5,6 +5,7 @@ const catchAsync = require('../utils/catchAsync');
 const { ObjectId } = require('mongodb');
 const crypto = require('crypto');
 const bcrypt = require('bcrypt');
+const sgMail = require('@sendgrid/mail');
 
 module.exports.renderRegister = (req, res) => {
   res.render('user/registreren', { title: 'Maak een account aan' });
@@ -160,8 +161,33 @@ module.exports.requestWachtwoordReset = async (req, res) => {
   }
 
   const link = `${url}/${user._id}/wachtwoord-reset?token=${resetToken}`;
+
+  sgMail.setApiKey(process.env.SENDGRID_API);
+  const msg = {
+    to: email,
+    from: 'no-reply@medilogs.be',
+    templateId: 'd-3520c4e280934d779eec5f969007f9fa',
+    dynamicTemplateDate: {
+      subject: 'medilogs - Aanvraag wachtwoord resetten',
+      url: link,
+    },
+  };
+
+  sgMail.send(msg).then(
+    () => {},
+    (error) => {
+      req.flash(
+        'Er ging iets mis met het verzenden van de wachtwoordlink, probeer nogmaals.'
+      );
+      return res.redirect('/wachtwoord-reset');
+    }
+  );
+
   console.log(link); // moet gemaild worden
-  req.flash('success', 'U ontvangt zo dadelijk een e-mail met instructies.');
+  req.flash(
+    'success',
+    'U ontvangt binnen enkele ogenblikken een e-mail met instructies.'
+  );
   res.redirect('/');
 };
 

@@ -80,6 +80,7 @@ app.use(
       fontSrc: ["'self'", ...fontSrcUrls],
       mediaSrc: [],
       childSrc: ['blob:'],
+      manifestSrc: ["'self'"], // favicon manifest
     },
   })
 );
