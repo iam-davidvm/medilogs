@@ -1,0 +1,32 @@
+<% layout('layouts/boilerplate') %>
+   
+
+    <h1><%= title %></h1>
+
+    <section class="box">
+        <form action="/<%= accountId %>/wachtwoord-wijzigen?_method=PATCH" class="form account" method="POST">
+            <div class="form-element">
+                <label for="password">Oud wachtwoord</label>
+                <div class="password-container">
+                    <input type="password" name="oldPassword" id="password" required placeholder=" ">
+                    <span class="password-eye"><img src="/assets/icons/eye.svg" id="toggle-password" alt=""></span>
+                </div>
+            </div>
+            <div class="form-element">
+                <label for="password">Nieuw wachtwoord</label>
+                <div class="password-container">
+                    <input type="password" name="newPassword" id="password" required placeholder=" ">
+                    <span class="password-eye"><img src="/assets/icons/eye.svg" id="toggle-password" alt=""></span>
+                </div>
+            </div>
+
+            <div class="form-btns">
+                <button class="btn btn-pri">Wachtwoord wijzigen</button>
+                <a href="/<%= accountId %>" class="cta mt3">Annuleer</a>
+            </div>
+
+        </form>
+
+    </section>  
+
+<script src="/js/userform.js"></script>

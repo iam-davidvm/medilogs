@@ -1,7 +1,7 @@
 <% if(warningPatient && warningPatient.length) { %>
 <div class="modal">
     <div class="warning box" role="alert" aria-live="polite">
-        <p>Ben je zeker dat je <span class="warning-date"><%= warningPatient[0].voornaam + " " + warningPatient[0].familienaam  %></span> wil verwijderen?</p>
+        <p>Ben je zeker dat je <span class="warning-date"><%= warningPatient[0].voornaam + " " + warningPatient[0].familienaam  %></span> en eventuele metingen wil verwijderen?</p>
         <form action="/<%= warningPatient[0].patientId %>/verwijderen?_method=DELETE" method="POST">
             <div class="form-btns">
                 <button class="btn btn-pri">Ja</button>

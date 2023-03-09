@@ -18,7 +18,7 @@ module.exports.lastSeen = async (req, res, next) => {
 module.exports.isLoggedIn = (req, res, next) => {
   if (!req.isAuthenticated()) {
     req.session.returnTo = req.originalUrl;
-    req.flash('error', 'Je moet aangemeld zijn om deze pagina te raadplegen');
+    req.flash('error', 'Je moet aangemeld zijn om deze pagina te raadplegen.');
     return res.redirect('/aanmelden');
   }
   next();

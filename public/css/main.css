@@ -488,8 +488,18 @@ p {
   left: 0;
   width: unset;
   display: grid;
-  place-items: center;
+  place-content: center;
   min-height: 100vh;
+}
+
+.center-box {
+  display: grid;
+  place-content: center;
+  min-height: 100vh;
+}
+
+.center-box .error-box {
+  max-width: 800px;
 }
 
 .aanmelden-box {

@@ -1,7 +1,10 @@
 const User = require('../models/user');
+const Token = require('../models/token');
 const Patient = require('../models/patient');
 const catchAsync = require('../utils/catchAsync');
 const { ObjectId } = require('mongodb');
+const crypto = require('crypto');
+const bcrypt = require('bcrypt');
 
 module.exports.renderRegister = (req, res) => {
   res.render('user/registreren', { title: 'Maak een account aan' });
@@ -71,7 +74,7 @@ module.exports.logout = (req, res, next) => {
 
 module.exports.renderAccount = async (req, res) => {
   const { accountId } = req.params;
-  const account = await User.find({ _id: accountId });
+  const account = await User.findOne({ _id: accountId });
   const patienten = await Patient.find({ eigenaar: account });
   res.render('user/account', {
     title: 'Mijn account',
@@ -104,6 +107,100 @@ module.exports.koppelAccount = async (req, res) => {
   return res.redirect(`/${accountId}`);
 };
 
+module.exports.renderWachtwoordWijzigen = (req, res) => {
+  const { accountId } = req.params;
+  res.render('user/wachtwoordWijzigen', {
+    title: 'Wijzig jouw wachtwoord',
+    accountId,
+  });
+};
+
+module.exports.wachtwoordWijzigen = async (req, res) => {
+  const { accountId } = req.params;
+  const user = await User.findOne({ _id: accountId });
+  user.changePassword(req.body.oldPassword, req.body.newPassword, (e) => {
+    if (e) {
+      if (e.name === 'IncorrectPasswordError') {
+        req.flash('error', 'Jouw oud wachtwoord is niet correct.');
+        res.redirect(`/${accountId}/wachtwoord-wijzigen`);
+      } else {
+        req.flash('error', 'Er is iets fout gegaan, probeer opnieuw.');
+        res.redirect(`/${accountId}/wachtwoord-wijzigen`);
+      }
+    } else {
+      req.flash('success', 'Jouw wachtwoord is gewijzigd.');
+      res.redirect(`/${accountId}`);
+    }
+  });
+};
+
+module.exports.renderWachtwoordReset = (req, res) => {
+  res.render('user/wachtwoordReset', { title: 'Vraag wachtwoord reset aan' });
+};
+
+module.exports.requestWachtwoordReset = async (req, res) => {
+  const { email } = req.body;
+  const user = await User.findOne({ email });
+  if (!user) {
+    req.flash('error', 'We vinden dit e-mailadres niet terug.');
+    return res.redirect('/wachtwoord-reset');
+  }
+  const token = await Token.findOne({ userId: user._id });
+  if (token) await token.deleteOne();
+  let resetToken = crypto.randomBytes(32).toString('hex');
+  const hash = await bcrypt.hash(resetToken, Number(process.env.BCRYPT_SALT));
+  await new Token({
+    userId: user._id,
+    token: hash,
+    createdAt: Date.now(),
+  }).save();
+  let url = 'http://localhost:3000';
+  if (process.env.NODE_ENV == 'production') {
+    url = process.env.SITE_URL;
+  }
+
+  const link = `${url}/${user._id}/wachtwoord-reset?token=${resetToken}`;
+  console.log(link);
+  req.flash('success', 'U ontvangt zo dadelijk een e-mail met instructies.');
+  res.redirect('/');
+};
+
+module.exports.renderNieuwWachtwoord = (req, res) => {
+  const { accountId } = req.params;
+  const { token } = req.query;
+  res.render('user/nieuwWachtwoord', {
+    title: 'Nieuw wachtwoord instellen',
+    accountId,
+    token,
+  });
+};
+
+module.exports.saveNieuwWachtwoord = async (req, res) => {
+  const { accountId } = req.params;
+  const { token } = req.query;
+  const { password } = req.body;
+  const passwordResetToken = await Token.findOne({ accountId });
+  if (!passwordResetToken) {
+    req.flash(
+      'error',
+      'De gebruikte token is foutief of vervallen, probeer opnieuw.'
+    );
+    return res.redirect('/');
+  }
+
+  const isValid = await bcrypt.compare(token, passwordResetToken.token);
+  if (!isValid) {
+    req.flash(
+      'error',
+      'De gebruikte token is foutief of vervallen, probeer opnieuw.'
+    );
+    return res.redirect('/');
+  }
+  // VOLGENDE STAP IS WACHTWOORD SAVE STOREN (ZIE STACKOVERFLOW) EN DAN CODE VAN LOGROCKET OPNIEUW VOLGEN
+  console.log(accountId, token, password);
+  res.redirect('/');
+};
+
 module.exports.flashDeletePatient = async (req, res) => {
   const { patientId } = req.params;
   const patient = await Patient.findOne({ _id: patientId });
@@ -113,5 +210,16 @@ module.exports.flashDeletePatient = async (req, res) => {
     familienaam: patient.familienaam,
     patientId,
   });
+  res.redirect(`/${patient.eigenaar}`);
+};
+
+module.exports.deletePatient = async (req, res) => {
+  const { patientId } = req.params;
+  const patient = await Patient.findOne({ _id: patientId });
+  await Patient.findByIdAndDelete(patientId);
+  req.flash(
+    'success',
+    `${patient.voornaam + ' ' + patient.familienaam} werd ontkoppeld.`
+  );
   res.redirect(`/${patient.eigenaar}`);
 };

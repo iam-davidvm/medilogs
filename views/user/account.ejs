@@ -7,15 +7,15 @@
         <h2>Mijn gegevens</h2>
         <div class="account-gegeven">
             <p><strong>Voornaam:</strong></p>
-            <p><%= account[0].voornaam %></p>
+            <p><%= account.voornaam %></p>
         </div>
         <div class="account-gegeven">
             <p><strong>Familienaam:</strong></p>
-            <p><%= account[0].familienaam %></p>
+            <p><%= account.familienaam %></p>
         </div>
         <div class="account-gegeven">
             <p><strong>E-mailadres:</strong></p>
-            <p><%= account[0].email %></p>
+            <p><%= account.email %></p>
         </div>
         <div class="account-gegeven">
             <label for="toggle">
@@ -23,7 +23,7 @@
             </label>    
             <div class="form-element">
                 <label class="toggle">
-                    <input type="checkbox" name="updates" id="toggle" class="toggle-input" <%= account[0].wilUpdates ? 'checked' : '' %> disabled />
+                    <input type="checkbox" name="updates" id="toggle" class="toggle-input" <%= account.wilUpdates ? 'checked' : '' %> disabled />
                     <span class="toggle-display" hidden>
                         <svg width="18" height="14" viewBox="0 0 18 14" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" class="toggle-icon toggle-icon-checkmark">
                             <path d="M6.08471 10.6237L2.29164 6.83059L1 8.11313L6.08471 13.1978L17 2.28255L15.7175 1L6.08471 10.6237Z" fill="currentcolor" stroke="currentcolor" />
@@ -37,7 +37,7 @@
         </div>
 
 
-        <a href="#" class="cta"> Wijzig wachtwoord</a>
+        <a href="/<%= account._id %>/wachtwoord-wijzigen" class="cta"> Wijzig wachtwoord</a>
     </section>
 
     <section class="box">
@@ -45,7 +45,7 @@
         <p class="hint">U kunt maximum 3 personen koppelen op dit moment.</p>
 
         <% if(patienten.length <= 1) { %>
-            <p class="mt3">Momenteel zijn er nog geen personen aan uw account gekoppeld</p>
+            <p class="mt3">Momenteel zijn er nog geen personen aan uw account gekoppeld.</p>
         <% } else { %>
             <table id="table-personen">
                 <thead>
@@ -70,7 +70,7 @@
 
         <% if(patienten.length < 4) { %>
             <div class="dash-links">
-                <a class="dash-link btn btn-pri" href="/<%= account[0]._id %>/koppelen" title="Persoon koppelen">
+                <a class="dash-link btn btn-pri" href="/<%= account._id %>/koppelen" title="Persoon koppelen">
                     <img src="/assets/icons/koppelen.svg" alt="" class="dash-link-icon">
                     <span class="dash-link-text">Persoon koppelen</span>
                 </a>
