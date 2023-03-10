@@ -167,14 +167,20 @@ module.exports.requestWachtwoordReset = async (req, res) => {
     to: email,
     from: 'no-reply@medilogs.be',
     templateId: 'd-3520c4e280934d779eec5f969007f9fa',
-    dynamicTemplateDate: {
+    dynamic_template_data: {
       subject: 'medilogs - Aanvraag wachtwoord resetten',
       url: link,
     },
   };
 
   sgMail.send(msg).then(
-    () => {},
+    () => {
+      req.flash(
+        'success',
+        'U ontvangt binnen enkele ogenblikken een e-mail met instructies.'
+      );
+      return res.redirect('/aanmelden');
+    },
     (error) => {
       req.flash(
         'Er ging iets mis met het verzenden van de wachtwoordlink, probeer nogmaals.'
@@ -182,13 +188,6 @@ module.exports.requestWachtwoordReset = async (req, res) => {
       return res.redirect('/wachtwoord-reset');
     }
   );
-
-  console.log(link); // moet gemaild worden
-  req.flash(
-    'success',
-    'U ontvangt binnen enkele ogenblikken een e-mail met instructies.'
-  );
-  res.redirect('/');
 };
 
 module.exports.renderNieuwWachtwoord = (req, res) => {
