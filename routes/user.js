@@ -44,6 +44,10 @@ router
   );
 
 router
+  .route('/:accountId/account-activeren')
+  .get(catchAsync(userController.activeerAccount));
+
+router
   .route('/:accountId/wachtwoord-reset')
   .get(userController.renderNieuwWachtwoord)
   .patch(catchAsync(userController.saveNieuwWachtwoord));

@@ -22,10 +22,7 @@ module.exports.register = async (req, res, next) => {
       updates,
     } = req.body;
     const wilUpdates = updates ? true : false;
-    if (registratiecode !== process.env.BETA_CODE) {
-      req.flash('error', 'Dit is niet de juiste registratiecode.');
-      return res.redirect('/registreren');
-    }
+
     const patient = await new Patient({ voornaam, familienaam });
     const user = new User({
       email,
@@ -33,6 +30,7 @@ module.exports.register = async (req, res, next) => {
       familienaam,
       username: email,
       wilUpdates,
+      isActive: false,
     });
 
     user.patienten.push(patient);
@@ -43,14 +41,53 @@ module.exports.register = async (req, res, next) => {
 
     await patient.save();
 
-    req.login(registeredUser, (err) => {
-      if (err) return next();
-      res.redirect(`/${registeredUser.patienten[0]._id}/dashboard/`);
-    });
+    let url = 'http://localhost:3000';
+    if (process.env.NODE_ENV == 'production') {
+      url = process.env.SITE_URL;
+    }
+
+    const link = `${url}/${user._id}/account-activeren`;
+
+    sgMail.setApiKey(process.env.SENDGRID_API);
+    const msg = {
+      to: email,
+      from: 'no-reply@medilogs.be',
+      templateId: 'd-a817cfe9e6044d0b98e0a10c785035a2',
+      dynamic_template_data: {
+        subject: 'medilogs - Account activeren',
+        voornaam,
+        url: link,
+      },
+    };
+
+    sgMail.send(msg).then(
+      () => {
+        req.flash(
+          'success',
+          'Je ontvangt binnen enkele ogenblikken een e-mail met instructies.'
+        );
+        return res.redirect('/aanmelden');
+      },
+      (error) => {
+        req.flash(
+          'Er ging iets mis met het verzenden van de activatielink, probeer nogmaals.'
+        );
+        return res.redirect('/registreren');
+      }
+    );
   } catch (e) {
     req.flash('error', `Er ging iets fout: ${e.message}`);
     res.redirect('/registreren');
   }
+};
+
+module.exports.activeerAccount = async (req, res) => {
+  const { accountId } = req.params;
+  const user = await User.findOne({ _id: accountId });
+  user.isActive = true;
+  await user.save();
+  req.flash('success', 'Jouw account is geactiveerd.');
+  res.redirect(`/aanmelden`);
 };
 
 module.exports.renderLogin = (req, res) => {
@@ -177,7 +214,7 @@ module.exports.requestWachtwoordReset = async (req, res) => {
     () => {
       req.flash(
         'success',
-        'U ontvangt binnen enkele ogenblikken een e-mail met instructies.'
+        'Je ontvangt binnen enkele ogenblikken een e-mail met instructies.'
       );
       return res.redirect('/aanmelden');
     },
@@ -251,9 +288,6 @@ module.exports.saveNieuwWachtwoord = async (req, res) => {
         `${url}/${accountId}/wachtwoord-reset?token=${token}`
       );
     });
-  // VOLGENDE STAP IS WACHTWOORD SAVE STOREN (ZIE STACKOVERFLOW) EN DAN CODE VAN LOGROCKET OPNIEUW VOLGEN
-  // console.log(accountId, token, password);
-  // res.redirect('/');
 };
 
 module.exports.flashDeletePatient = async (req, res) => {

@@ -33,6 +33,9 @@ const userSchema = new Schema({
   wilUpdates: {
     type: Boolean,
   },
+  isActive: {
+    type: Boolean,
+  },
 });
 
 // https://stackoverflow.com/a/45602063

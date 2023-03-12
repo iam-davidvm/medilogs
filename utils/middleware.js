@@ -20,6 +20,10 @@ module.exports.isLoggedIn = (req, res, next) => {
     req.session.returnTo = req.originalUrl;
     req.flash('error', 'Je moet aangemeld zijn om deze pagina te raadplegen.');
     return res.redirect('/aanmelden');
+  } else if (!req.user.isActive) {
+    req.session.returnTo = req.originalUrl;
+    req.flash('error', 'Jouw account is nog niet geactiveerd.');
+    return res.redirect('/aanmelden');
   }
   next();
 };
