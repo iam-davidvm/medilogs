@@ -34,13 +34,12 @@ module.exports.register = async (req, res, next) => {
     });
 
     user.patienten.push(patient);
-    user.rollen.push('betasquad');
+    user.rollen.push('account');
     patient.eigenaar = user;
 
     const registeredUser = await User.register(user, wachtwoord);
 
     await patient.save();
-
     let url = 'http://localhost:3000';
     if (process.env.NODE_ENV == 'production') {
       url = process.env.SITE_URL;
@@ -62,11 +61,14 @@ module.exports.register = async (req, res, next) => {
 
     sgMail.send(msg).then(
       () => {
-        req.flash(
-          'success',
-          'Je ontvangt binnen enkele ogenblikken een e-mail met instructies.'
-        );
-        return res.redirect('/aanmelden');
+        req.login(registeredUser, (err) => {
+          if (err) return next();
+          req.flash(
+            'success',
+            'Je ontvangt binnen enkele ogenblikken een e-mail met instructies.'
+          );
+          return res.redirect('/aanmelden');
+        });
       },
       (error) => {
         req.flash(
