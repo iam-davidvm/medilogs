@@ -142,6 +142,7 @@ app.use((req, res, next) => {
 
 app.use('/', userRoutes);
 app.use('/admin', adminRoutes);
+app.use('/test', testRoutes);
 app.use('/:patientId/dashboard', dashboardRoutes);
 app.use('/:patientId/bloeddruk', bloodpressureRoutes);
 
