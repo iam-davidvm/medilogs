@@ -8,6 +8,13 @@ const bcrypt = require('bcrypt');
 const sgMail = require('@sendgrid/mail');
 
 module.exports.renderRegister = (req, res) => {
+  if (req.user) {
+    req.flash(
+      'error',
+      'Je kan je niet registren, want je bent momenteel aangemeld.'
+    );
+    return res.redirect(`/${req.user.patienten[0]._id}/dashboard/`);
+  }
   res.render('user/registreren', { title: 'Maak een account aan' });
 };
 
@@ -93,6 +100,10 @@ module.exports.activeerAccount = async (req, res) => {
 };
 
 module.exports.renderLogin = (req, res) => {
+  if (req.user) {
+    req.flash('error', 'Je kan je niet aanmelden, want je bent al aangemeld.');
+    return res.redirect(`/${req.user.patienten[0]._id}/dashboard/`);
+  }
   res.render('user/aanmelden', { title: 'Aanmelden' });
 };
 
