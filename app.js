@@ -142,16 +142,11 @@ app.use((req, res, next) => {
 
 app.use('/', userRoutes);
 app.use('/admin', adminRoutes);
-app.use('/test', testRoutes);
 app.use('/:patientId/dashboard', dashboardRoutes);
 app.use('/:patientId/bloeddruk', bloodpressureRoutes);
 
 app.get('/', (req, res) => {
-  if (req.user) {
-    return res.redirect(`/${req.user.patienten[0]._id}/dashboard`);
-  }
-  res.redirect('/aanmelden');
-  // res.render('index', { title: 'Welkom' });
+  res.render('index');
 });
 
 app.get('/:patientId/dashboard', (req, res) => {
