@@ -4,6 +4,14 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Met medilogs kan je jouw bloeddruk metingen bewaren en raadplegen op elk moment.">
+    <meta property="og:title" content="medilogs - Jouw medisch dagboek" />
+    <meta property="og:description" content="Hou je vinger aan de pols met medilogs. Bewaar en raadpleeg bloeddruk metingen op elk moment" />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://www.medilogs.be/" />
+    <meta property="og:image" content="/assets/landing/raadplegen.png" />
+    <meta property="og:locale" content="nl_BE" />
+    <meta name="robots" content="index, follow">
     <title>medilogs - Jouw medisch dagboek</title>
     <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@300;400;700;800&display=swap" rel="stylesheet" crossorigin> 
     <link rel="stylesheet" href="/css/style.css">
@@ -22,11 +30,11 @@
                 </div>
                 <div class="nav-menu">
                     <% if(!currentUser) { %>
-                        <a href="/aanmelden" class="btn">Aanmelden</a>
-                        <a href="/registreren" class="btn">Registreren</a>
+                        <a href="/aanmelden" class="btn btn-pri">Aanmelden</a>
+                        <a href="/registreren" class="btn btn-sec">Registreren</a>
                     <% } else { %>
-                        <a href="<%= `/${currentUser.patienten[0]._id}/dashboard` %>" class="btn">Dashboard</a>
-                        <a href="/afmelden" class="btn">Afmelden</a>
+                        <a href="<%= `/${currentUser.patienten[0]._id}/dashboard` %>" class="btn btn-pri">Dashboard</a>
+                        <a href="/afmelden" class="btn btn-sec">Afmelden</a>
                     <% } %>
                 </div>
             </nav>
@@ -36,17 +44,26 @@
         <div class="container">
             <section class="hero">
                 <div class="hero-body">
-                    <h1>Over deze website</h1>
-                    <p>Deze website is er gekomen vanwege een persoonlijke noodzaak. Ik vond het omslachtig om mijn bloeddruk metingen bij te houden in een excel-bestand of op papier. Deze tool zorgt ervoor dat je op een eenvoudige manier, van eender waar, jouw <strong>bloeddruk metingen</strong> kan <strong>bewaren en raadplegen</strong>. In de toekomst wil ik de functionaliten uitbreiden, zodat ik ook mijn medicijnenkast kan beheren.</p>
+                    <h1>Over medilogs</h1>
+                    <p>medilogs is een tool waarbij je op een eenvoudige manier jouw <strong>bloeddruk kan bewaren en raadplegen</strong>. In de toekomst willen we het ook mogelijk maken om een medicatieschema bij te houden en jouw medicijnenkast te beheren.</p>
                 </div>
                 <div class="hero-image">
                     <img src="/assets/landing/hero-image.svg" alt="">
                 </div>
             </section>
+            <section class="cta-bar">
+                <% if(!currentUser) { %>
+                    <h2>Maak nu een account aan</h2>
+                    <a href="/registreren" class="cta">Registreren</a>
+                <% } else { %>
+                    <h2>Ga naar jouw dashboard</h2>
+                    <a href="<%= `/${currentUser.patienten[0]._id}/dashboard` %>" class="cta">Dashboard</a>
+                <% } %>
+            </section>
             <section class="feature">
                 <div class="feature-body">
                     <h2>Bloeddruk metingen</h2>
-                    <p>Via deze website kan je jouw bloeddruk opslaan en raadplegen op eender welk moment. Bekijk de laatste 7 of 30 metingen in een handig overzicht. Of download alle metingen van het voorbije jaar als excel-bestand.</p>
+                    <p>Via deze website kan je jouw bloeddruk opslaan en raadplegen op elk moment. Bekijk de laatste 7 of 30 metingen in een handig overzicht. Of download alle metingen van het voorbije jaar als excel-bestand.</p>
                 </div>
                 <div class="feature-image">
                     <img src="/assets/landing/hero-blood.svg" alt="">
@@ -55,7 +72,7 @@
             <section class="feature">
                 <div class="feature-body">
                     <h2>Koppel meerdere personen</h2>
-                    <p>Meet je soms voor andere personen de bloeddruk? Zij hoeven geen apart account aan te maken. Je kan tot drie personen koppelen aan jouw account. Op termijn kan dat aantal uitgebreid worden.</p>
+                    <p>Meet je soms voor andere personen de bloeddruk? Zij hoeven <strong>geen afzonderlijk account</strong> aan te maken. Je kan tot drie personen koppelen aan jouw account en voor hen metingen bewaren. Op termijn kan dat aantal uitgebreid worden.</p>
                 </div>
                 <div class="feature-image">
                     <img src="/assets/landing/hero-people.svg" alt="">
@@ -63,8 +80,8 @@
             </section>
             <section class="feature">
                 <div class="feature-body">
-                    <h2>Jouw data is veilig</h2>
-                    <p>Jouw data wordt bewaard op Europese servers en in eigen beheer. Wij gebruiken jouw data niet en verkopen deze ook niet door. Daarnaast wordt jouw wachtwoord ook geëncrypteerd bewaard, zodat je met een gerust hart gebruik kan maken van deze tool.</p>
+                    <h2>De data is van jou</h2>
+                    <p>Jouw data wordt bewaard op Europese servers en in een eigen database. Wij gebruiken jouw data niet en verkopen deze ook niet door. Ook jouw wachtwoord wordt geëncrypteerd bewaard om jouw veiligheid te garanderen.</p>
                 </div>
                 <div class="feature-image">
                     <img src="/assets/landing/hero-private.svg" alt="">
@@ -72,5 +89,10 @@
             </section>
         </div>
     </main>
+    <footer>
+        <section>
+            <a href="/disclaimer" class="disclaimer">Disclaimer</a>
+        </section>
+    </footer>
 </body>
 </html>
