@@ -83,6 +83,21 @@ router
   );
 
 router
+  .route('/:accountId/communicatie')
+  .get(
+    isLoggedIn,
+    catchAsync(isAccount),
+    lastSeen,
+    catchAsync(userController.flashChangeComms)
+  )
+  .patch(
+    isLoggedIn,
+    catchAsync(isAccount),
+    lastSeen,
+    catchAsync(userController.changeComms)
+  );
+
+router
   .route('/:patientId/verwijderen')
   .get(
     isLoggedIn,

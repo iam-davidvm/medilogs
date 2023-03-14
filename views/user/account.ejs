@@ -1,7 +1,8 @@
 <% layout('layouts/boilerplate') %>
-   
 
-    <h1><%= title %></h1>
+
+
+<h1><%= title %></h1>
 
     <section class="box">
         <h2>Mijn gegevens</h2>
@@ -19,7 +20,7 @@
         </div>
         <div class="account-gegeven">
             <label for="toggle">
-                <p>Mag ik jou af en toe e-mails sturen?</p>
+                <p><strong>Mag ik jou af en toe e-mails sturen?</strong></p>
             </label>    
             <div class="form-element">
                 <label class="toggle">
@@ -34,10 +35,11 @@
                     </span>
                 </label>
             </div>
+            <a href="/<%= account._id %>/communicatie" class="cta">Pas de communicatievoorkeuren aan</a>
         </div>
 
 
-        <a href="/<%= account._id %>/wachtwoord-wijzigen" class="cta"> Wijzig wachtwoord</a>
+        <a href="/<%= account._id %>/wachtwoord-wijzigen" class="cta mt3"> Wijzig wachtwoord</a>
     </section>
 
     <section class="box">

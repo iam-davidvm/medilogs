@@ -137,6 +137,7 @@ app.use((req, res, next) => {
   res.locals.error = req.flash('error');
   res.locals.warningBloodpressure = req.flash('warningBloodpressure');
   res.locals.warningPatient = req.flash('warningPatient');
+  res.locals.modalComms = req.flash('modalComms');
   next();
 });
 

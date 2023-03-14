@@ -158,6 +158,27 @@ module.exports.koppelAccount = async (req, res) => {
   return res.redirect(`/${accountId}`);
 };
 
+module.exports.flashChangeComms = async (req, res) => {
+  const { accountId } = req.params;
+  const user = await User.findById(accountId);
+  const wantsComm = user.wilUpdates;
+  req.flash('modalComms', {
+    accountId,
+    wantsComm,
+  });
+  res.redirect(`/${accountId}`);
+};
+
+module.exports.changeComms = async (req, res) => {
+  const { accountId } = req.params;
+  const { updates } = req.body;
+  const wilUpdates = updates ? true : false;
+  const user = await User.findById(accountId);
+  user.wilUpdates = wilUpdates;
+  await user.save();
+  res.redirect(`/${accountId}`);
+};
+
 module.exports.renderWachtwoordWijzigen = (req, res) => {
   const { accountId } = req.params;
   res.render('user/wachtwoordWijzigen', {
