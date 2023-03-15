@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Met medilogs kan je jouw bloeddruk metingen bewaren en raadplegen op elk moment.">
+    <meta property="og:title" content="medilogs - Jouw medisch dagboek" />
+    <meta property="og:description" content="Hou je vinger aan de pols met medilogs. Bewaar en raadpleeg bloeddruk metingen op elk moment" />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://www.medilogs.be/" />
+    <meta property="og:image" content="/assets/landing/raadplegen.png" />
+    <meta property="og:locale" content="nl_BE" />
+    <meta name="robots" content="index, follow">
+    <title>medilogs - Jouw medisch dagboek</title>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@300;400;700;800&display=swap" rel="stylesheet" crossorigin> 
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="icon" href="/assets/favicon/favicon.ico" sizes="any">
+    <link rel="icon" href="/assets/favicon/favicon.svg" type="image/svg+xml">
+    <link rel="apple-touch-icon" href="/assets/favicon/apple-touch-icon.png">
+    <link rel="manifest" href="/assets/favicon/site.webmanifest">
+    <meta name="theme-color" content="#4a4a4a">
+</head>
+<body>
+    <%- include('./partials/cookies') %>
+
+    <header>
+        <div class="container">
+            <nav>
+                <div class="nav-brand">
+                    <img src="/assets/logo/medilogs_white.svg" alt="">
+                </div>
+                <div class="nav-menu">
+                    <% if(!currentUser) { %>
+                        <a href="/aanmelden" class="btn btn-pri">Aanmelden</a>
+                        <a href="/registreren" class="btn btn-sec">Registreren</a>
+                    <% } else { %>
+                        <a href="<%= `/${currentUser.patienten[0]._id}/dashboard` %>" class="btn btn-pri">Dashboard</a>
+                        <a href="/afmelden" class="btn btn-sec">Afmelden</a>
+                    <% } %>
+                </div>
+            </nav>
+        </div>
+    </header>
+    <main>
+        <div class="container">
+            <section class="disclaimer-text">
+                <h1>Disclaimer</h1>
+                <p>Het doel van deze website is om een medisch dagboek te worden. De website is gegroeid uit een persoonlijke nood aan een oplossing. Momenteel kan je enkel bloeddrukmetingen invoeren, maar de bedoeling is dat er op termijn functionaliteiten worden bijgebouwd.</p>
+                <p>Deze website slaat bloeddrukmetingen op voor persoonlijk gebruik van de gebruiker. Dat betekent dat wij geen analyses doen van jouw data en deze al zeker niet doorgeven aan derden. We doen ons best om de privacy en vertrouwelijkheid van de gegevens van de gebruiker te waarborgen en hebben passende technische en organisatorische maatregelen genomen om ervoor te zorgen dat de opgeslagen gegevens veilig zijn.</p>
+                <p>Let op: de bloeddrukmetingen die worden opgeslagen op deze website zijn bedoeld als meetinstrument en niet als vervanging voor professioneel medisch advies. Gebruikers wordt aangeraden om altijd een arts of andere gekwalificeerde zorgverlener te raadplegen voor medische adviezen en behandelingen. Wij zijn niet verantwoordelijk voor enige gevolgen die voortvloeien uit het gebruik van deze website als vervanging voor medisch advies of behandeling.</p>
+                <p>Wij bewaren, naast de informatie die je zelf invoert, ook de datum van wanneer u het laatst heeft aangemeld. Dit stelt ons in staat om voor inactieve gebruikers de nodige maatregelen te treffen, zodat de website performant blijft voor iedereen.</p>
+                <p>Als gebruikers hun account willen verwijderen, kunnen ze een e-mail sturen naar webmaster@medilogs.be. Wij zullen alle persoonlijke gegevens van de gebruiker, inclusief de opgeslagen bloeddrukmetingen en gekoppelde personen, verwijderen zodra we hun verzoek hebben ontvangen en hebben verwerkt.</p>
+                <p>Heb je nog andere vragen? Mail ons dan via webmaster@medilogs.be</p>
+            </section>
+        </div>
+    </main>
+
+    <script src="/js/cookies-consent.js"></script>
+
+</body>
+</html>

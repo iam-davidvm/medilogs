@@ -141,6 +141,10 @@ app.use((req, res, next) => {
   next();
 });
 
+app.get('/disclaimer', (req, res) => {
+  res.render('disclaimer');
+});
+
 app.use('/', userRoutes);
 app.use('/admin', adminRoutes);
 app.use('/:patientId/dashboard', dashboardRoutes);

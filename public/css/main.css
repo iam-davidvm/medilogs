@@ -669,6 +669,11 @@ p {
   width: 30rem;
 }
 
+.cookies-consent {
+  max-width: 960px;
+  margin: 0 2rem;
+}
+
 #cookies-modal p {
   margin: 3rem 0;
 }
