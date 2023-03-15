@@ -32,11 +32,11 @@
                 </div>
                 <div class="nav-menu">
                     <% if(!currentUser) { %>
-                        <a href="/aanmelden" class="btn btn-pri">Aanmelden</a>
-                        <a href="/registreren" class="btn btn-sec">Registreren</a>
+                        <a href="/aanmelden" class="btn btn-pri focus-red">Aanmelden</a>
+                        <a href="/registreren" class="btn btn-sec focus-red">Registreren</a>
                     <% } else { %>
-                        <a href="<%= `/${currentUser.patienten[0]._id}/dashboard` %>" class="btn btn-pri">Dashboard</a>
-                        <a href="/afmelden" class="btn btn-sec">Afmelden</a>
+                        <a href="<%= `/${currentUser.patienten[0]._id}/dashboard` %>" class="btn btn-pri focus-red">Dashboard</a>
+                        <a href="/afmelden" class="btn btn-sec focus-red">Afmelden</a>
                     <% } %>
                 </div>
             </nav>
@@ -56,10 +56,10 @@
             <section class="cta-bar">
                 <% if(!currentUser) { %>
                     <h2>Maak nu een account aan</h2>
-                    <a href="/registreren" class="cta">Registreren</a>
+                    <a href="/registreren" class="cta focus-red">Registreren</a>
                 <% } else { %>
                     <h2>Ga naar jouw dashboard</h2>
-                    <a href="<%= `/${currentUser.patienten[0]._id}/dashboard` %>" class="cta">Dashboard</a>
+                    <a href="<%= `/${currentUser.patienten[0]._id}/dashboard` %>" class="cta focus-red">Dashboard</a>
                 <% } %>
             </section>
             <section class="feature">

@@ -144,6 +144,14 @@ footer {
 .cta:hover {
   text-decoration: underline;
 }
+
+*:focus:not(.focus-visible) {
+  outline: none;
+}
+
+.focus-red:focus-visible {
+  outline: var(--clr-pri-red) solid 3px;
+}
 /* MOBILE */
 
 nav {
