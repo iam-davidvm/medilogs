@@ -10,6 +10,7 @@
 
 
         let sortedResults = [...results];
+
         let labels = ['Bovendruk', 'Onderdruk', 'Hartslag', 'Tijdstip'];
     
         if (sort) {
@@ -38,7 +39,9 @@
                 default:
                     break;
             }
-        } 
+        } else {
+            sortedResults = sortedResults.reverse()
+        }
     %>
 
     <section class="subtle-pane invisible" id="results-settings" role="settings" aria-live="polite">
