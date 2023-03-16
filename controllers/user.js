@@ -96,7 +96,7 @@ module.exports.activeerAccount = async (req, res) => {
   user.isActive = true;
   await user.save();
   req.flash('success', 'Jouw account is geactiveerd.');
-  res.redirect(`/${req.user.patienten[0]._id}/dashboard/`);
+  res.redirect(`/${user.patienten[0]._id}/dashboard/`);
 };
 
 module.exports.renderLogin = (req, res) => {
