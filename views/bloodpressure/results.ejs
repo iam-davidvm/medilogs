@@ -39,8 +39,6 @@
                 default:
                     break;
             }
-        } else {
-            sortedResults = sortedResults.reverse()
         }
     %>
 
@@ -178,6 +176,7 @@
             <h2>Grafiek</h2>
         </div>
 
+
         <div id="graph">
             <canvas id="myChart"></canvas>
           </div>
@@ -186,8 +185,10 @@
 
    <script src="/js/show-hide-result.js"></script>
    <script>
+       
        let results = <%- JSON.stringify(sortedResults) %>;
        const patientId = <%- JSON.stringify(patientId) %>;
+       const isSorted = <%- JSON.stringify(sort ? true : false) %>;
     </script>
 
 <script src="https://cdn.jsdelivr.net/npm/chart.js" crossorigin="anonymous"></script>
