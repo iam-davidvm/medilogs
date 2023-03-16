@@ -96,11 +96,11 @@ module.exports.activeerAccount = async (req, res) => {
   user.isActive = true;
   await user.save();
   req.flash('success', 'Jouw account is geactiveerd.');
-  res.redirect(`/aanmelden`);
+  res.redirect(`/${req.user.patienten[0]._id}/dashboard/`);
 };
 
 module.exports.renderLogin = (req, res) => {
-  if (req.user) {
+  if (req.user && req.user.isActive) {
     req.flash('error', 'Je kan je niet aanmelden, want je bent al aangemeld.');
     return res.redirect(`/${req.user.patienten[0]._id}/dashboard/`);
   }
@@ -141,6 +141,7 @@ module.exports.renderKoppelen = (req, res) => {
 
 module.exports.koppelAccount = async (req, res) => {
   const { voornaam, familienaam } = req.body.persoon;
+  const { accountId } = req.params;
   const account = await User.findOne({ _id: accountId });
   if (account.patienten.length === 4) {
     req.flash('error', 'Je hebt al 3 personen gekoppeld');
@@ -340,6 +341,10 @@ module.exports.deletePatient = async (req, res) => {
   const { patientId } = req.params;
   const patient = await Patient.findOne({ _id: patientId });
   await Patient.findByIdAndDelete(patientId);
+  await User.updateOne(
+    { _id: patient.eigenaar },
+    { $pull: { patienten: patientId } }
+  );
   req.flash(
     'success',
     `${patient.voornaam + ' ' + patient.familienaam} werd ontkoppeld.`

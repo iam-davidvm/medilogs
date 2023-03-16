@@ -31,7 +31,7 @@
                     <img src="/assets/logo/medilogs_white.svg" alt="">
                 </div>
                 <div class="nav-menu">
-                    <% if(!currentUser) { %>
+                    <% if(!currentUser || !currentUser.isActive) { %>
                         <a href="/aanmelden" class="btn btn-pri focus-red">Aanmelden</a>
                         <a href="/registreren" class="btn btn-sec focus-red">Registreren</a>
                     <% } else { %>

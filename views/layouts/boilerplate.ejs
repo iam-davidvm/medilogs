@@ -28,7 +28,7 @@
 <body>
     <%- include('../partials/cookies') %>
 
-    <% const asideUrl = typeof patientId !== 'undefined' ? patientId : currentUser.patienten[0]._id; %>
+    <% const asideUrl = (typeof patientId !== 'undefined' && patientId.length > 0) ? patientId : currentUser.patienten[0]._id; %>
 
     <aside class="menu">
         <div class="side-top">
